@@ -60,6 +60,12 @@ Decisão deliberada de **engenharia pragmática**: um único projeto `src/Mortal
 - Conferência com o Tabnet: igualdade exata por ano × UF e ano × sexo; qualquer divergência aborta o run e nada é publicado. O gabarito do Tabnet é gravado como fixture com a data da consulta.
 - Detalhes de fontes, layout dos CSV e conferência com o Tabnet: `reports/Fontes e padrões da fase 0.md`.
 
+## População (fase 2)
+
+- `data/ibge/populacao_fontes.csv` guarda os anos-âncora por UF × sexo × faixa quinquenal (+ `ign`): Censo 1980 do **SIDRA tabela 200** (119.009.778; o Tabnet `popbr` por município perde 739 mil pessoas em 1980), Censo 1991 e Contagem 1996 do Tabnet `popbr` (somados por município → UF) e RIPSA `popsvs2024br` 2000–2023. UF `00` é zero e é descartada.
+- `Dominio/EstimativaPopulacional.cs`: redistribui idade ignorada da fonte, interpola 1981–1999 geometricamente entre âncoras, extrapola 1979 e soma TO em GO antes de 1989. Entre 1980 (TO dentro de GO) e 1991, interpola GO+TO juntos e separa TO pela proporção de 1991; interpolar separado contaria TO duas vezes.
+- Efeito conhecido: 1996–2000 cresce ~2,7% ao ano porque a âncora 2000 é a RIPSA reconciliada (174,7 mi), maior que o Censo 2000 (169,8 mi). É a consequência de não ter salto na emenda com 2000.
+
 ## Harmonização CID-9/CID-10 (fase 1)
 
 - `data/cause_map/grupos.csv` é a tabela de correspondência: 87 grupos com faixas CID-9 e CID-10 por prefixo (`410-414`, `I20-I25`, `4275`). Grupos `resto=1` são o fallback do capítulo; entre específicos vence a faixa mais longa, e empate é erro. Cobre 100% dos códigos de 1979–2023.
