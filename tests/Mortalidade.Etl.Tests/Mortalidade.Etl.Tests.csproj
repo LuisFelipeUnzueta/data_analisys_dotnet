@@ -28,6 +28,7 @@
   <ItemGroup>
     <None Include="..\..\data\cause_map\grupos.csv" Link="Dados\grupos.csv" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\data\ibge\populacao_fontes.csv" Link="Dados\populacao_fontes.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\data\padrao\oms_2000_2025.csv" Link="Dados\oms_2000_2025.csv" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Fixtures\*.csv" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
