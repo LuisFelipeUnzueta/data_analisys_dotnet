@@ -28,8 +28,16 @@ Requer o SDK do .NET 10 (fixado em `global.json`).
 ```bash
 dotnet build
 dotnet test
-dotnet run --project src/Mortalidade.Etl
+dotnet run -c Release --project src/Mortalidade.Etl -- data/raw 1979 2023 out
 ```
+
+O ETL lê os CSV anuais do SIM em `data/raw/` (`Mortalidade_Geral_{AAAA}.csv`, baixados do [OpenDATASUS](https://dadosabertos.saude.gov.br/dataset/sim)), confere cada ano com o Tabnet e grava em `out/`:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `obitos.parquet` | Óbitos por ano × UF × grupo de causa × sexo × faixa etária, com os óbitos de idade ignorada redistribuídos (`obitos_ajustados`) para a taxa padronizada |
+| `populacao.parquet` | População por ano × UF × sexo × faixa etária |
+| `dimensoes.json` | Códigos das dimensões, pesos da OMS 2000–2025, proveniência de cada ano e marcos metodológicos |
 
 ## Roadmap
 

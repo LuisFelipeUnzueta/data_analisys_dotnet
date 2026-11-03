@@ -1,14 +1,16 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using Mortalidade.Etl.Cubo;
 using Mortalidade.Etl.Dominio;
 using Mortalidade.Etl.Leitura;
 using Mortalidade.Etl.Pipeline;
 using Mortalidade.Etl.Validacao;
 
-// Uso: dotnet run --project src/Mortalidade.Etl -- [dir_csv] [primeiro_ano] [ultimo_ano]
+// Uso: dotnet run --project src/Mortalidade.Etl -- [dir_csv] [primeiro_ano] [ultimo_ano] [dir_saida]
 var dirCsv = args.ElementAtOrDefault(0) ?? "data/raw";
 var primeiro = int.Parse(args.ElementAtOrDefault(1) ?? "1979");
 var ultimo = int.Parse(args.ElementAtOrDefault(2) ?? "2023");
+var dirSaida = args.ElementAtOrDefault(3) ?? "out";
 
 var mapa = MapaCausas.Carregar(File.ReadLines("data/cause_map/grupos.csv"));
 var padrao = PopulacaoPadrao.Carregar(File.ReadLines("data/padrao/oms_2000_2025.csv"));
@@ -48,6 +50,18 @@ foreach (var resultado in resultados.OrderBy(r => r.Ano))
         Console.WriteLine($"     {problema}");
 }
 
-var aprovados = resultados.Count(r => r.Aprovado);
-Console.WriteLine($"{aprovados}/{resultados.Count} anos conferem com o Tabnet em {relogio.Elapsed:mm\\:ss}.");
-return aprovados == resultados.Count ? 0 : 1;
+// Só anos que conferem com o Tabnet são publicados; um ano reprovado não derruba os demais.
+var publicados = resultados.Where(r => r.Aprovado).OrderBy(r => r.Ano).ToList();
+var anosPublicados = publicados.Select(r => r.Ano).ToHashSet();
+Directory.CreateDirectory(dirSaida);
+await using (var arquivo = File.Create(Path.Combine(dirSaida, "obitos.parquet")))
+    await EscritorParquet.GravarObitosAsync(arquivo, publicados.Select(r => r.Celulas));
+await using (var arquivo = File.Create(Path.Combine(dirSaida, "populacao.parquet")))
+    await EscritorParquet.GravarPopulacaoAsync(arquivo, estimativa.Valor.Populacao.Where(p => anosPublicados.Contains(p.Ano.Valor)).ToList());
+await File.WriteAllTextAsync(Path.Combine(dirSaida, "dimensoes.json"),
+    GeradorDimensoes.Gerar(mapa.Valor, padrao.Valor, anosPublicados, estimativa.Valor.FontePorAno, DateTimeOffset.UtcNow));
+
+foreach (var arquivo in new DirectoryInfo(dirSaida).GetFiles())
+    Console.WriteLine($"{arquivo.Name}: {arquivo.Length / 1024.0 / 1024.0:F2} MB");
+Console.WriteLine($"{publicados.Count}/{resultados.Count} anos conferem com o Tabnet e foram publicados em {relogio.Elapsed:mm\\:ss}.");
+return publicados.Count == resultados.Count ? 0 : 1;

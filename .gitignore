@@ -489,3 +489,6 @@ data/raw/
 
 # Instruções locais do Claude Code (não versionadas)
 CLAUDE.md
+
+# Saída do ETL (Parquet e JSON gerados)
+out/
