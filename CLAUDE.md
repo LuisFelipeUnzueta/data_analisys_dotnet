@@ -14,8 +14,11 @@ Portfólio pessoal: página estática com a mortalidade no Brasil desde 1979 (SI
 dotnet build
 dotnet test
 dotnet test --filter "FullyQualifiedName~FaixaEtariaTests"   # um teste ou classe
-dotnet run --project src/Mortalidade.Etl
+dotnet run -c Release --project src/Mortalidade.Etl -- data/raw 1979 2023   # lê os CSV e confere com o Tabnet
 ```
+
+- Rode a partir da raiz do repositório: o ETL lê `data/cause_map/grupos.csv` e `data/tabnet/gabarito_1979_2023.csv` por caminho relativo. Os CSV do SIM ficam em `data/raw/` (ignorado pelo git, ~12 GB); os 45 anos rodam em ~25 s.
+- `data/tabnet/gabarito_1979_2023.csv` é o gabarito (ano × total/UF/sexo, por residência) extraído do Tabnet por POST, com a data da consulta. A UF `00` é "Ignorado/exterior" (zero em todos os anos).
 
 - `global.json` fixa o SDK 10.0.4xx; o projeto usa `net10.0` e C# 14 (diverge do padrão .NET 8 das preferências globais, por decisão do projeto).
 - `Directory.Build.props` liga `TreatWarningsAsErrors`: warning quebra o build.
@@ -26,7 +29,8 @@ dotnet run --project src/Mortalidade.Etl
 Decisão deliberada de **engenharia pragmática**: um único projeto `src/Mortalidade.Etl` e um único `tests/Mortalidade.Etl.Tests`, em vez de camadas Clean Architecture em projetos separados.
 
 - `Dominio/` é puro (sem I/O, sem pacotes). A regra está em `tests/Mortalidade.Etl.Tests/ArquiteturaTests.cs`: `Dominio` não depende de `Leitura`, `Cubo`, `Validacao` nem `Parquet`. Ao criar esses namespaces, mantenha os nomes para a regra valer.
-- Pipeline planejado em `Program.cs`, como funções encadeadas: ler → harmonizar → agregar → validar → gravar.
+- Pipeline em `Program.cs`, um ano por vez em paralelo: `Leitura/LeitorSimCsv` → `Cubo/AgregadorCubo` (resolve o grupo com cache por código) → `Validacao/ConferenciaTabnet`. Gravação em Parquet ainda não existe.
+- CSV lido com o pacote `Sep` (rápido, sem alocação por campo); colunas por nome, sem diferenciar caixa.
 - **Sem portas/interfaces** até existir uma segunda implementação real. Leitores recebem `Stream` e os testes usam arquivos de fixture, não fakes.
 - **O ETL só grava num diretório local.** Download das fontes e publicação (GitHub Pages ou S3) ficam nos workflows, não no código, por isso não há retry/decorators.
 - A correspondência CID → grupo é **dado** (`data/cause_map/*.csv`, versionado), carregado num dicionário `(RevisaoCid, código) → GrupoCausa`; não crie uma Strategy por revisão.
@@ -52,7 +56,7 @@ Decisão deliberada de **engenharia pragmática**: um único projeto `src/Mortal
 - IDADE ignorada = vazio, `000` ou `999`, em qualquer ano; `0xx` com xx ≥ 1 são minutos. 1979–1995 usam só `000`; 1999 em diante passa a usar `999`. Conferido com o Tabnet em 1979–2023.
 - Taxa padronizada: método direto com um único padrão, OMS 2000–2025 (versão SEER por milhão; 80+ = soma de 80–84 a 100+ = 15.445). Pesos versionados como dado, não no código. O padrão OMS 2026–2050 fica como migração futura.
 - Idade ignorada na taxa padronizada: redistribuída proporcionalmente às faixas conhecidas dentro de ano × UF × causa × sexo; se o estrato não tiver nenhuma idade conhecida, usa a distribuição de ano × UF × sexo (todas as causas). O cubo mantém a categoria `Ignorada` e os totais brutos não mudam.
-- Residência sem UF válida (após a regra da UF 20): usa a UF de ocorrência (`MUNIOCOR`/`CODMUNOCOR`). Se ela também for inválida, o óbito entra numa UF `Ignorada` visível. Cada imputação é contada no relatório de qualidade do run.
+- Residência sem UF válida (após a regra da UF 20): usa a UF de ocorrência (`MUNIOCOR`/`CODMUNOCOR`). Se ela também for inválida, o leitor devolve a falha `sim.uf_invalida`, que reprova o ano (não há categoria de UF ignorada no cubo; 1979–2023 têm zero casos).
 - Conferência com o Tabnet: igualdade exata por ano × UF e ano × sexo; qualquer divergência aborta o run e nada é publicado. O gabarito do Tabnet é gravado como fixture com a data da consulta.
 - Detalhes de fontes, layout dos CSV e conferência com o Tabnet: `reports/Fontes e padrões da fase 0.md`.
 
