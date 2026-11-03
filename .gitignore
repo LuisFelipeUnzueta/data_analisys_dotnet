@@ -486,3 +486,6 @@ $RECYCLE.BIN/
 # Microdados brutos do SIM e IBGE (~12 GB), baixados localmente
 data/raw/
 *.csv.zip
+
+# Instruções locais do Claude Code (não versionadas)
+CLAUDE.md
