@@ -23,7 +23,7 @@ Um único projeto, com o domínio isolado por namespace e protegido por um teste
 
 ## Executar
 
-Requer o SDK do .NET 8 (fixado em `global.json`).
+Requer o SDK do .NET 10 (fixado em `global.json`).
 
 ```bash
 dotnet build

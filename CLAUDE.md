@@ -17,7 +17,7 @@ dotnet test --filter "FullyQualifiedName~FaixaEtariaTests"   # um teste ou class
 dotnet run --project src/Mortalidade.Etl
 ```
 
-- `global.json` fixa o SDK 8.0.4xx (a máquina também tem o SDK 10); mantenha `net8.0` e C# 12.
+- `global.json` fixa o SDK 10.0.4xx; o projeto usa `net10.0` e C# 14 (diverge do padrão .NET 8 das preferências globais, por decisão do projeto).
 - `Directory.Build.props` liga `TreatWarningsAsErrors`: warning quebra o build.
 - CI (`.github/workflows/ci.yml`): restore, build Release, testes com cobertura.
 
