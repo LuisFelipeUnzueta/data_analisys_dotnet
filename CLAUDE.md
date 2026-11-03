@@ -56,6 +56,15 @@ Decisão deliberada de **engenharia pragmática**: um único projeto `src/Mortal
 - Conferência com o Tabnet: igualdade exata por ano × UF e ano × sexo; qualquer divergência aborta o run e nada é publicado. O gabarito do Tabnet é gravado como fixture com a data da consulta.
 - Detalhes de fontes, layout dos CSV e conferência com o Tabnet: `reports/Fontes e padrões da fase 0.md`.
 
+## Harmonização CID-9/CID-10 (fase 1)
+
+- `data/cause_map/grupos.csv` é a tabela de correspondência: 87 grupos com faixas CID-9 e CID-10 por prefixo (`410-414`, `I20-I25`, `4275`). Grupos `resto=1` são o fallback do capítulo; entre específicos vence a faixa mais longa, e empate é erro. Cobre 100% dos códigos de 1979–2023.
+- CID-9 de causas externas vem sem o "E" (`800-999`); códigos de 3 dígitos vêm completados com `X` (`436X`).
+- `mal_definidas` segue o conceito do Tabnet: R00–R99 mais I46.1, I46.9, I95.9, I99, J96.0, J96.9 e P28.5 (CID-9: 780–799 mais 427.5, 458.9 e 770.8). Diferença: R95/798.0 (morte súbita na infância) ficam dentro do grupo.
+- Continuidade: a razão 1996/1995 de cada grupo é comparada com a média das razões vizinhas (1992–1999). Desvio acima de 10% marca `comparabilidade=reduzida` (23 grupos), que vira aviso junto ao gráfico. Ajustes de fronteira feitos para reduzir saltos: 239.6 em `neo_snc`, 887 fora de `quedas`, 590 em `renais`, prematuridade e trauma de parto fundidos em `perinatais_resto`.
+
+- Implementação: `Dominio/MapaCausas.cs` (resolve causa → grupo) e `Validacao/ContinuidadeCid.cs` (desvio 1995/1996). `tests/.../Validacao/HarmonizacaoGoldenTests.cs` usa a tabela real e fixtures em `tests/Mortalidade.Etl.Tests/Fixtures/` extraídas dos CSV: códigos observados 1979–2023, óbitos por código 1992–1999 e o golden de totais por grupo. Mudar uma faixa do `grupos.csv` quebra o golden de propósito: regere o golden e a coluna `comparabilidade` e revise a diferença.
+
 ## Pontos em aberto
 
-Lista final de grupos de causa harmonizados (fase 1). Não invente valores; pergunte.
+Revisão da lista de grupos por alguém que conheça codificação de causas de morte. Não invente valores; pergunte.

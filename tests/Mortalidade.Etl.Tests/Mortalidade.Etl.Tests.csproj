@@ -25,4 +25,9 @@
     <ProjectReference Include="..\..\src\Mortalidade.Etl\Mortalidade.Etl.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\data\cause_map\grupos.csv" Link="Dados\grupos.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Fixtures\*.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

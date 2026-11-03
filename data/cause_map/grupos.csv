@@ -1,0 +1,88 @@
+codigo;nome;capitulo;resto;cid9;cid10;comparabilidade
+inf_intestinais;Doenças infecciosas intestinais;infecciosas;0;001-009;A00-A09;reduzida
+tuberculose;Tuberculose (inclui sequelas);infecciosas;0;010-018,137;A15-A19,B90;alta
+septicemia;Septicemia;infecciosas;0;038;A40-A41;reduzida
+meningococica;Infecção meningocócica;infecciosas;0;036;A39;alta
+tetano;Tétano (inclui neonatal);infecciosas;0;037,7713;A33-A35;alta
+imunopreveniveis;Difteria, coqueluche, sarampo e poliomielite;infecciosas;0;032,033,045,055,138;A36,A37,A80,B05,B91;reduzida
+hiv_aids;HIV/aids;infecciosas;0;2791;B20-B24;alta
+hepatite_viral;Hepatites virais;infecciosas;0;070;B15-B19;alta
+dengue;Dengue;infecciosas;0;061;A90-A91,A97;reduzida
+chagas;Doença de Chagas;infecciosas;0;086;B57;alta
+malaria;Malária;infecciosas;0;084;B50-B54;reduzida
+leishmaniose;Leishmaniose;infecciosas;0;085;B55;reduzida
+esquistossomose;Esquistossomose;infecciosas;0;120;B65;reduzida
+leptospirose;Leptospirose;infecciosas;0;100;A27;alta
+sifilis;Sífilis;infecciosas;0;090-097;A50-A53;alta
+infecciosas_resto;Restante das doenças infecciosas e parasitárias;infecciosas;1;001-139;A00-B99;alta
+covid19;COVID-19;covid19;0;;B342,U00-U99;alta
+neo_boca_faringe;Neoplasia maligna do lábio, cavidade oral e faringe;neoplasias;0;140-149;C00-C14;alta
+neo_esofago;Neoplasia maligna do esôfago;neoplasias;0;150;C15;alta
+neo_estomago;Neoplasia maligna do estômago;neoplasias;0;151;C16;alta
+neo_colon_reto;Neoplasia maligna do cólon, reto e ânus;neoplasias;0;153-154;C18-C21;alta
+neo_figado;Neoplasia maligna do fígado e vias biliares intra-hepáticas;neoplasias;0;155;C22;alta
+neo_pancreas;Neoplasia maligna do pâncreas;neoplasias;0;157;C25;alta
+neo_laringe;Neoplasia maligna da laringe;neoplasias;0;161;C32;alta
+neo_pulmao;Neoplasia maligna da traqueia, brônquios e pulmões;neoplasias;0;162;C33-C34;alta
+neo_melanoma;Melanoma maligno da pele;neoplasias;0;172;C43;alta
+neo_mama;Neoplasia maligna da mama;neoplasias;0;174-175;C50;alta
+neo_colo_utero;Neoplasia maligna do colo do útero;neoplasias;0;180;C53;alta
+neo_utero_outros;Neoplasia maligna do corpo e partes não especificadas do útero;neoplasias;0;179,182;C54-C55;alta
+neo_ovario;Neoplasia maligna do ovário e anexos;neoplasias;0;183;C56-C57;reduzida
+neo_prostata;Neoplasia maligna da próstata;neoplasias;0;185;C61;alta
+neo_bexiga;Neoplasia maligna da bexiga;neoplasias;0;188;C67;alta
+neo_snc;Neoplasias do encéfalo e sistema nervoso central (qualquer comportamento);neoplasias;0;191-192,2396;C70-C72,D32-D33,D42-D43;alta
+neo_linfomas;Linfomas;neoplasias;0;200-202;C81-C86,C96;alta
+neo_mieloma;Mieloma múltiplo e doenças imunoproliferativas malignas;neoplasias;0;203;C88,C90;reduzida
+neo_leucemia;Leucemias;neoplasias;0;204-208;C91-C95;alta
+neo_benignas_insitu;Neoplasias in situ, benignas e de comportamento incerto (exceto SNC);neoplasias;1;210-239;D00-D48;reduzida
+neoplasias_resto;Restante das neoplasias malignas;neoplasias;1;140-208;C00-C97;alta
+anemias;Anemias;sangue;0;280-285;D50-D64;reduzida
+sangue_resto;Restante das doenças do sangue e transtornos imunitários;sangue;1;279,286-289;D65-D89;alta
+diabetes;Diabetes mellitus;endocrinas;0;250;E10-E14;alta
+desnutricao;Desnutrição;endocrinas;0;260-263;E40-E46;alta
+endocrinas_resto;Restante das doenças endócrinas, nutricionais e metabólicas;endocrinas;1;240-278;E00-E90;alta
+demencias;Demências e doença de Alzheimer;mentais;0;290,3310;F00-F03,G30;alta
+alcool;Transtornos mentais devidos ao uso de álcool;mentais;0;303,3050;F10;alta
+mentais_resto;Restante dos transtornos mentais e comportamentais;mentais;1;290-319;F00-F99;reduzida
+meningite;Meningites;nervoso;0;320-322;G00-G03;reduzida
+epilepsia;Epilepsia;nervoso;0;345;G40-G41;alta
+parkinson;Doença de Parkinson;nervoso;0;332;G20-G21;alta
+nervoso_resto;Restante das doenças do sistema nervoso e órgãos dos sentidos;nervoso;1;320-389;G00-G99,H00-H95;reduzida
+reumatica;Febre reumática e doença reumática crônica do coração;circulatorio;0;390-398;I00-I09;alta
+hipertensivas;Doenças hipertensivas;circulatorio;0;401-405;I10-I15;alta
+isquemicas;Doenças isquêmicas do coração;circulatorio;0;410-414;I20-I25;alta
+outras_cardiacas;Outras doenças cardíacas (inclui insuficiência cardíaca);circulatorio;0;415-429;I26-I52;alta
+cerebrovasculares;Doenças cerebrovasculares;circulatorio;0;430-438;I60-I69;alta
+aterosclerose;Aterosclerose;circulatorio;0;440;I70;alta
+circulatorio_resto;Restante das doenças do aparelho circulatório;circulatorio;1;390-459;I00-I99;alta
+influenza;Influenza (gripe);respiratorio;0;487;J09-J11;alta
+pneumonia;Pneumonias;respiratorio;0;480-486;J12-J18;alta
+resp_agudas_inferiores;Bronquite e bronquiolite agudas;respiratorio;0;466;J20-J22;reduzida
+resp_cronicas;Doenças crônicas das vias aéreas inferiores (DPOC e asma);respiratorio;0;490-496;J40-J47;alta
+respiratorio_resto;Restante das doenças do aparelho respiratório;respiratorio;1;460-519;J00-J99;reduzida
+ulcera;Úlcera gástrica, duodenal e péptica;digestivo;0;531-534;K25-K28;alta
+figado;Doenças do fígado (inclui cirrose);digestivo;0;570-573;K70-K77;alta
+digestivo_resto;Restante das doenças do aparelho digestivo;digestivo;1;520-579;K00-K93;alta
+renais;Doenças renais (nefrites e insuficiência renal);geniturinario;0;580-590;N00-N19;alta
+geniturinario_resto;Restante das doenças do aparelho geniturinário;geniturinario;1;580-629;N00-N99;alta
+aborto;Gravidez que termina em aborto;maternas;0;630-639;O00-O08;reduzida
+maternas_resto;Outras causas maternas;maternas;1;630-676;O00-O99;reduzida
+pele;Doenças da pele e do tecido subcutâneo;pele;0;680-709;L00-L99;reduzida
+osteomuscular;Doenças do sistema osteomuscular e do tecido conjuntivo;osteomuscular;0;710-739;M00-M99;reduzida
+cong_nervoso;Malformações congênitas do sistema nervoso;congenitas;0;740-742;Q00-Q07;reduzida
+cong_circulatorio;Malformações congênitas do aparelho circulatório;congenitas;0;745-747;Q20-Q28;alta
+congenitas_resto;Restante das malformações congênitas e anomalias cromossômicas;congenitas;1;740-759;Q00-Q99;alta
+perinatal_respiratorio;Hipóxia, asfixia e transtornos respiratórios do período perinatal;perinatais;0;768-770;P20-P28;alta
+perinatais_resto;Restante das afecções originadas no período perinatal;perinatais;1;760-779;P00-P96;alta
+mal_definidas;Sintomas, sinais e causas mal definidas;mal_definidas;0;780-799,4275,4589,7708;R00-R99,I461,I469,I959,I99,J960,J969,P285;alta
+transporte;Acidentes de transporte;externas;0;800-848;V01-V99;alta
+quedas;Quedas;externas;0;880-886,888;W00-W19;alta
+afogamento;Afogamento e submersão acidentais;externas;0;910;W65-W74;alta
+fogo;Exposição à fumaça, ao fogo e às chamas;externas;0;890-899;X00-X09;alta
+envenenamento;Envenenamento acidental;externas;0;850-869;X40-X49;reduzida
+suicidio;Lesões autoprovocadas voluntariamente (suicídio);externas;0;950-959;X60-X84,Y870;alta
+homicidio;Agressões (homicídio);externas;0;960-969;X85-Y09,Y871;alta
+intencao_indeterminada;Eventos cuja intenção é indeterminada;externas;0;980-989;Y10-Y34,Y872;alta
+intervencao_legal;Intervenções legais e operações de guerra;externas;0;970-978,990-999;Y35-Y36,Y890-Y891;reduzida
+externas_resto;Restante das causas externas;externas;1;800-999;V01-Y98;alta
