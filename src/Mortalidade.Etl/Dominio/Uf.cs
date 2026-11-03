@@ -14,6 +14,9 @@ public sealed record Uf
     public static IReadOnlyCollection<Uf> Todas { get; } =
         Siglas.Select(par => new Uf(par.Key, par.Value)).ToArray();
 
+    // Resultados pré-alocados: DeCodigoIbge roda uma vez por óbito.
+    private static readonly Dictionary<int, Result<Uf>> PorCodigo = Todas.ToDictionary(u => u.CodigoIbge, Result<Uf>.Sucesso);
+
     private Uf(int codigoIbge, string sigla)
     {
         CodigoIbge = codigoIbge;
@@ -27,9 +30,8 @@ public sealed record Uf
     public Regiao Regiao => (Regiao)(CodigoIbge / 10);
 
     public static Result<Uf> DeCodigoIbge(int codigo) =>
-        Siglas.TryGetValue(codigo, out var sigla)
-            ? Result<Uf>.Sucesso(new Uf(codigo, sigla))
-            : Result<Uf>.Falha("uf.codigo_invalido", $"Código IBGE de UF inválido: {codigo}.");
+        PorCodigo.GetValueOrDefault(codigo)
+        ?? Result<Uf>.Falha("uf.codigo_invalido", $"Código IBGE de UF inválido: {codigo}.");
 
     public override string ToString() => Sigla;
 }

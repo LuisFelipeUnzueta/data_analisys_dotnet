@@ -1,3 +1,4 @@
 namespace Mortalidade.Etl.Dominio;
 
-public sealed record GrupoCausa(string Codigo, string Nome, string Capitulo, bool ComparabilidadeReduzida);
+/// <param name="Indice">Posição do grupo em <see cref="MapaCausas.Grupos"/>; é o código numérico gravado no cubo.</param>
+public sealed record GrupoCausa(int Indice, string Codigo, string Nome, string Capitulo, bool ComparabilidadeReduzida);

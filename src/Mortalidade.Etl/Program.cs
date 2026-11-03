@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using Mortalidade.Etl.Cubo;
 using Mortalidade.Etl.Dominio;
 using Mortalidade.Etl.Leitura;
+using Mortalidade.Etl.Pipeline;
 using Mortalidade.Etl.Validacao;
 
 // Uso: dotnet run --project src/Mortalidade.Etl -- [dir_csv] [primeiro_ano] [ultimo_ano]
@@ -22,55 +22,32 @@ if (falhaEntrada is not null)
 }
 
 var populacaoPorAno = estimativa!.Valor.Populacao.ToLookup(p => p.Ano.Valor);
-var gabarito = ConferenciaTabnet.LerGabarito(File.ReadLines("data/tabnet/gabarito_1979_2023.csv"));
-var resultados = new ConcurrentDictionary<int, (long Obitos, int Celulas, double? Bruta, double? Padronizada, IReadOnlyList<string> Problemas)>();
+var processador = new ProcessadorAno(mapa.Valor, ConferenciaTabnet.LerGabarito(File.ReadLines("data/tabnet/gabarito_1979_2023.csv")));
+var resultados = new ConcurrentBag<ResultadoAno>();
 var relogio = Stopwatch.StartNew();
 
 Parallel.ForEach(Enumerable.Range(primeiro, ultimo - primeiro + 1), anoNumero =>
 {
-    var ano = Ano.Criar(anoNumero).Valor;
     var caminho = Path.Combine(dirCsv, $"Mortalidade_Geral_{anoNumero}.csv");
     if (!File.Exists(caminho))
     {
-        resultados[anoNumero] = (0, 0, null, null, [$"{anoNumero}: arquivo ausente ({caminho})."]);
+        resultados.Add(new ResultadoAno(anoNumero, [], [$"{anoNumero}: arquivo ausente ({caminho})."]));
         return;
     }
 
-    var agregador = new AgregadorCubo(mapa.Valor);
-    using (var arquivo = File.OpenRead(caminho))
-    {
-        foreach (var registro in LeitorSimCsv.Ler(arquivo, ano))
-            agregador.Adicionar(registro);
-    }
-
-    var celulas = RedistribuicaoIdade.Aplicar(agregador.Celulas());
-    var problemas = agregador.Falhas.Select(f => $"{anoNumero}: {f.Value} registro(s) com {f.Key}")
-        .Concat(agregador.ExemplosFalha.Take(3))
-        .Concat(celulas.IsFailure ? [celulas.Erro!.Mensagem] : ConferenciaTabnet.Divergencias(anoNumero, celulas.Valor, gabarito))
-        .ToList();
-    if (celulas.IsFailure)
-    {
-        resultados[anoNumero] = (0, 0, null, null, problemas);
-        return;
-    }
-
-    // Taxas nacionais do ano, como verificação de ordem de grandeza.
-    var populacao = populacaoPorAno[anoNumero].ToList();
-    var porFaixa = populacao.GroupBy(p => p.FaixaEtaria).ToDictionary(g => g.Key, g =>
-        (celulas.Valor.Where(c => c.FaixaEtaria == g.Key).Sum(c => c.ObitosAjustados), g.Sum(p => p.Habitantes)));
-    var obitos = celulas.Valor.Sum(c => c.Obitos);
-    resultados[anoNumero] = (obitos, celulas.Valor.Count, Taxas.Bruta(obitos, populacao.Sum(p => p.Habitantes)),
-        Taxas.Padronizada(porFaixa, padrao.Valor), problemas);
+    using var arquivo = File.OpenRead(caminho);
+    resultados.Add(processador.Processar(Ano.Criar(anoNumero).Valor, arquivo));
 });
 
-foreach (var (ano, (obitos, celulas, bruta, padronizada, problemas)) in resultados.OrderBy(r => r.Key))
+foreach (var resultado in resultados.OrderBy(r => r.Ano))
 {
-    Console.WriteLine($"{ano} {(problemas.Count == 0 ? "OK " : "DIF")} óbitos={obitos} células={celulas} " +
-        $"taxa_bruta={bruta:F1} taxa_padronizada={padronizada:F1}");
-    foreach (var problema in problemas.Take(5))
+    var (bruta, padronizada) = Taxas.DoRecorte(resultado.Celulas, populacaoPorAno[resultado.Ano], padrao.Valor);
+    Console.WriteLine($"{resultado.Ano} {(resultado.Aprovado ? "OK " : "DIF")} óbitos={resultado.Celulas.Sum(c => c.Obitos)} " +
+        $"células={resultado.Celulas.Count} taxa_bruta={bruta:F1} taxa_padronizada={padronizada:F1}");
+    foreach (var problema in resultado.Problemas.Take(5))
         Console.WriteLine($"     {problema}");
 }
 
-var aprovados = resultados.Count(r => r.Value.Problemas.Count == 0);
+var aprovados = resultados.Count(r => r.Aprovado);
 Console.WriteLine($"{aprovados}/{resultados.Count} anos conferem com o Tabnet em {relogio.Elapsed:mm\\:ss}.");
 return aprovados == resultados.Count ? 0 : 1;

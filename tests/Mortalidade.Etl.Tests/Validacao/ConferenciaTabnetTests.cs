@@ -16,7 +16,7 @@ public class ConferenciaTabnetTests
 
     private static IReadOnlyList<CelulaCubo> Cubo(params RegistroObito[] obitos)
     {
-        var agregador = new AgregadorCubo(Mapa);
+        var agregador = new AgregadorCubo(Mapa, Ano.Criar(2010).Valor);
         foreach (var obito in obitos)
             agregador.Adicionar(Result<RegistroObito>.Sucesso(obito));
         return agregador.Celulas();
@@ -61,7 +61,7 @@ public class ConferenciaTabnetTests
     [Fact]
     public void Agregador_CausaSemGrupo_ContaFalhaENaoGeraCelula()
     {
-        var agregador = new AgregadorCubo(Mapa);
+        var agregador = new AgregadorCubo(Mapa, Ano.Criar(2010).Valor);
         agregador.Adicionar(Result<RegistroObito>.Sucesso(Obito(35, Sexo.Masculino, "Z999")));
         agregador.Adicionar(Result<RegistroObito>.Sucesso(Obito(35, Sexo.Masculino)));
         agregador.Adicionar(Result<RegistroObito>.Sucesso(Obito(35, Sexo.Masculino)));

@@ -8,9 +8,6 @@ namespace Mortalidade.Etl.Leitura;
 /// </summary>
 public static class LeitorPopulacaoFontes
 {
-    private static readonly Dictionary<string, FaixaEtaria> Faixas =
-        FaixaEtaria.Todas.ToDictionary(f => f == FaixaEtaria.Ignorada ? "ign" : f.Rotulo);
-
     public static Result<IReadOnlyList<PontoPopulacao>> Ler(IEnumerable<string> linhasCsv)
     {
         var pontos = new List<PontoPopulacao>();
@@ -23,8 +20,8 @@ public static class LeitorPopulacaoFontes
 
             var c = linha.Split(';');
             if (c.Length < 6 || !int.TryParse(c[0], out var ano) || !int.TryParse(c[2], out var codigoUf)
-                || !long.TryParse(c[5], out var habitantes) || !Faixas.TryGetValue(c[4], out var faixa)
-                || Fonte(c[1]) is not { } fonte || Sexo(c[3]) is not { } sexo)
+                || !long.TryParse(c[5], out var habitantes) || FaixaEtaria.DeRotulo(c[4]) is not { } faixa
+                || Fonte(c[1]) is not { } fonte || SexoNome.Ler(c[3]) is not { } sexo)
                 return Falha("populacao.linha_invalida", $"Linha {numero} inválida: {linha}");
 
             if (codigoUf == 0)
@@ -49,14 +46,6 @@ public static class LeitorPopulacaoFontes
         "censo" or "censo_sidra200" => FontePopulacao.Censo,
         "contagem" => FontePopulacao.Contagem,
         "ripsa2024" => FontePopulacao.Ripsa2024,
-        _ => null
-    };
-
-    private static Sexo? Sexo(string valor) => valor switch
-    {
-        "masculino" => Dominio.Sexo.Masculino,
-        "feminino" => Dominio.Sexo.Feminino,
-        "ignorado" => Dominio.Sexo.Ignorado,
         _ => null
     };
 

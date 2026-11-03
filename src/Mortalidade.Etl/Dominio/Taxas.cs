@@ -9,18 +9,19 @@ public sealed class PopulacaoPadrao
 
     public static Result<PopulacaoPadrao> Carregar(IEnumerable<string> linhasCsv)
     {
-        var faixas = FaixaEtaria.Todas.Where(f => f != FaixaEtaria.Ignorada).ToDictionary(f => f.Rotulo);
         var pesos = new Dictionary<FaixaEtaria, double>();
         foreach (var campos in linhasCsv.Skip(1).Where(l => !string.IsNullOrWhiteSpace(l)).Select(l => l.Split(';')))
         {
-            if (campos.Length != 2 || !faixas.TryGetValue(campos[0], out var faixa) || !double.TryParse(campos[1], System.Globalization.CultureInfo.InvariantCulture, out var peso) || peso < 0)
+            if (campos.Length != 2 || FaixaEtaria.DeRotulo(campos[0]) is not { } faixa || faixa == FaixaEtaria.Ignorada
+                || !double.TryParse(campos[1], System.Globalization.CultureInfo.InvariantCulture, out var peso) || peso < 0)
                 return Result<PopulacaoPadrao>.Falha("padrao.linha_invalida", $"Linha inválida: {string.Join(';', campos)}.");
             pesos[faixa] = peso;
         }
 
-        return pesos.Count == faixas.Count
+        var faixasConhecidas = FaixaEtaria.Todas.Count - 1;
+        return pesos.Count == faixasConhecidas
             ? Result<PopulacaoPadrao>.Sucesso(new PopulacaoPadrao(pesos))
-            : Result<PopulacaoPadrao>.Falha("padrao.faixas_incompletas", $"Esperadas {faixas.Count} faixas, lidas {pesos.Count}.");
+            : Result<PopulacaoPadrao>.Falha("padrao.faixas_incompletas", $"Esperadas {faixasConhecidas} faixas, lidas {pesos.Count}.");
     }
 }
 
@@ -54,5 +55,25 @@ public static class Taxas
         }
 
         return pesos > 0 ? soma / pesos * Base : null;
+    }
+
+    /// <summary>Taxas bruta e padronizada de um recorte (células e população já filtradas), em uma passada por coleção.</summary>
+    public static (double? Bruta, double? Padronizada) DoRecorte(
+        IEnumerable<CelulaCubo> celulas, IEnumerable<Populacao> populacao, PopulacaoPadrao padrao)
+    {
+        var obitosPorFaixa = new double[FaixaEtaria.Todas.Count];
+        var populacaoPorFaixa = new long[FaixaEtaria.Todas.Count];
+        long obitos = 0;
+        foreach (var celula in celulas)
+        {
+            obitos += celula.Obitos;
+            obitosPorFaixa[celula.FaixaEtaria.Indice] += celula.ObitosAjustados;
+        }
+
+        foreach (var linha in populacao)
+            populacaoPorFaixa[linha.FaixaEtaria.Indice] += linha.Habitantes;
+
+        var porFaixa = FaixaEtaria.Todas.ToDictionary(f => f, f => (obitosPorFaixa[f.Indice], populacaoPorFaixa[f.Indice]));
+        return (Bruta(obitos, populacaoPorFaixa.Sum()), Padronizada(porFaixa, padrao));
     }
 }

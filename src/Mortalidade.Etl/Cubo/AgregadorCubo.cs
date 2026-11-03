@@ -1,12 +1,12 @@
+using System.Runtime.InteropServices;
 using Mortalidade.Etl.Dominio;
 
 namespace Mortalidade.Etl.Cubo;
 
-/// <summary>Soma óbitos por célula do cubo. Não é thread-safe: use uma instância por ano.</summary>
-public sealed class AgregadorCubo(MapaCausas mapa)
+/// <summary>Soma os óbitos de um ano por célula do cubo. Não é thread-safe: use uma instância por ano.</summary>
+public sealed class AgregadorCubo(MapaCausas mapa, Ano ano)
 {
-    private readonly Dictionary<Chave, long> _celulas = [];
-    private readonly Dictionary<CausaBasica, Result<GrupoCausa>> _grupos = [];
+    private readonly Dictionary<(int Uf, int Grupo, Sexo Sexo, int Faixa), long> _celulas = [];
     private readonly Dictionary<string, long> _falhas = [];
     private readonly List<string> _exemplosFalha = [];
 
@@ -23,21 +23,20 @@ public sealed class AgregadorCubo(MapaCausas mapa)
         }
 
         var obito = registro.Valor;
-        if (!_grupos.TryGetValue(obito.Causa, out var grupo))
-            _grupos[obito.Causa] = grupo = mapa.Resolver(obito.Causa);
-
+        var grupo = mapa.Resolver(obito.Causa);
         if (grupo.IsFailure)
         {
             RegistrarFalha(grupo.Erro!);
             return;
         }
 
-        var chave = new Chave(obito.Ano, obito.UfResidencia, grupo.Valor, obito.Sexo, obito.FaixaEtaria);
-        _celulas[chave] = _celulas.GetValueOrDefault(chave) + 1;
+        var chave = (obito.UfResidencia.CodigoIbge, grupo.Valor.Indice, obito.Sexo, obito.FaixaEtaria.Indice);
+        CollectionsMarshal.GetValueRefOrAddDefault(_celulas, chave, out _)++;
     }
 
     public IReadOnlyList<CelulaCubo> Celulas() =>
-        _celulas.Select(c => new CelulaCubo(c.Key.Ano, c.Key.Uf, c.Key.Grupo, c.Key.Sexo, c.Key.FaixaEtaria, c.Value)).ToList();
+        _celulas.Select(c => new CelulaCubo(ano, Uf.DeCodigoIbge(c.Key.Uf).Valor, mapa.Grupos[c.Key.Grupo], c.Key.Sexo,
+            FaixaEtaria.Todas[c.Key.Faixa], c.Value)).ToList();
 
     private void RegistrarFalha(Erro erro)
     {
@@ -45,6 +44,4 @@ public sealed class AgregadorCubo(MapaCausas mapa)
         if (_exemplosFalha.Count < 10)
             _exemplosFalha.Add(erro.Mensagem);
     }
-
-    private readonly record struct Chave(Ano Ano, Uf Uf, GrupoCausa Grupo, Sexo Sexo, FaixaEtaria FaixaEtaria);
 }

@@ -29,7 +29,7 @@ public static class LeitorSimCsv
             yield break;
         }
 
-        var revisao = RevisaoCidPorAno.De(ano);
+        var causas = new CacheCausas(RevisaoCidPorAno.De(ano));
         foreach (var linha in leitor)
         {
             if (linha[tipo].Span.Trim() is not "2")
@@ -43,16 +43,31 @@ public static class LeitorSimCsv
                 continue;
             }
 
-            var faixa = FaixaEtaria.DeIdadeEmAnos(IdadeEmAnos(linha[idade].Span));
-            if (faixa.IsFailure)
-            {
-                yield return Result<RegistroObito>.Falha(faixa.Erro!.Codigo, faixa.Erro.Mensagem);
-                continue;
-            }
-
-            var codigoCausa = linha[causa].Span.Trim().ToString().ToUpperInvariant();
+            // IdadeEmAnos nunca é negativa, então a faixa sempre resolve.
+            var faixa = FaixaEtaria.DeIdadeEmAnos(IdadeEmAnos(linha[idade].Span)).Valor;
             yield return Result<RegistroObito>.Sucesso(new RegistroObito(
-                ano, uf, new CausaBasica(revisao, codigoCausa), SexoSim.DeCodigo(linha[sexo].ToString()), faixa.Valor));
+                ano, uf, causas.Obter(linha[causa].Span), SexoSim.DeCodigo(linha[sexo].Span), faixa));
+        }
+    }
+
+    /// <summary>Reaproveita a mesma <see cref="CausaBasica"/> por código, sem alocar string por registro.</summary>
+    private sealed class CacheCausas(RevisaoCid revisao)
+    {
+        private readonly Dictionary<string, CausaBasica> _causas = [];
+
+        public CausaBasica Obter(ReadOnlySpan<char> campo)
+        {
+            var codigo = campo.Trim();
+            Span<char> maiusculo = codigo.Length <= 16 ? stackalloc char[codigo.Length] : new char[codigo.Length];
+            codigo.ToUpperInvariant(maiusculo);
+
+            var busca = _causas.GetAlternateLookup<ReadOnlySpan<char>>();
+            if (busca.TryGetValue(maiusculo, out var causa))
+                return causa;
+
+            causa = new CausaBasica(revisao, maiusculo.ToString());
+            _causas[causa.Codigo] = causa;
+            return causa;
         }
     }
 

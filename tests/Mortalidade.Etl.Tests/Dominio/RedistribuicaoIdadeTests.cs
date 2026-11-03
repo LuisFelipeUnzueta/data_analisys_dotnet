@@ -6,8 +6,8 @@ public class RedistribuicaoIdadeTests
 {
     private static readonly Ano Ano2010 = Ano.Criar(2010).Valor;
     private static readonly Uf Sp = Uf.DeCodigoIbge(35).Valor;
-    private static readonly GrupoCausa Isquemicas = new("isquemicas", "Isquêmicas", "circ", false);
-    private static readonly GrupoCausa Homicidio = new("homicidio", "Homicídio", "ext", false);
+    private static readonly GrupoCausa Isquemicas = new(0, "isquemicas", "Isquêmicas", "circ", false);
+    private static readonly GrupoCausa Homicidio = new(1, "homicidio", "Homicídio", "ext", false);
     private static readonly FaixaEtaria Adultos = FaixaEtaria.DeIdadeEmAnos(40).Valor;
     private static readonly FaixaEtaria Idosos = FaixaEtaria.DeIdadeEmAnos(80).Valor;
 

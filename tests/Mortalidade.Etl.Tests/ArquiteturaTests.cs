@@ -16,6 +16,7 @@ public class ArquiteturaTests
                 "Mortalidade.Etl.Leitura",
                 "Mortalidade.Etl.Cubo",
                 "Mortalidade.Etl.Validacao",
+                "Mortalidade.Etl.Pipeline",
                 "Parquet")
             .GetResult();
 

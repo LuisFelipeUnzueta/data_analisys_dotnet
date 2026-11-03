@@ -13,19 +13,28 @@ public static class ConferenciaTabnet
         if (esperado.Count == 0)
             return [$"{ano}: ano ausente do gabarito."];
 
-        var calculado = new Dictionary<(string, string), long> { [("total", "total")] = celulas.Sum(c => c.Obitos) };
+        long total = 0;
+        var porUf = new Dictionary<int, long>();
+        var porSexo = new Dictionary<Sexo, long>();
         foreach (var celula in celulas)
         {
-            Somar(("uf", celula.Uf.CodigoIbge.ToString()), celula.Obitos);
-            Somar(("sexo", NomeSexo(celula.Sexo)), celula.Obitos);
+            total += celula.Obitos;
+            porUf[celula.Uf.CodigoIbge] = porUf.GetValueOrDefault(celula.Uf.CodigoIbge) + celula.Obitos;
+            porSexo[celula.Sexo] = porSexo.GetValueOrDefault(celula.Sexo) + celula.Obitos;
         }
 
-        return esperado
-            .Where(g => calculado.GetValueOrDefault((g.Dimensao, g.Categoria)) != g.Obitos)
-            .Select(g => $"{ano} {g.Dimensao} {g.Categoria}: cubo {calculado.GetValueOrDefault((g.Dimensao, g.Categoria))}, Tabnet {g.Obitos}")
-            .ToList();
+        long Calculado(LinhaGabarito g) => g.Dimensao switch
+        {
+            "total" => total,
+            "uf" => porUf.GetValueOrDefault(int.Parse(g.Categoria)),
+            "sexo" => SexoNome.Ler(g.Categoria) is { } sexo ? porSexo.GetValueOrDefault(sexo) : -1,
+            _ => -1
+        };
 
-        void Somar((string, string) chave, long obitos) => calculado[chave] = calculado.GetValueOrDefault(chave) + obitos;
+        return esperado
+            .Where(g => Calculado(g) != g.Obitos)
+            .Select(g => $"{ano} {g.Dimensao} {g.Categoria}: cubo {Calculado(g)}, Tabnet {g.Obitos}")
+            .ToList();
     }
 
     public static IReadOnlyList<LinhaGabarito> LerGabarito(IEnumerable<string> linhasCsv) =>
@@ -34,11 +43,4 @@ public static class ConferenciaTabnet
             .Select(l => l.Split(';'))
             .Select(c => new LinhaGabarito(int.Parse(c[0]), c[1], c[2], long.Parse(c[3])))
             .ToList();
-
-    private static string NomeSexo(Sexo sexo) => sexo switch
-    {
-        Sexo.Masculino => "masculino",
-        Sexo.Feminino => "feminino",
-        _ => "ignorado"
-    };
 }

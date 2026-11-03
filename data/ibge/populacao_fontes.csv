@@ -16,7 +16,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;11;feminino;70-74;788;2026-11-03
 1980;censo_sidra200;11;feminino;75-79;513;2026-11-03
 1980;censo_sidra200;11;feminino;80+;292;2026-11-03
-1980;censo_sidra200;11;feminino;ign;284;2026-11-03
+1980;censo_sidra200;11;feminino;Ignorada;284;2026-11-03
 1980;censo_sidra200;11;masculino;0-4;43827;2026-11-03
 1980;censo_sidra200;11;masculino;10-14;33235;2026-11-03
 1980;censo_sidra200;11;masculino;15-19;28180;2026-11-03
@@ -34,7 +34,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;11;masculino;70-74;1190;2026-11-03
 1980;censo_sidra200;11;masculino;75-79;538;2026-11-03
 1980;censo_sidra200;11;masculino;80+;224;2026-11-03
-1980;censo_sidra200;11;masculino;ign;336;2026-11-03
+1980;censo_sidra200;11;masculino;Ignorada;336;2026-11-03
 1980;censo_sidra200;12;feminino;0-4;27094;2026-11-03
 1980;censo_sidra200;12;feminino;10-14;20010;2026-11-03
 1980;censo_sidra200;12;feminino;15-19;17149;2026-11-03
@@ -52,7 +52,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;12;feminino;70-74;921;2026-11-03
 1980;censo_sidra200;12;feminino;75-79;472;2026-11-03
 1980;censo_sidra200;12;feminino;80+;286;2026-11-03
-1980;censo_sidra200;12;feminino;ign;223;2026-11-03
+1980;censo_sidra200;12;feminino;Ignorada;223;2026-11-03
 1980;censo_sidra200;12;masculino;0-4;28180;2026-11-03
 1980;censo_sidra200;12;masculino;10-14;20551;2026-11-03
 1980;censo_sidra200;12;masculino;15-19;16865;2026-11-03
@@ -70,7 +70,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;12;masculino;70-74;1151;2026-11-03
 1980;censo_sidra200;12;masculino;75-79;563;2026-11-03
 1980;censo_sidra200;12;masculino;80+;354;2026-11-03
-1980;censo_sidra200;12;masculino;ign;240;2026-11-03
+1980;censo_sidra200;12;masculino;Ignorada;240;2026-11-03
 1980;censo_sidra200;13;feminino;0-4;132643;2026-11-03
 1980;censo_sidra200;13;feminino;10-14;93367;2026-11-03
 1980;censo_sidra200;13;feminino;15-19;81548;2026-11-03
@@ -88,7 +88,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;13;feminino;70-74;4888;2026-11-03
 1980;censo_sidra200;13;feminino;75-79;2921;2026-11-03
 1980;censo_sidra200;13;feminino;80+;1811;2026-11-03
-1980;censo_sidra200;13;feminino;ign;1014;2026-11-03
+1980;censo_sidra200;13;feminino;Ignorada;1014;2026-11-03
 1980;censo_sidra200;13;masculino;0-4;134440;2026-11-03
 1980;censo_sidra200;13;masculino;10-14;94045;2026-11-03
 1980;censo_sidra200;13;masculino;15-19;79099;2026-11-03
@@ -106,7 +106,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;13;masculino;70-74;4940;2026-11-03
 1980;censo_sidra200;13;masculino;75-79;2542;2026-11-03
 1980;censo_sidra200;13;masculino;80+;1145;2026-11-03
-1980;censo_sidra200;13;masculino;ign;978;2026-11-03
+1980;censo_sidra200;13;masculino;Ignorada;978;2026-11-03
 1980;censo_sidra200;14;feminino;0-4;6972;2026-11-03
 1980;censo_sidra200;14;feminino;10-14;4776;2026-11-03
 1980;censo_sidra200;14;feminino;15-19;4440;2026-11-03
@@ -124,7 +124,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;14;feminino;70-74;172;2026-11-03
 1980;censo_sidra200;14;feminino;75-79;111;2026-11-03
 1980;censo_sidra200;14;feminino;80+;83;2026-11-03
-1980;censo_sidra200;14;feminino;ign;24;2026-11-03
+1980;censo_sidra200;14;feminino;Ignorada;24;2026-11-03
 1980;censo_sidra200;14;masculino;0-4;7048;2026-11-03
 1980;censo_sidra200;14;masculino;10-14;4873;2026-11-03
 1980;censo_sidra200;14;masculino;15-19;4332;2026-11-03
@@ -142,7 +142,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;14;masculino;70-74;281;2026-11-03
 1980;censo_sidra200;14;masculino;75-79;121;2026-11-03
 1980;censo_sidra200;14;masculino;80+;70;2026-11-03
-1980;censo_sidra200;14;masculino;ign;41;2026-11-03
+1980;censo_sidra200;14;masculino;Ignorada;41;2026-11-03
 1980;censo_sidra200;15;feminino;0-4;292311;2026-11-03
 1980;censo_sidra200;15;feminino;10-14;222145;2026-11-03
 1980;censo_sidra200;15;feminino;15-19;191692;2026-11-03
@@ -160,7 +160,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;15;feminino;70-74;15773;2026-11-03
 1980;censo_sidra200;15;feminino;75-79;10285;2026-11-03
 1980;censo_sidra200;15;feminino;80+;6768;2026-11-03
-1980;censo_sidra200;15;feminino;ign;1945;2026-11-03
+1980;censo_sidra200;15;feminino;Ignorada;1945;2026-11-03
 1980;censo_sidra200;15;masculino;0-4;300322;2026-11-03
 1980;censo_sidra200;15;masculino;10-14;224097;2026-11-03
 1980;censo_sidra200;15;masculino;15-19;186918;2026-11-03
@@ -178,7 +178,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;15;masculino;70-74;14177;2026-11-03
 1980;censo_sidra200;15;masculino;75-79;7755;2026-11-03
 1980;censo_sidra200;15;masculino;80+;4071;2026-11-03
-1980;censo_sidra200;15;masculino;ign;1979;2026-11-03
+1980;censo_sidra200;15;masculino;Ignorada;1979;2026-11-03
 1980;censo_sidra200;16;feminino;0-4;16817;2026-11-03
 1980;censo_sidra200;16;feminino;10-14;12075;2026-11-03
 1980;censo_sidra200;16;feminino;15-19;10083;2026-11-03
@@ -196,7 +196,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;16;feminino;70-74;882;2026-11-03
 1980;censo_sidra200;16;feminino;75-79;503;2026-11-03
 1980;censo_sidra200;16;feminino;80+;246;2026-11-03
-1980;censo_sidra200;16;feminino;ign;42;2026-11-03
+1980;censo_sidra200;16;feminino;Ignorada;42;2026-11-03
 1980;censo_sidra200;16;masculino;0-4;17002;2026-11-03
 1980;censo_sidra200;16;masculino;10-14;11940;2026-11-03
 1980;censo_sidra200;16;masculino;15-19;9612;2026-11-03
@@ -214,7 +214,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;16;masculino;70-74;808;2026-11-03
 1980;censo_sidra200;16;masculino;75-79;450;2026-11-03
 1980;censo_sidra200;16;masculino;80+;154;2026-11-03
-1980;censo_sidra200;16;masculino;ign;29;2026-11-03
+1980;censo_sidra200;16;masculino;Ignorada;29;2026-11-03
 1980;censo_sidra200;17;feminino;0-4;0;2026-11-03
 1980;censo_sidra200;17;feminino;10-14;0;2026-11-03
 1980;censo_sidra200;17;feminino;15-19;0;2026-11-03
@@ -232,7 +232,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;17;feminino;70-74;0;2026-11-03
 1980;censo_sidra200;17;feminino;75-79;0;2026-11-03
 1980;censo_sidra200;17;feminino;80+;0;2026-11-03
-1980;censo_sidra200;17;feminino;ign;0;2026-11-03
+1980;censo_sidra200;17;feminino;Ignorada;0;2026-11-03
 1980;censo_sidra200;17;masculino;0-4;0;2026-11-03
 1980;censo_sidra200;17;masculino;10-14;0;2026-11-03
 1980;censo_sidra200;17;masculino;15-19;0;2026-11-03
@@ -250,7 +250,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;17;masculino;70-74;0;2026-11-03
 1980;censo_sidra200;17;masculino;75-79;0;2026-11-03
 1980;censo_sidra200;17;masculino;80+;0;2026-11-03
-1980;censo_sidra200;17;masculino;ign;0;2026-11-03
+1980;censo_sidra200;17;masculino;Ignorada;0;2026-11-03
 1980;censo_sidra200;21;feminino;0-4;349613;2026-11-03
 1980;censo_sidra200;21;feminino;10-14;263285;2026-11-03
 1980;censo_sidra200;21;feminino;15-19;226084;2026-11-03
@@ -268,7 +268,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;21;feminino;70-74;21771;2026-11-03
 1980;censo_sidra200;21;feminino;75-79;13684;2026-11-03
 1980;censo_sidra200;21;feminino;80+;7190;2026-11-03
-1980;censo_sidra200;21;feminino;ign;2312;2026-11-03
+1980;censo_sidra200;21;feminino;Ignorada;2312;2026-11-03
 1980;censo_sidra200;21;masculino;0-4;354078;2026-11-03
 1980;censo_sidra200;21;masculino;10-14;261723;2026-11-03
 1980;censo_sidra200;21;masculino;15-19;218924;2026-11-03
@@ -286,7 +286,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;21;masculino;70-74;22288;2026-11-03
 1980;censo_sidra200;21;masculino;75-79;12369;2026-11-03
 1980;censo_sidra200;21;masculino;80+;5176;2026-11-03
-1980;censo_sidra200;21;masculino;ign;2537;2026-11-03
+1980;censo_sidra200;21;masculino;Ignorada;2537;2026-11-03
 1980;censo_sidra200;22;feminino;0-4;178057;2026-11-03
 1980;censo_sidra200;22;feminino;10-14;150166;2026-11-03
 1980;censo_sidra200;22;feminino;15-19;131159;2026-11-03
@@ -304,7 +304,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;22;feminino;70-74;11736;2026-11-03
 1980;censo_sidra200;22;feminino;75-79;7717;2026-11-03
 1980;censo_sidra200;22;feminino;80+;4764;2026-11-03
-1980;censo_sidra200;22;feminino;ign;901;2026-11-03
+1980;censo_sidra200;22;feminino;Ignorada;901;2026-11-03
 1980;censo_sidra200;22;masculino;0-4;179680;2026-11-03
 1980;censo_sidra200;22;masculino;10-14;147499;2026-11-03
 1980;censo_sidra200;22;masculino;15-19;125002;2026-11-03
@@ -322,7 +322,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;22;masculino;70-74;12011;2026-11-03
 1980;censo_sidra200;22;masculino;75-79;7714;2026-11-03
 1980;censo_sidra200;22;masculino;80+;3981;2026-11-03
-1980;censo_sidra200;22;masculino;ign;905;2026-11-03
+1980;censo_sidra200;22;masculino;Ignorada;905;2026-11-03
 1980;censo_sidra200;23;feminino;0-4;396368;2026-11-03
 1980;censo_sidra200;23;feminino;10-14;361110;2026-11-03
 1980;censo_sidra200;23;feminino;15-19;327898;2026-11-03
@@ -340,7 +340,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;23;feminino;70-74;32492;2026-11-03
 1980;censo_sidra200;23;feminino;75-79;23316;2026-11-03
 1980;censo_sidra200;23;feminino;80+;18869;2026-11-03
-1980;censo_sidra200;23;feminino;ign;2769;2026-11-03
+1980;censo_sidra200;23;feminino;Ignorada;2769;2026-11-03
 1980;censo_sidra200;23;masculino;0-4;402286;2026-11-03
 1980;censo_sidra200;23;masculino;10-14;359502;2026-11-03
 1980;censo_sidra200;23;masculino;15-19;313166;2026-11-03
@@ -358,7 +358,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;23;masculino;70-74;31807;2026-11-03
 1980;censo_sidra200;23;masculino;75-79;21956;2026-11-03
 1980;censo_sidra200;23;masculino;80+;15347;2026-11-03
-1980;censo_sidra200;23;masculino;ign;2537;2026-11-03
+1980;censo_sidra200;23;masculino;Ignorada;2537;2026-11-03
 1980;censo_sidra200;24;feminino;0-4;137730;2026-11-03
 1980;censo_sidra200;24;feminino;10-14;127714;2026-11-03
 1980;censo_sidra200;24;feminino;15-19;118172;2026-11-03
@@ -376,7 +376,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;24;feminino;70-74;13437;2026-11-03
 1980;censo_sidra200;24;feminino;75-79;9431;2026-11-03
 1980;censo_sidra200;24;feminino;80+;7438;2026-11-03
-1980;censo_sidra200;24;feminino;ign;914;2026-11-03
+1980;censo_sidra200;24;feminino;Ignorada;914;2026-11-03
 1980;censo_sidra200;24;masculino;0-4;140060;2026-11-03
 1980;censo_sidra200;24;masculino;10-14;127010;2026-11-03
 1980;censo_sidra200;24;masculino;15-19;113841;2026-11-03
@@ -394,7 +394,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;24;masculino;70-74;13396;2026-11-03
 1980;censo_sidra200;24;masculino;75-79;9315;2026-11-03
 1980;censo_sidra200;24;masculino;80+;6706;2026-11-03
-1980;censo_sidra200;24;masculino;ign;1049;2026-11-03
+1980;censo_sidra200;24;masculino;Ignorada;1049;2026-11-03
 1980;censo_sidra200;25;feminino;0-4;209338;2026-11-03
 1980;censo_sidra200;25;feminino;10-14;188660;2026-11-03
 1980;censo_sidra200;25;feminino;15-19;164635;2026-11-03
@@ -412,7 +412,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;25;feminino;70-74;19682;2026-11-03
 1980;censo_sidra200;25;feminino;75-79;15353;2026-11-03
 1980;censo_sidra200;25;feminino;80+;11371;2026-11-03
-1980;censo_sidra200;25;feminino;ign;1856;2026-11-03
+1980;censo_sidra200;25;feminino;Ignorada;1856;2026-11-03
 1980;censo_sidra200;25;masculino;0-4;211155;2026-11-03
 1980;censo_sidra200;25;masculino;10-14;186143;2026-11-03
 1980;censo_sidra200;25;masculino;15-19;158405;2026-11-03
@@ -430,7 +430,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;25;masculino;70-74;20074;2026-11-03
 1980;censo_sidra200;25;masculino;75-79;13865;2026-11-03
 1980;censo_sidra200;25;masculino;80+;9755;2026-11-03
-1980;censo_sidra200;25;masculino;ign;1810;2026-11-03
+1980;censo_sidra200;25;masculino;Ignorada;1810;2026-11-03
 1980;censo_sidra200;26;feminino;0-4;453506;2026-11-03
 1980;censo_sidra200;26;feminino;10-14;405676;2026-11-03
 1980;censo_sidra200;26;feminino;15-19;362827;2026-11-03
@@ -448,7 +448,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;26;feminino;70-74;41438;2026-11-03
 1980;censo_sidra200;26;feminino;75-79;28254;2026-11-03
 1980;censo_sidra200;26;feminino;80+;19865;2026-11-03
-1980;censo_sidra200;26;feminino;ign;2844;2026-11-03
+1980;censo_sidra200;26;feminino;Ignorada;2844;2026-11-03
 1980;censo_sidra200;26;masculino;0-4;459647;2026-11-03
 1980;censo_sidra200;26;masculino;10-14;400711;2026-11-03
 1980;censo_sidra200;26;masculino;15-19;343967;2026-11-03
@@ -466,7 +466,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;26;masculino;70-74;35853;2026-11-03
 1980;censo_sidra200;26;masculino;75-79;23625;2026-11-03
 1980;censo_sidra200;26;masculino;80+;13855;2026-11-03
-1980;censo_sidra200;26;masculino;ign;2901;2026-11-03
+1980;censo_sidra200;26;masculino;Ignorada;2901;2026-11-03
 1980;censo_sidra200;27;feminino;0-4;164313;2026-11-03
 1980;censo_sidra200;27;feminino;10-14;134152;2026-11-03
 1980;censo_sidra200;27;feminino;15-19;114400;2026-11-03
@@ -484,7 +484,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;27;feminino;70-74;12584;2026-11-03
 1980;censo_sidra200;27;feminino;75-79;7382;2026-11-03
 1980;censo_sidra200;27;feminino;80+;5768;2026-11-03
-1980;censo_sidra200;27;feminino;ign;1247;2026-11-03
+1980;censo_sidra200;27;feminino;Ignorada;1247;2026-11-03
 1980;censo_sidra200;27;masculino;0-4;163276;2026-11-03
 1980;censo_sidra200;27;masculino;10-14;133283;2026-11-03
 1980;censo_sidra200;27;masculino;15-19;108682;2026-11-03
@@ -502,7 +502,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;27;masculino;70-74;12233;2026-11-03
 1980;censo_sidra200;27;masculino;75-79;7292;2026-11-03
 1980;censo_sidra200;27;masculino;80+;3911;2026-11-03
-1980;censo_sidra200;27;masculino;ign;1369;2026-11-03
+1980;censo_sidra200;27;masculino;Ignorada;1369;2026-11-03
 1980;censo_sidra200;28;feminino;0-4;91019;2026-11-03
 1980;censo_sidra200;28;feminino;10-14;77687;2026-11-03
 1980;censo_sidra200;28;feminino;15-19;67155;2026-11-03
@@ -520,7 +520,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;28;feminino;70-74;8503;2026-11-03
 1980;censo_sidra200;28;feminino;75-79;5495;2026-11-03
 1980;censo_sidra200;28;feminino;80+;3944;2026-11-03
-1980;censo_sidra200;28;feminino;ign;664;2026-11-03
+1980;censo_sidra200;28;feminino;Ignorada;664;2026-11-03
 1980;censo_sidra200;28;masculino;0-4;92459;2026-11-03
 1980;censo_sidra200;28;masculino;10-14;78084;2026-11-03
 1980;censo_sidra200;28;masculino;15-19;64718;2026-11-03
@@ -538,7 +538,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;28;masculino;70-74;7707;2026-11-03
 1980;censo_sidra200;28;masculino;75-79;4683;2026-11-03
 1980;censo_sidra200;28;masculino;80+;2955;2026-11-03
-1980;censo_sidra200;28;masculino;ign;716;2026-11-03
+1980;censo_sidra200;28;masculino;Ignorada;716;2026-11-03
 1980;censo_sidra200;29;feminino;0-4;763358;2026-11-03
 1980;censo_sidra200;29;feminino;10-14;627055;2026-11-03
 1980;censo_sidra200;29;feminino;15-19;542760;2026-11-03
@@ -556,7 +556,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;29;feminino;70-74;58133;2026-11-03
 1980;censo_sidra200;29;feminino;75-79;35827;2026-11-03
 1980;censo_sidra200;29;feminino;80+;29339;2026-11-03
-1980;censo_sidra200;29;feminino;ign;7246;2026-11-03
+1980;censo_sidra200;29;feminino;Ignorada;7246;2026-11-03
 1980;censo_sidra200;29;masculino;0-4;775565;2026-11-03
 1980;censo_sidra200;29;masculino;10-14;628735;2026-11-03
 1980;censo_sidra200;29;masculino;15-19;523837;2026-11-03
@@ -574,7 +574,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;29;masculino;70-74;54884;2026-11-03
 1980;censo_sidra200;29;masculino;75-79;31509;2026-11-03
 1980;censo_sidra200;29;masculino;80+;20335;2026-11-03
-1980;censo_sidra200;29;masculino;ign;7448;2026-11-03
+1980;censo_sidra200;29;masculino;Ignorada;7448;2026-11-03
 1980;censo_sidra200;31;feminino;0-4;884088;2026-11-03
 1980;censo_sidra200;31;feminino;10-14;819112;2026-11-03
 1980;censo_sidra200;31;feminino;15-19;807226;2026-11-03
@@ -592,7 +592,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;31;feminino;70-74;76252;2026-11-03
 1980;censo_sidra200;31;feminino;75-79;49764;2026-11-03
 1980;censo_sidra200;31;feminino;80+;38597;2026-11-03
-1980;censo_sidra200;31;feminino;ign;4724;2026-11-03
+1980;censo_sidra200;31;feminino;Ignorada;4724;2026-11-03
 1980;censo_sidra200;31;masculino;0-4;907137;2026-11-03
 1980;censo_sidra200;31;masculino;10-14;830173;2026-11-03
 1980;censo_sidra200;31;masculino;15-19;795709;2026-11-03
@@ -610,7 +610,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;31;masculino;70-74;70156;2026-11-03
 1980;censo_sidra200;31;masculino;75-79;41758;2026-11-03
 1980;censo_sidra200;31;masculino;80+;26945;2026-11-03
-1980;censo_sidra200;31;masculino;ign;4545;2026-11-03
+1980;censo_sidra200;31;masculino;Ignorada;4545;2026-11-03
 1980;censo_sidra200;32;feminino;0-4;140188;2026-11-03
 1980;censo_sidra200;32;feminino;10-14;122817;2026-11-03
 1980;censo_sidra200;32;feminino;15-19;122888;2026-11-03
@@ -628,7 +628,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;32;feminino;70-74;10675;2026-11-03
 1980;censo_sidra200;32;feminino;75-79;7532;2026-11-03
 1980;censo_sidra200;32;feminino;80+;5770;2026-11-03
-1980;censo_sidra200;32;feminino;ign;862;2026-11-03
+1980;censo_sidra200;32;feminino;Ignorada;862;2026-11-03
 1980;censo_sidra200;32;masculino;0-4;143987;2026-11-03
 1980;censo_sidra200;32;masculino;10-14;125264;2026-11-03
 1980;censo_sidra200;32;masculino;15-19;122565;2026-11-03
@@ -646,7 +646,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;32;masculino;70-74;11302;2026-11-03
 1980;censo_sidra200;32;masculino;75-79;7089;2026-11-03
 1980;censo_sidra200;32;masculino;80+;4303;2026-11-03
-1980;censo_sidra200;32;masculino;ign;1116;2026-11-03
+1980;censo_sidra200;32;masculino;Ignorada;1116;2026-11-03
 1980;censo_sidra200;33;feminino;0-4;615103;2026-11-03
 1980;censo_sidra200;33;feminino;10-14;561781;2026-11-03
 1980;censo_sidra200;33;feminino;15-19;611543;2026-11-03
@@ -664,7 +664,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;33;feminino;70-74;82393;2026-11-03
 1980;censo_sidra200;33;feminino;75-79;55983;2026-11-03
 1980;censo_sidra200;33;feminino;80+;49239;2026-11-03
-1980;censo_sidra200;33;feminino;ign;7586;2026-11-03
+1980;censo_sidra200;33;feminino;Ignorada;7586;2026-11-03
 1980;censo_sidra200;33;masculino;0-4;631529;2026-11-03
 1980;censo_sidra200;33;masculino;10-14;569805;2026-11-03
 1980;censo_sidra200;33;masculino;15-19;597436;2026-11-03
@@ -682,7 +682,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;33;masculino;70-74;62828;2026-11-03
 1980;censo_sidra200;33;masculino;75-79;36862;2026-11-03
 1980;censo_sidra200;33;masculino;80+;24603;2026-11-03
-1980;censo_sidra200;33;masculino;ign;7112;2026-11-03
+1980;censo_sidra200;33;masculino;Ignorada;7112;2026-11-03
 1980;censo_sidra200;35;feminino;0-4;1500190;2026-11-03
 1980;censo_sidra200;35;feminino;10-14;1262058;2026-11-03
 1980;censo_sidra200;35;feminino;15-19;1348186;2026-11-03
@@ -700,7 +700,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;35;feminino;70-74;152523;2026-11-03
 1980;censo_sidra200;35;feminino;75-79;97258;2026-11-03
 1980;censo_sidra200;35;feminino;80+;77293;2026-11-03
-1980;censo_sidra200;35;feminino;ign;7809;2026-11-03
+1980;censo_sidra200;35;feminino;Ignorada;7809;2026-11-03
 1980;censo_sidra200;35;masculino;0-4;1547403;2026-11-03
 1980;censo_sidra200;35;masculino;10-14;1279253;2026-11-03
 1980;censo_sidra200;35;masculino;15-19;1325666;2026-11-03
@@ -718,7 +718,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;35;masculino;70-74;130736;2026-11-03
 1980;censo_sidra200;35;masculino;75-79;77895;2026-11-03
 1980;censo_sidra200;35;masculino;80+;50748;2026-11-03
-1980;censo_sidra200;35;masculino;ign;8585;2026-11-03
+1980;censo_sidra200;35;masculino;Ignorada;8585;2026-11-03
 1980;censo_sidra200;41;feminino;0-4;506297;2026-11-03
 1980;censo_sidra200;41;feminino;10-14;491071;2026-11-03
 1980;censo_sidra200;41;feminino;15-19;461392;2026-11-03
@@ -736,7 +736,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;41;feminino;70-74;31204;2026-11-03
 1980;censo_sidra200;41;feminino;75-79;19520;2026-11-03
 1980;censo_sidra200;41;feminino;80+;13237;2026-11-03
-1980;censo_sidra200;41;feminino;ign;2952;2026-11-03
+1980;censo_sidra200;41;feminino;Ignorada;2952;2026-11-03
 1980;censo_sidra200;41;masculino;0-4;519930;2026-11-03
 1980;censo_sidra200;41;masculino;10-14;501577;2026-11-03
 1980;censo_sidra200;41;masculino;15-19;455664;2026-11-03
@@ -754,7 +754,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;41;masculino;70-74;34998;2026-11-03
 1980;censo_sidra200;41;masculino;75-79;20192;2026-11-03
 1980;censo_sidra200;41;masculino;80+;12044;2026-11-03
-1980;censo_sidra200;41;masculino;ign;2765;2026-11-03
+1980;censo_sidra200;41;masculino;Ignorada;2765;2026-11-03
 1980;censo_sidra200;42;feminino;0-4;229074;2026-11-03
 1980;censo_sidra200;42;feminino;10-14;225479;2026-11-03
 1980;censo_sidra200;42;feminino;15-19;226835;2026-11-03
@@ -772,7 +772,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;42;feminino;70-74;18142;2026-11-03
 1980;censo_sidra200;42;feminino;75-79;11163;2026-11-03
 1980;censo_sidra200;42;feminino;80+;8423;2026-11-03
-1980;censo_sidra200;42;feminino;ign;1637;2026-11-03
+1980;censo_sidra200;42;feminino;Ignorada;1637;2026-11-03
 1980;censo_sidra200;42;masculino;0-4;238518;2026-11-03
 1980;censo_sidra200;42;masculino;10-14;231188;2026-11-03
 1980;censo_sidra200;42;masculino;15-19;228393;2026-11-03
@@ -790,7 +790,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;42;masculino;70-74;16780;2026-11-03
 1980;censo_sidra200;42;masculino;75-79;10188;2026-11-03
 1980;censo_sidra200;42;masculino;80+;6428;2026-11-03
-1980;censo_sidra200;42;masculino;ign;1584;2026-11-03
+1980;censo_sidra200;42;masculino;Ignorada;1584;2026-11-03
 1980;censo_sidra200;43;feminino;0-4;427542;2026-11-03
 1980;censo_sidra200;43;feminino;10-14;416453;2026-11-03
 1980;censo_sidra200;43;feminino;15-19;448182;2026-11-03
@@ -808,7 +808,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;43;feminino;70-74;54763;2026-11-03
 1980;censo_sidra200;43;feminino;75-79;37162;2026-11-03
 1980;censo_sidra200;43;feminino;80+;30086;2026-11-03
-1980;censo_sidra200;43;feminino;ign;2976;2026-11-03
+1980;censo_sidra200;43;feminino;Ignorada;2976;2026-11-03
 1980;censo_sidra200;43;masculino;0-4;442976;2026-11-03
 1980;censo_sidra200;43;masculino;10-14;426990;2026-11-03
 1980;censo_sidra200;43;masculino;15-19;444170;2026-11-03
@@ -826,7 +826,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;43;masculino;70-74;44942;2026-11-03
 1980;censo_sidra200;43;masculino;75-79;26581;2026-11-03
 1980;censo_sidra200;43;masculino;80+;17372;2026-11-03
-1980;censo_sidra200;43;masculino;ign;2736;2026-11-03
+1980;censo_sidra200;43;masculino;Ignorada;2736;2026-11-03
 1980;censo_sidra200;50;feminino;0-4;97540;2026-11-03
 1980;censo_sidra200;50;feminino;10-14;86482;2026-11-03
 1980;censo_sidra200;50;feminino;15-19;80892;2026-11-03
@@ -844,7 +844,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;50;feminino;70-74;4832;2026-11-03
 1980;censo_sidra200;50;feminino;75-79;3098;2026-11-03
 1980;censo_sidra200;50;feminino;80+;1937;2026-11-03
-1980;censo_sidra200;50;feminino;ign;512;2026-11-03
+1980;censo_sidra200;50;feminino;Ignorada;512;2026-11-03
 1980;censo_sidra200;50;masculino;0-4;100118;2026-11-03
 1980;censo_sidra200;50;masculino;10-14;88717;2026-11-03
 1980;censo_sidra200;50;masculino;15-19;83191;2026-11-03
@@ -862,7 +862,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;50;masculino;70-74;5881;2026-11-03
 1980;censo_sidra200;50;masculino;75-79;3503;2026-11-03
 1980;censo_sidra200;50;masculino;80+;2124;2026-11-03
-1980;censo_sidra200;50;masculino;ign;656;2026-11-03
+1980;censo_sidra200;50;masculino;Ignorada;656;2026-11-03
 1980;censo_sidra200;51;feminino;0-4;89493;2026-11-03
 1980;censo_sidra200;51;feminino;10-14;72375;2026-11-03
 1980;censo_sidra200;51;feminino;15-19;65797;2026-11-03
@@ -880,7 +880,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;51;feminino;70-74;3179;2026-11-03
 1980;censo_sidra200;51;feminino;75-79;2069;2026-11-03
 1980;censo_sidra200;51;feminino;80+;1416;2026-11-03
-1980;censo_sidra200;51;feminino;ign;868;2026-11-03
+1980;censo_sidra200;51;feminino;Ignorada;868;2026-11-03
 1980;censo_sidra200;51;masculino;0-4;91524;2026-11-03
 1980;censo_sidra200;51;masculino;10-14;74456;2026-11-03
 1980;censo_sidra200;51;masculino;15-19;65862;2026-11-03
@@ -898,7 +898,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;51;masculino;70-74;4097;2026-11-03
 1980;censo_sidra200;51;masculino;75-79;2373;2026-11-03
 1980;censo_sidra200;51;masculino;80+;1444;2026-11-03
-1980;censo_sidra200;51;masculino;ign;1085;2026-11-03
+1980;censo_sidra200;51;masculino;Ignorada;1085;2026-11-03
 1980;censo_sidra200;52;feminino;0-4;281187;2026-11-03
 1980;censo_sidra200;52;feminino;10-14;250767;2026-11-03
 1980;censo_sidra200;52;feminino;15-19;228813;2026-11-03
@@ -916,7 +916,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;52;feminino;70-74;15053;2026-11-03
 1980;censo_sidra200;52;feminino;75-79;9185;2026-11-03
 1980;censo_sidra200;52;feminino;80+;5821;2026-11-03
-1980;censo_sidra200;52;feminino;ign;1605;2026-11-03
+1980;censo_sidra200;52;feminino;Ignorada;1605;2026-11-03
 1980;censo_sidra200;52;masculino;0-4;289735;2026-11-03
 1980;censo_sidra200;52;masculino;10-14;252733;2026-11-03
 1980;censo_sidra200;52;masculino;15-19;226944;2026-11-03
@@ -934,7 +934,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;52;masculino;70-74;16488;2026-11-03
 1980;censo_sidra200;52;masculino;75-79;9451;2026-11-03
 1980;censo_sidra200;52;masculino;80+;4997;2026-11-03
-1980;censo_sidra200;52;masculino;ign;1741;2026-11-03
+1980;censo_sidra200;52;masculino;Ignorada;1741;2026-11-03
 1980;censo_sidra200;53;feminino;0-4;85473;2026-11-03
 1980;censo_sidra200;53;feminino;10-14;68016;2026-11-03
 1980;censo_sidra200;53;feminino;15-19;74920;2026-11-03
@@ -952,7 +952,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;53;feminino;70-74;2968;2026-11-03
 1980;censo_sidra200;53;feminino;75-79;1778;2026-11-03
 1980;censo_sidra200;53;feminino;80+;1130;2026-11-03
-1980;censo_sidra200;53;feminino;ign;384;2026-11-03
+1980;censo_sidra200;53;feminino;Ignorada;384;2026-11-03
 1980;censo_sidra200;53;masculino;0-4;88716;2026-11-03
 1980;censo_sidra200;53;masculino;10-14;64630;2026-11-03
 1980;censo_sidra200;53;masculino;15-19;64098;2026-11-03
@@ -970,7 +970,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1980;censo_sidra200;53;masculino;70-74;2187;2026-11-03
 1980;censo_sidra200;53;masculino;75-79;1162;2026-11-03
 1980;censo_sidra200;53;masculino;80+;573;2026-11-03
-1980;censo_sidra200;53;masculino;ign;440;2026-11-03
+1980;censo_sidra200;53;masculino;Ignorada;440;2026-11-03
 1991;censo;00;feminino;0-4;0;2026-11-03
 1991;censo;00;feminino;10-14;0;2026-11-03
 1991;censo;00;feminino;15-19;0;2026-11-03
@@ -1940,7 +1940,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;00;feminino;70-74;0;2026-11-03
 1996;contagem;00;feminino;75-79;0;2026-11-03
 1996;contagem;00;feminino;80+;0;2026-11-03
-1996;contagem;00;feminino;ign;0;2026-11-03
+1996;contagem;00;feminino;Ignorada;0;2026-11-03
 1996;contagem;00;masculino;0-4;0;2026-11-03
 1996;contagem;00;masculino;10-14;0;2026-11-03
 1996;contagem;00;masculino;15-19;0;2026-11-03
@@ -1958,7 +1958,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;00;masculino;70-74;0;2026-11-03
 1996;contagem;00;masculino;75-79;0;2026-11-03
 1996;contagem;00;masculino;80+;0;2026-11-03
-1996;contagem;00;masculino;ign;0;2026-11-03
+1996;contagem;00;masculino;Ignorada;0;2026-11-03
 1996;contagem;11;feminino;0-4;72199;2026-11-03
 1996;contagem;11;feminino;10-14;75987;2026-11-03
 1996;contagem;11;feminino;15-19;69325;2026-11-03
@@ -1976,7 +1976,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;11;feminino;70-74;3921;2026-11-03
 1996;contagem;11;feminino;75-79;2189;2026-11-03
 1996;contagem;11;feminino;80+;1971;2026-11-03
-1996;contagem;11;feminino;ign;1860;2026-11-03
+1996;contagem;11;feminino;Ignorada;1860;2026-11-03
 1996;contagem;11;masculino;0-4;75293;2026-11-03
 1996;contagem;11;masculino;10-14;78920;2026-11-03
 1996;contagem;11;masculino;15-19;71349;2026-11-03
@@ -1994,7 +1994,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;11;masculino;70-74;5529;2026-11-03
 1996;contagem;11;masculino;75-79;3033;2026-11-03
 1996;contagem;11;masculino;80+;2040;2026-11-03
-1996;contagem;11;masculino;ign;1845;2026-11-03
+1996;contagem;11;masculino;Ignorada;1845;2026-11-03
 1996;contagem;12;feminino;0-4;32124;2026-11-03
 1996;contagem;12;feminino;10-14;32305;2026-11-03
 1996;contagem;12;feminino;15-19;29590;2026-11-03
@@ -2012,7 +2012,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;12;feminino;70-74;1851;2026-11-03
 1996;contagem;12;feminino;75-79;1364;2026-11-03
 1996;contagem;12;feminino;80+;1433;2026-11-03
-1996;contagem;12;feminino;ign;677;2026-11-03
+1996;contagem;12;feminino;Ignorada;677;2026-11-03
 1996;contagem;12;masculino;0-4;32444;2026-11-03
 1996;contagem;12;masculino;10-14;32674;2026-11-03
 1996;contagem;12;masculino;15-19;29627;2026-11-03
@@ -2030,7 +2030,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;12;masculino;70-74;2461;2026-11-03
 1996;contagem;12;masculino;75-79;1642;2026-11-03
 1996;contagem;12;masculino;80+;1432;2026-11-03
-1996;contagem;12;masculino;ign;697;2026-11-03
+1996;contagem;12;masculino;Ignorada;697;2026-11-03
 1996;contagem;13;feminino;0-4;162327;2026-11-03
 1996;contagem;13;feminino;10-14;156582;2026-11-03
 1996;contagem;13;feminino;15-19;145268;2026-11-03
@@ -2048,7 +2048,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;13;feminino;70-74;9217;2026-11-03
 1996;contagem;13;feminino;75-79;6112;2026-11-03
 1996;contagem;13;feminino;80+;6253;2026-11-03
-1996;contagem;13;feminino;ign;8300;2026-11-03
+1996;contagem;13;feminino;Ignorada;8300;2026-11-03
 1996;contagem;13;masculino;0-4;163484;2026-11-03
 1996;contagem;13;masculino;10-14;157215;2026-11-03
 1996;contagem;13;masculino;15-19;143936;2026-11-03
@@ -2066,7 +2066,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;13;masculino;70-74;9436;2026-11-03
 1996;contagem;13;masculino;75-79;6187;2026-11-03
 1996;contagem;13;masculino;80+;5159;2026-11-03
-1996;contagem;13;masculino;ign;8052;2026-11-03
+1996;contagem;13;masculino;Ignorada;8052;2026-11-03
 1996;contagem;14;feminino;0-4;17145;2026-11-03
 1996;contagem;14;feminino;10-14;15708;2026-11-03
 1996;contagem;14;feminino;15-19;14117;2026-11-03
@@ -2084,7 +2084,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;14;feminino;70-74;784;2026-11-03
 1996;contagem;14;feminino;75-79;441;2026-11-03
 1996;contagem;14;feminino;80+;378;2026-11-03
-1996;contagem;14;feminino;ign;843;2026-11-03
+1996;contagem;14;feminino;Ignorada;843;2026-11-03
 1996;contagem;14;masculino;0-4;17548;2026-11-03
 1996;contagem;14;masculino;10-14;15955;2026-11-03
 1996;contagem;14;masculino;15-19;13990;2026-11-03
@@ -2102,7 +2102,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;14;masculino;70-74;890;2026-11-03
 1996;contagem;14;masculino;75-79;513;2026-11-03
 1996;contagem;14;masculino;80+;378;2026-11-03
-1996;contagem;14;masculino;ign;894;2026-11-03
+1996;contagem;14;masculino;Ignorada;894;2026-11-03
 1996;contagem;15;feminino;0-4;351253;2026-11-03
 1996;contagem;15;feminino;10-14;358124;2026-11-03
 1996;contagem;15;feminino;15-19;322660;2026-11-03
@@ -2120,7 +2120,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;15;feminino;70-74;24001;2026-11-03
 1996;contagem;15;feminino;75-79;17464;2026-11-03
 1996;contagem;15;feminino;80+;20805;2026-11-03
-1996;contagem;15;feminino;ign;11259;2026-11-03
+1996;contagem;15;feminino;Ignorada;11259;2026-11-03
 1996;contagem;15;masculino;0-4;364713;2026-11-03
 1996;contagem;15;masculino;10-14;365794;2026-11-03
 1996;contagem;15;masculino;15-19;325951;2026-11-03
@@ -2138,7 +2138,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;15;masculino;70-74;24575;2026-11-03
 1996;contagem;15;masculino;75-79;15478;2026-11-03
 1996;contagem;15;masculino;80+;16041;2026-11-03
-1996;contagem;15;masculino;ign;11576;2026-11-03
+1996;contagem;15;masculino;Ignorada;11576;2026-11-03
 1996;contagem;16;feminino;0-4;25808;2026-11-03
 1996;contagem;16;feminino;10-14;25682;2026-11-03
 1996;contagem;16;feminino;15-19;23404;2026-11-03
@@ -2156,7 +2156,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;16;feminino;70-74;1093;2026-11-03
 1996;contagem;16;feminino;75-79;800;2026-11-03
 1996;contagem;16;feminino;80+;1163;2026-11-03
-1996;contagem;16;feminino;ign;744;2026-11-03
+1996;contagem;16;feminino;Ignorada;744;2026-11-03
 1996;contagem;16;masculino;0-4;26650;2026-11-03
 1996;contagem;16;masculino;10-14;25405;2026-11-03
 1996;contagem;16;masculino;15-19;22325;2026-11-03
@@ -2174,7 +2174,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;16;masculino;70-74;1057;2026-11-03
 1996;contagem;16;masculino;75-79;738;2026-11-03
 1996;contagem;16;masculino;80+;851;2026-11-03
-1996;contagem;16;masculino;ign;821;2026-11-03
+1996;contagem;16;masculino;Ignorada;821;2026-11-03
 1996;contagem;17;feminino;0-4;62253;2026-11-03
 1996;contagem;17;feminino;10-14;67849;2026-11-03
 1996;contagem;17;feminino;15-19;61306;2026-11-03
@@ -2192,7 +2192,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;17;feminino;70-74;5232;2026-11-03
 1996;contagem;17;feminino;75-79;3584;2026-11-03
 1996;contagem;17;feminino;80+;3885;2026-11-03
-1996;contagem;17;feminino;ign;797;2026-11-03
+1996;contagem;17;feminino;Ignorada;797;2026-11-03
 1996;contagem;17;masculino;0-4;65263;2026-11-03
 1996;contagem;17;masculino;10-14;69860;2026-11-03
 1996;contagem;17;masculino;15-19;63276;2026-11-03
@@ -2210,7 +2210,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;17;masculino;70-74;6228;2026-11-03
 1996;contagem;17;masculino;75-79;4032;2026-11-03
 1996;contagem;17;masculino;80+;3768;2026-11-03
-1996;contagem;17;masculino;ign;786;2026-11-03
+1996;contagem;17;masculino;Ignorada;786;2026-11-03
 1996;contagem;21;feminino;0-4;316389;2026-11-03
 1996;contagem;21;feminino;10-14;365482;2026-11-03
 1996;contagem;21;feminino;15-19;311999;2026-11-03
@@ -2228,7 +2228,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;21;feminino;70-74;30600;2026-11-03
 1996;contagem;21;feminino;75-79;22898;2026-11-03
 1996;contagem;21;feminino;80+;24754;2026-11-03
-1996;contagem;21;feminino;ign;12847;2026-11-03
+1996;contagem;21;feminino;Ignorada;12847;2026-11-03
 1996;contagem;21;masculino;0-4;322143;2026-11-03
 1996;contagem;21;masculino;10-14;367920;2026-11-03
 1996;contagem;21;masculino;15-19;317688;2026-11-03
@@ -2246,7 +2246,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;21;masculino;70-74;30759;2026-11-03
 1996;contagem;21;masculino;75-79;21891;2026-11-03
 1996;contagem;21;masculino;80+;20145;2026-11-03
-1996;contagem;21;masculino;ign;11843;2026-11-03
+1996;contagem;21;masculino;Ignorada;11843;2026-11-03
 1996;contagem;22;feminino;0-4;144148;2026-11-03
 1996;contagem;22;feminino;10-14;178472;2026-11-03
 1996;contagem;22;feminino;15-19;162540;2026-11-03
@@ -2264,7 +2264,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;22;feminino;70-74;19532;2026-11-03
 1996;contagem;22;feminino;75-79;12818;2026-11-03
 1996;contagem;22;feminino;80+;14407;2026-11-03
-1996;contagem;22;feminino;ign;2435;2026-11-03
+1996;contagem;22;feminino;Ignorada;2435;2026-11-03
 1996;contagem;22;masculino;0-4;148410;2026-11-03
 1996;contagem;22;masculino;10-14;179901;2026-11-03
 1996;contagem;22;masculino;15-19;162714;2026-11-03
@@ -2282,7 +2282,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;22;masculino;70-74;18415;2026-11-03
 1996;contagem;22;masculino;75-79;11863;2026-11-03
 1996;contagem;22;masculino;80+;11932;2026-11-03
-1996;contagem;22;masculino;ign;2268;2026-11-03
+1996;contagem;22;masculino;Ignorada;2268;2026-11-03
 1996;contagem;23;feminino;0-4;392283;2026-11-03
 1996;contagem;23;feminino;10-14;410740;2026-11-03
 1996;contagem;23;feminino;15-19;374479;2026-11-03
@@ -2300,7 +2300,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;23;feminino;70-74;59266;2026-11-03
 1996;contagem;23;feminino;75-79;36415;2026-11-03
 1996;contagem;23;feminino;80+;42728;2026-11-03
-1996;contagem;23;feminino;ign;9449;2026-11-03
+1996;contagem;23;feminino;Ignorada;9449;2026-11-03
 1996;contagem;23;masculino;0-4;405622;2026-11-03
 1996;contagem;23;masculino;10-14;414349;2026-11-03
 1996;contagem;23;masculino;15-19;367752;2026-11-03
@@ -2318,7 +2318,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;23;masculino;70-74;53048;2026-11-03
 1996;contagem;23;masculino;75-79;32522;2026-11-03
 1996;contagem;23;masculino;80+;35098;2026-11-03
-1996;contagem;23;masculino;ign;8761;2026-11-03
+1996;contagem;23;masculino;Ignorada;8761;2026-11-03
 1996;contagem;24;feminino;0-4;135250;2026-11-03
 1996;contagem;24;feminino;10-14;152321;2026-11-03
 1996;contagem;24;feminino;15-19;140562;2026-11-03
@@ -2336,7 +2336,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;24;feminino;70-74;23116;2026-11-03
 1996;contagem;24;feminino;75-79;15329;2026-11-03
 1996;contagem;24;feminino;80+;17973;2026-11-03
-1996;contagem;24;feminino;ign;3337;2026-11-03
+1996;contagem;24;feminino;Ignorada;3337;2026-11-03
 1996;contagem;24;masculino;0-4;139484;2026-11-03
 1996;contagem;24;masculino;10-14;153209;2026-11-03
 1996;contagem;24;masculino;15-19;138995;2026-11-03
@@ -2354,7 +2354,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;24;masculino;70-74;21221;2026-11-03
 1996;contagem;24;masculino;75-79;14640;2026-11-03
 1996;contagem;24;masculino;80+;15745;2026-11-03
-1996;contagem;24;masculino;ign;3200;2026-11-03
+1996;contagem;24;masculino;Ignorada;3200;2026-11-03
 1996;contagem;25;feminino;0-4;172019;2026-11-03
 1996;contagem;25;feminino;10-14;201108;2026-11-03
 1996;contagem;25;feminino;15-19;187625;2026-11-03
@@ -2372,7 +2372,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;25;feminino;70-74;33021;2026-11-03
 1996;contagem;25;feminino;75-79;23757;2026-11-03
 1996;contagem;25;feminino;80+;25884;2026-11-03
-1996;contagem;25;feminino;ign;3364;2026-11-03
+1996;contagem;25;feminino;Ignorada;3364;2026-11-03
 1996;contagem;25;masculino;0-4;176592;2026-11-03
 1996;contagem;25;masculino;10-14;203639;2026-11-03
 1996;contagem;25;masculino;15-19;187198;2026-11-03
@@ -2390,7 +2390,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;25;masculino;70-74;29527;2026-11-03
 1996;contagem;25;masculino;75-79;21225;2026-11-03
 1996;contagem;25;masculino;80+;21655;2026-11-03
-1996;contagem;25;masculino;ign;3024;2026-11-03
+1996;contagem;25;masculino;Ignorada;3024;2026-11-03
 1996;contagem;26;feminino;0-4;374012;2026-11-03
 1996;contagem;26;feminino;10-14;434885;2026-11-03
 1996;contagem;26;feminino;15-19;417108;2026-11-03
@@ -2408,7 +2408,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;26;feminino;70-74;62853;2026-11-03
 1996;contagem;26;feminino;75-79;43678;2026-11-03
 1996;contagem;26;feminino;80+;45377;2026-11-03
-1996;contagem;26;feminino;ign;13069;2026-11-03
+1996;contagem;26;feminino;Ignorada;13069;2026-11-03
 1996;contagem;26;masculino;0-4;382462;2026-11-03
 1996;contagem;26;masculino;10-14;438835;2026-11-03
 1996;contagem;26;masculino;15-19;414572;2026-11-03
@@ -2426,7 +2426,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;26;masculino;70-74;54228;2026-11-03
 1996;contagem;26;masculino;75-79;36530;2026-11-03
 1996;contagem;26;masculino;80+;33494;2026-11-03
-1996;contagem;26;masculino;ign;11759;2026-11-03
+1996;contagem;26;masculino;Ignorada;11759;2026-11-03
 1996;contagem;27;feminino;0-4;158245;2026-11-03
 1996;contagem;27;feminino;10-14;167758;2026-11-03
 1996;contagem;27;feminino;15-19;154842;2026-11-03
@@ -2444,7 +2444,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;27;feminino;70-74;16759;2026-11-03
 1996;contagem;27;feminino;75-79;11731;2026-11-03
 1996;contagem;27;feminino;80+;13527;2026-11-03
-1996;contagem;27;feminino;ign;4205;2026-11-03
+1996;contagem;27;feminino;Ignorada;4205;2026-11-03
 1996;contagem;27;masculino;0-4;160551;2026-11-03
 1996;contagem;27;masculino;10-14;167372;2026-11-03
 1996;contagem;27;masculino;15-19;152607;2026-11-03
@@ -2462,7 +2462,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;27;masculino;70-74;14881;2026-11-03
 1996;contagem;27;masculino;75-79;10724;2026-11-03
 1996;contagem;27;masculino;80+;11152;2026-11-03
-1996;contagem;27;masculino;ign;3782;2026-11-03
+1996;contagem;27;masculino;Ignorada;3782;2026-11-03
 1996;contagem;28;feminino;0-4;90790;2026-11-03
 1996;contagem;28;feminino;10-14;100481;2026-11-03
 1996;contagem;28;feminino;15-19;94318;2026-11-03
@@ -2480,7 +2480,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;28;feminino;70-74;11356;2026-11-03
 1996;contagem;28;feminino;75-79;7692;2026-11-03
 1996;contagem;28;feminino;80+;9602;2026-11-03
-1996;contagem;28;feminino;ign;2893;2026-11-03
+1996;contagem;28;feminino;Ignorada;2893;2026-11-03
 1996;contagem;28;masculino;0-4;93575;2026-11-03
 1996;contagem;28;masculino;10-14;101242;2026-11-03
 1996;contagem;28;masculino;15-19;93288;2026-11-03
@@ -2498,7 +2498,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;28;masculino;70-74;9633;2026-11-03
 1996;contagem;28;masculino;75-79;6644;2026-11-03
 1996;contagem;28;masculino;80+;7728;2026-11-03
-1996;contagem;28;masculino;ign;2739;2026-11-03
+1996;contagem;28;masculino;Ignorada;2739;2026-11-03
 1996;contagem;29;feminino;0-4;652544;2026-11-03
 1996;contagem;29;feminino;10-14;806351;2026-11-03
 1996;contagem;29;feminino;15-19;751750;2026-11-03
@@ -2516,7 +2516,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;29;feminino;70-74;88194;2026-11-03
 1996;contagem;29;feminino;75-79;63421;2026-11-03
 1996;contagem;29;feminino;80+;79293;2026-11-03
-1996;contagem;29;feminino;ign;17476;2026-11-03
+1996;contagem;29;feminino;Ignorada;17476;2026-11-03
 1996;contagem;29;masculino;0-4;668230;2026-11-03
 1996;contagem;29;masculino;10-14;816639;2026-11-03
 1996;contagem;29;masculino;15-19;760214;2026-11-03
@@ -2534,7 +2534,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;29;masculino;70-74;80724;2026-11-03
 1996;contagem;29;masculino;75-79;55909;2026-11-03
 1996;contagem;29;masculino;80+;59860;2026-11-03
-1996;contagem;29;masculino;ign;16199;2026-11-03
+1996;contagem;29;masculino;Ignorada;16199;2026-11-03
 1996;contagem;31;feminino;0-4;779490;2026-11-03
 1996;contagem;31;feminino;10-14;897291;2026-11-03
 1996;contagem;31;feminino;15-19;878506;2026-11-03
@@ -2552,7 +2552,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;31;feminino;70-74;135063;2026-11-03
 1996;contagem;31;feminino;75-79;91293;2026-11-03
 1996;contagem;31;feminino;80+;98261;2026-11-03
-1996;contagem;31;feminino;ign;13755;2026-11-03
+1996;contagem;31;feminino;Ignorada;13755;2026-11-03
 1996;contagem;31;masculino;0-4;805110;2026-11-03
 1996;contagem;31;masculino;10-14;920559;2026-11-03
 1996;contagem;31;masculino;15-19;892178;2026-11-03
@@ -2570,7 +2570,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;31;masculino;70-74;114396;2026-11-03
 1996;contagem;31;masculino;75-79;70891;2026-11-03
 1996;contagem;31;masculino;80+;65206;2026-11-03
-1996;contagem;31;masculino;ign;13124;2026-11-03
+1996;contagem;31;masculino;Ignorada;13124;2026-11-03
 1996;contagem;32;feminino;0-4;131524;2026-11-03
 1996;contagem;32;feminino;10-14;156032;2026-11-03
 1996;contagem;32;feminino;15-19;152177;2026-11-03
@@ -2588,7 +2588,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;32;feminino;70-74;18882;2026-11-03
 1996;contagem;32;feminino;75-79;12525;2026-11-03
 1996;contagem;32;feminino;80+;13855;2026-11-03
-1996;contagem;32;feminino;ign;1114;2026-11-03
+1996;contagem;32;feminino;Ignorada;1114;2026-11-03
 1996;contagem;32;masculino;0-4;136060;2026-11-03
 1996;contagem;32;masculino;10-14;160133;2026-11-03
 1996;contagem;32;masculino;15-19;153358;2026-11-03
@@ -2606,7 +2606,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;32;masculino;70-74;17282;2026-11-03
 1996;contagem;32;masculino;75-79;10411;2026-11-03
 1996;contagem;32;masculino;80+;9959;2026-11-03
-1996;contagem;32;masculino;ign;1318;2026-11-03
+1996;contagem;32;masculino;Ignorada;1318;2026-11-03
 1996;contagem;33;feminino;0-4;552058;2026-11-03
 1996;contagem;33;feminino;10-14;609235;2026-11-03
 1996;contagem;33;feminino;15-19;634798;2026-11-03
@@ -2624,7 +2624,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;33;feminino;70-74;141776;2026-11-03
 1996;contagem;33;feminino;75-79;90687;2026-11-03
 1996;contagem;33;feminino;80+;96197;2026-11-03
-1996;contagem;33;feminino;ign;23287;2026-11-03
+1996;contagem;33;feminino;Ignorada;23287;2026-11-03
 1996;contagem;33;masculino;0-4;568223;2026-11-03
 1996;contagem;33;masculino;10-14;618785;2026-11-03
 1996;contagem;33;masculino;15-19;627180;2026-11-03
@@ -2642,7 +2642,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;33;masculino;70-74;102958;2026-11-03
 1996;contagem;33;masculino;75-79;58835;2026-11-03
 1996;contagem;33;masculino;80+;49336;2026-11-03
-1996;contagem;33;masculino;ign;20621;2026-11-03
+1996;contagem;33;masculino;Ignorada;20621;2026-11-03
 1996;contagem;35;feminino;0-4;1448536;2026-11-03
 1996;contagem;35;feminino;10-14;1694762;2026-11-03
 1996;contagem;35;feminino;15-19;1692943;2026-11-03
@@ -2660,7 +2660,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;35;feminino;70-74;288701;2026-11-03
 1996;contagem;35;feminino;75-79;181884;2026-11-03
 1996;contagem;35;feminino;80+;184270;2026-11-03
-1996;contagem;35;feminino;ign;49900;2026-11-03
+1996;contagem;35;feminino;Ignorada;49900;2026-11-03
 1996;contagem;35;masculino;0-4;1503175;2026-11-03
 1996;contagem;35;masculino;10-14;1729924;2026-11-03
 1996;contagem;35;masculino;15-19;1682163;2026-11-03
@@ -2678,7 +2678,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;35;masculino;70-74;229814;2026-11-03
 1996;contagem;35;masculino;75-79;133012;2026-11-03
 1996;contagem;35;masculino;80+;111717;2026-11-03
-1996;contagem;35;masculino;ign;49844;2026-11-03
+1996;contagem;35;masculino;Ignorada;49844;2026-11-03
 1996;contagem;41;feminino;0-4;439581;2026-11-03
 1996;contagem;41;feminino;10-14;468967;2026-11-03
 1996;contagem;41;feminino;15-19;454163;2026-11-03
@@ -2696,7 +2696,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;41;feminino;70-74;63800;2026-11-03
 1996;contagem;41;feminino;75-79;40438;2026-11-03
 1996;contagem;41;feminino;80+;38027;2026-11-03
-1996;contagem;41;feminino;ign;5936;2026-11-03
+1996;contagem;41;feminino;Ignorada;5936;2026-11-03
 1996;contagem;41;masculino;0-4;457316;2026-11-03
 1996;contagem;41;masculino;10-14;483583;2026-11-03
 1996;contagem;41;masculino;15-19;459198;2026-11-03
@@ -2714,7 +2714,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;41;masculino;70-74;59143;2026-11-03
 1996;contagem;41;masculino;75-79;34996;2026-11-03
 1996;contagem;41;masculino;80+;29182;2026-11-03
-1996;contagem;41;masculino;ign;5607;2026-11-03
+1996;contagem;41;masculino;Ignorada;5607;2026-11-03
 1996;contagem;42;feminino;0-4;230088;2026-11-03
 1996;contagem;42;feminino;10-14;253654;2026-11-03
 1996;contagem;42;feminino;15-19;238184;2026-11-03
@@ -2732,7 +2732,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;42;feminino;70-74;36255;2026-11-03
 1996;contagem;42;feminino;75-79;23054;2026-11-03
 1996;contagem;42;feminino;80+;21927;2026-11-03
-1996;contagem;42;feminino;ign;3959;2026-11-03
+1996;contagem;42;feminino;Ignorada;3959;2026-11-03
 1996;contagem;42;masculino;0-4;238931;2026-11-03
 1996;contagem;42;masculino;10-14;263685;2026-11-03
 1996;contagem;42;masculino;15-19;243089;2026-11-03
@@ -2750,7 +2750,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;42;masculino;70-74;30341;2026-11-03
 1996;contagem;42;masculino;75-79;18022;2026-11-03
 1996;contagem;42;masculino;80+;14425;2026-11-03
-1996;contagem;42;masculino;ign;3628;2026-11-03
+1996;contagem;42;masculino;Ignorada;3628;2026-11-03
 1996;contagem;43;feminino;0-4;415277;2026-11-03
 1996;contagem;43;feminino;10-14;467131;2026-11-03
 1996;contagem;43;feminino;15-19;439969;2026-11-03
@@ -2768,7 +2768,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;43;feminino;70-74;97392;2026-11-03
 1996;contagem;43;feminino;75-79;66708;2026-11-03
 1996;contagem;43;feminino;80+;67442;2026-11-03
-1996;contagem;43;feminino;ign;8192;2026-11-03
+1996;contagem;43;feminino;Ignorada;8192;2026-11-03
 1996;contagem;43;masculino;0-4;431607;2026-11-03
 1996;contagem;43;masculino;10-14;485871;2026-11-03
 1996;contagem;43;masculino;15-19;448624;2026-11-03
@@ -2786,7 +2786,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;43;masculino;70-74;72156;2026-11-03
 1996;contagem;43;masculino;75-79;44445;2026-11-03
 1996;contagem;43;masculino;80+;36426;2026-11-03
-1996;contagem;43;masculino;ign;7731;2026-11-03
+1996;contagem;43;masculino;Ignorada;7731;2026-11-03
 1996;contagem;50;feminino;0-4;100271;2026-11-03
 1996;contagem;50;feminino;10-14;107139;2026-11-03
 1996;contagem;50;feminino;15-19;101266;2026-11-03
@@ -2804,7 +2804,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;50;feminino;70-74;10906;2026-11-03
 1996;contagem;50;feminino;75-79;7156;2026-11-03
 1996;contagem;50;feminino;80+;7371;2026-11-03
-1996;contagem;50;feminino;ign;2417;2026-11-03
+1996;contagem;50;feminino;Ignorada;2417;2026-11-03
 1996;contagem;50;masculino;0-4;103712;2026-11-03
 1996;contagem;50;masculino;10-14;110583;2026-11-03
 1996;contagem;50;masculino;15-19;101782;2026-11-03
@@ -2822,7 +2822,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;50;masculino;70-74;11724;2026-11-03
 1996;contagem;50;masculino;75-79;7400;2026-11-03
 1996;contagem;50;masculino;80+;6828;2026-11-03
-1996;contagem;50;masculino;ign;2423;2026-11-03
+1996;contagem;50;masculino;Ignorada;2423;2026-11-03
 1996;contagem;51;feminino;0-4;121048;2026-11-03
 1996;contagem;51;feminino;10-14;128746;2026-11-03
 1996;contagem;51;feminino;15-19;122345;2026-11-03
@@ -2840,7 +2840,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;51;feminino;70-74;8243;2026-11-03
 1996;contagem;51;feminino;75-79;5114;2026-11-03
 1996;contagem;51;feminino;80+;5226;2026-11-03
-1996;contagem;51;feminino;ign;3311;2026-11-03
+1996;contagem;51;feminino;Ignorada;3311;2026-11-03
 1996;contagem;51;masculino;0-4;125900;2026-11-03
 1996;contagem;51;masculino;10-14;134038;2026-11-03
 1996;contagem;51;masculino;15-19;125781;2026-11-03
@@ -2858,7 +2858,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;51;masculino;70-74;10357;2026-11-03
 1996;contagem;51;masculino;75-79;6204;2026-11-03
 1996;contagem;51;masculino;80+;5364;2026-11-03
-1996;contagem;51;masculino;ign;3843;2026-11-03
+1996;contagem;51;masculino;Ignorada;3843;2026-11-03
 1996;contagem;52;feminino;0-4;221915;2026-11-03
 1996;contagem;52;feminino;10-14;242985;2026-11-03
 1996;contagem;52;feminino;15-19;246132;2026-11-03
@@ -2876,7 +2876,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;52;feminino;70-74;24846;2026-11-03
 1996;contagem;52;feminino;75-79;15471;2026-11-03
 1996;contagem;52;feminino;80+;15558;2026-11-03
-1996;contagem;52;feminino;ign;3509;2026-11-03
+1996;contagem;52;feminino;Ignorada;3509;2026-11-03
 1996;contagem;52;masculino;0-4;231818;2026-11-03
 1996;contagem;52;masculino;10-14;248686;2026-11-03
 1996;contagem;52;masculino;15-19;244604;2026-11-03
@@ -2894,7 +2894,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;52;masculino;70-74;25482;2026-11-03
 1996;contagem;52;masculino;75-79;15134;2026-11-03
 1996;contagem;52;masculino;80+;13436;2026-11-03
-1996;contagem;52;masculino;ign;3555;2026-11-03
+1996;contagem;52;masculino;Ignorada;3555;2026-11-03
 1996;contagem;53;feminino;0-4;89277;2026-11-03
 1996;contagem;53;feminino;10-14;98325;2026-11-03
 1996;contagem;53;feminino;15-19;112938;2026-11-03
@@ -2912,7 +2912,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;53;feminino;70-74;7780;2026-11-03
 1996;contagem;53;feminino;75-79;4655;2026-11-03
 1996;contagem;53;feminino;80+;5010;2026-11-03
-1996;contagem;53;feminino;ign;1381;2026-11-03
+1996;contagem;53;feminino;Ignorada;1381;2026-11-03
 1996;contagem;53;masculino;0-4;91614;2026-11-03
 1996;contagem;53;masculino;10-14;96958;2026-11-03
 1996;contagem;53;masculino;15-19;100766;2026-11-03
@@ -2930,7 +2930,7 @@ ano;fonte;uf;sexo;faixa;populacao;consulta
 1996;contagem;53;masculino;70-74;6138;2026-11-03
 1996;contagem;53;masculino;75-79;3182;2026-11-03
 1996;contagem;53;masculino;80+;2774;2026-11-03
-1996;contagem;53;masculino;ign;1167;2026-11-03
+1996;contagem;53;masculino;Ignorada;1167;2026-11-03
 2000;ripsa2024;00;feminino;0-4;0;2026-11-03
 2000;ripsa2024;00;feminino;10-14;0;2026-11-03
 2000;ripsa2024;00;feminino;15-19;0;2026-11-03

@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+
 namespace Mortalidade.Etl.Dominio;
 
 /// <summary>
@@ -8,9 +10,10 @@ public sealed class MapaCausas
 {
     private static readonly string[] Colunas = ["codigo", "nome", "capitulo", "resto", "cid9", "cid10", "comparabilidade"];
 
-    private readonly IReadOnlyList<Faixa> _faixas;
+    private readonly Dictionary<RevisaoCid, Faixa[]> _faixas;
+    private readonly ConcurrentDictionary<CausaBasica, Result<GrupoCausa>> _resolvidas = new();
 
-    private MapaCausas(IReadOnlyList<GrupoCausa> grupos, IReadOnlyList<Faixa> faixas)
+    private MapaCausas(IReadOnlyList<GrupoCausa> grupos, Dictionary<RevisaoCid, Faixa[]> faixas)
     {
         Grupos = grupos;
         _faixas = faixas;
@@ -25,7 +28,8 @@ public sealed class MapaCausas
             return Result<MapaCausas>.Falha("mapa.cabecalho_invalido", $"Cabeçalho esperado: {string.Join(';', Colunas)}.");
 
         var grupos = new List<GrupoCausa>();
-        var faixas = new List<Faixa>();
+        var codigos = new HashSet<string>();
+        var faixas = new Dictionary<RevisaoCid, List<Faixa>> { [RevisaoCid.Cid9] = [], [RevisaoCid.Cid10] = [] };
         var numero = 1;
         while (linhas.MoveNext())
         {
@@ -37,10 +41,10 @@ public sealed class MapaCausas
             if (campos.Length != Colunas.Length || campos[3] is not ("0" or "1") || campos[6] is not ("alta" or "reduzida"))
                 return Result<MapaCausas>.Falha("mapa.linha_invalida", $"Linha {numero} inválida: {linhas.Current}");
 
-            if (grupos.Any(g => g.Codigo == campos[0]))
+            if (!codigos.Add(campos[0]))
                 return Result<MapaCausas>.Falha("mapa.codigo_duplicado", $"Grupo duplicado na linha {numero}: {campos[0]}.");
 
-            var grupo = new GrupoCausa(campos[0], campos[1], campos[2], campos[6] == "reduzida");
+            var grupo = new GrupoCausa(grupos.Count, campos[0], campos[1], campos[2], campos[6] == "reduzida");
             var resto = campos[3] == "1";
             foreach (var (revisao, spec) in new[] { (RevisaoCid.Cid9, campos[4]), (RevisaoCid.Cid10, campos[5]) })
             {
@@ -51,43 +55,64 @@ public sealed class MapaCausas
                     if (limites.Length > 2 || inicio.Length != fim.Length || string.CompareOrdinal(inicio, fim) > 0)
                         return Result<MapaCausas>.Falha("mapa.faixa_invalida", $"Faixa inválida na linha {numero}: {parte}.");
 
-                    faixas.Add(new Faixa(grupo, revisao, inicio, fim, resto));
+                    faixas[revisao].Add(new Faixa(grupo, inicio, fim, resto));
                 }
             }
 
             grupos.Add(grupo);
         }
 
-        return Result<MapaCausas>.Sucesso(new MapaCausas(grupos, faixas));
+        return Result<MapaCausas>.Sucesso(new MapaCausas(grupos, faixas.ToDictionary(f => f.Key, f => f.Value.ToArray())));
     }
 
-    public Result<GrupoCausa> Resolver(CausaBasica causa)
+    /// <summary>Resolve uma causa; o resultado fica em cache por código (thread-safe), então cada código é resolvido uma vez.</summary>
+    public Result<GrupoCausa> Resolver(CausaBasica causa) => _resolvidas.GetOrAdd(causa, ResolverSemCache);
+
+    private Result<GrupoCausa> ResolverSemCache(CausaBasica causa)
     {
         var codigo = causa.Codigo.Trim().ToUpperInvariant();
-        var candidatas = _faixas.Where(f => f.Revisao == causa.Revisao && f.Contem(codigo)).ToList();
+        GrupoCausa? especifico = null, resto = null, conflito = null;
+        var tamanhoEspecifico = 0;
 
-        var especificas = candidatas.Where(f => !f.Resto).ToList();
-        var escolhidas = especificas.Count > 0
-            ? especificas.Where(f => f.Inicio.Length == especificas.Max(e => e.Inicio.Length)).ToList()
-            : candidatas;
-
-        var grupos = escolhidas.Select(f => f.Grupo).Distinct().ToList();
-        return grupos.Count switch
+        foreach (var faixa in _faixas[causa.Revisao])
         {
-            1 => Result<GrupoCausa>.Sucesso(grupos[0]),
-            0 => Result<GrupoCausa>.Falha("causa.sem_grupo", $"Causa {causa.Revisao} {codigo} sem grupo."),
-            _ => Result<GrupoCausa>.Falha("causa.conflito",
-                $"Causa {causa.Revisao} {codigo} casa com {string.Join(", ", grupos.Select(g => g.Codigo))}.")
-        };
+            if (!faixa.Contem(codigo))
+                continue;
+
+            if (faixa.Resto)
+            {
+                if (resto is null)
+                    resto = faixa.Grupo;
+                else if (resto != faixa.Grupo && especifico is null)
+                    conflito = faixa.Grupo;
+            }
+            else if (faixa.Inicio.Length > tamanhoEspecifico)
+            {
+                (especifico, tamanhoEspecifico, conflito) = (faixa.Grupo, faixa.Inicio.Length, null);
+            }
+            else if (faixa.Inicio.Length == tamanhoEspecifico && faixa.Grupo != especifico)
+            {
+                conflito = faixa.Grupo;
+            }
+        }
+
+        var escolhido = especifico ?? resto;
+        if (conflito is not null)
+            return Result<GrupoCausa>.Falha("causa.conflito",
+                $"Causa {causa.Revisao} {codigo} casa com {escolhido!.Codigo}, {conflito.Codigo}.");
+
+        return escolhido is null
+            ? Result<GrupoCausa>.Falha("causa.sem_grupo", $"Causa {causa.Revisao} {codigo} sem grupo.")
+            : Result<GrupoCausa>.Sucesso(escolhido);
     }
 
-    private sealed record Faixa(GrupoCausa Grupo, RevisaoCid Revisao, string Inicio, string Fim, bool Resto)
+    private sealed record Faixa(GrupoCausa Grupo, string Inicio, string Fim, bool Resto)
     {
         public bool Contem(string codigo) =>
-            string.CompareOrdinal(Inicio, Prefixo(codigo, Inicio.Length)) <= 0
-            && string.CompareOrdinal(Prefixo(codigo, Fim.Length), Fim) <= 0;
+            Inicio.AsSpan().SequenceCompareTo(Prefixo(codigo, Inicio.Length)) <= 0
+            && Prefixo(codigo, Fim.Length).SequenceCompareTo(Fim) <= 0;
 
-        private static string Prefixo(string codigo, int tamanho) =>
-            codigo.Length > tamanho ? codigo[..tamanho] : codigo;
+        private static ReadOnlySpan<char> Prefixo(string codigo, int tamanho) =>
+            codigo.AsSpan(0, Math.Min(codigo.Length, tamanho));
     }
 }
