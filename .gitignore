@@ -482,3 +482,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Microdados brutos do SIM e IBGE (~12 GB), baixados localmente
+data/raw/
+*.csv.zip

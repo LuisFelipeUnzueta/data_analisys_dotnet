@@ -42,6 +42,20 @@ Decisão deliberada de **engenharia pragmática**: um único projeto `src/Mortal
 - Falhas devem abortar o run em vez de degradar em silêncio: coluna obrigatória ausente no CSV, código CID sem grupo, totais anuais divergentes do Tabnet.
 - As dimensões (faixas, grupos de causa) são definidas uma vez no ETL, que gera o JSON consumido pelo front.
 
+## Decisões da fase 0
+
+- Série da v1: **1979 a 2024** (anos definitivos). 2025 (preliminar) e 2026 (prévia) ficam fora; o CSV de 2025 tem ~60% dos óbitos do Tabnet.
+- População 1980–1999: interpolação própria (geométrica) por UF × sexo × faixa entre Censo 1980, Censo 1991, Contagem 1996 e o ano 2000 da série RIPSA `popsvs2024br`, para não haver salto na emenda com 2000–2024. Não usar a `popbr`.
+- População de 1979: extrapolada de 1980–1981 por UF × sexo × faixa (crescimento geométrico aplicado para trás), marcada como estimada no cubo e na interface.
+- Tocantins (17) só a partir de 1989; antes, óbitos e população do território ficam em Goiás, como nos dados originais. A queda de GO em 1989 é sinalizada na interface.
+- UF 20 (antigo Território de Fernando de Noronha, ex.: município `2000107`) é contada como PE (26), como faz o Tabnet. Conferido em 1979: com essa regra, todas as UFs batem com o Tabnet.
+- IDADE `000` em CID-9 (1979–1995) é idade ignorada; em CID-10 `0xx` são minutos. A decodificação depende da revisão da CID.
+- Taxa padronizada: método direto com um único padrão, OMS 2000–2025 (versão SEER por milhão; 80+ = soma de 80–84 a 100+ = 15.445). Pesos versionados como dado, não no código. O padrão OMS 2026–2050 fica como migração futura.
+- Idade ignorada na taxa padronizada: redistribuída proporcionalmente às faixas conhecidas dentro de ano × UF × causa × sexo; se o estrato não tiver nenhuma idade conhecida, usa a distribuição de ano × UF × sexo (todas as causas). O cubo mantém a categoria `Ignorada` e os totais brutos não mudam.
+- Residência sem UF válida (após a regra da UF 20): usa a UF de ocorrência (`MUNIOCOR`/`CODMUNOCOR`). Se ela também for inválida, o óbito entra numa UF `Ignorada` visível. Cada imputação é contada no relatório de qualidade do run.
+- Conferência com o Tabnet: igualdade exata por ano × UF e ano × sexo; qualquer divergência aborta o run e nada é publicado. O gabarito do Tabnet é gravado como fixture com a data da consulta.
+- Detalhes de fontes, layout dos CSV e conferência com o Tabnet: `reports/Fontes e padrões da fase 0.md`.
+
 ## Pontos em aberto
 
-Último ano consolidado no CSV do OpenDATASUS, fonte/versão da população IBGE, população-padrão da taxa padronizada, lista final de grupos de causa. Não invente valores para eles; pergunte.
+Lista final de grupos de causa harmonizados (fase 1). Não invente valores; pergunte.
