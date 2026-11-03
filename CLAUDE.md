@@ -44,12 +44,12 @@ Decisão deliberada de **engenharia pragmática**: um único projeto `src/Mortal
 
 ## Decisões da fase 0
 
-- Série da v1: **1979 a 2024** (anos definitivos). 2025 (preliminar) e 2026 (prévia) ficam fora; o CSV de 2025 tem ~60% dos óbitos do Tabnet.
+- Série da v1: **1979 a 2023**. 2024 entra automaticamente quando o CSV republicado bater com o Tabnet (o atual tem extração anterior à definitiva). 2025 (preliminar) e 2026 (prévia) ficam fora; o CSV de 2025 tem ~60% dos óbitos do Tabnet. O ETL processa ano a ano: um ano que não bate não é publicado, mas não derruba os anos já conferidos.
 - População 1980–1999: interpolação própria (geométrica) por UF × sexo × faixa entre Censo 1980, Censo 1991, Contagem 1996 e o ano 2000 da série RIPSA `popsvs2024br`, para não haver salto na emenda com 2000–2024. Não usar a `popbr`.
 - População de 1979: extrapolada de 1980–1981 por UF × sexo × faixa (crescimento geométrico aplicado para trás), marcada como estimada no cubo e na interface.
 - Tocantins (17) só a partir de 1989; antes, óbitos e população do território ficam em Goiás, como nos dados originais. A queda de GO em 1989 é sinalizada na interface.
-- UF 20 (antigo Território de Fernando de Noronha, ex.: município `2000107`) é contada como PE (26), como faz o Tabnet. Conferido em 1979: com essa regra, todas as UFs batem com o Tabnet.
-- IDADE `000` em CID-9 (1979–1995) é idade ignorada; em CID-10 `0xx` são minutos. A decodificação depende da revisão da CID.
+- UF 20 (antigo Território de Fernando de Noronha, ex.: município `2000107`) é contada como PE (26), como faz o Tabnet. Com as regras desta seção, total, ano × UF, ano × sexo e idade ignorada batem exatamente com o Tabnet em 1979–2023 (conferência de 03/11/2026), sem nenhuma imputação por UF de ocorrência e com `TIPOBITO = 2` em 100% dos registros. O CSV de 2024 (extração anterior à definitiva) tem 4.646 óbitos a menos que o Tabnet (1.527.369 × 1.532.015), espalhados por todas as UFs.
+- IDADE ignorada = vazio, `000` ou `999`, em qualquer ano; `0xx` com xx ≥ 1 são minutos. 1979–1995 usam só `000`; 1999 em diante passa a usar `999`. Conferido com o Tabnet em 1979–2023.
 - Taxa padronizada: método direto com um único padrão, OMS 2000–2025 (versão SEER por milhão; 80+ = soma de 80–84 a 100+ = 15.445). Pesos versionados como dado, não no código. O padrão OMS 2026–2050 fica como migração futura.
 - Idade ignorada na taxa padronizada: redistribuída proporcionalmente às faixas conhecidas dentro de ano × UF × causa × sexo; se o estrato não tiver nenhuma idade conhecida, usa a distribuição de ano × UF × sexo (todas as causas). O cubo mantém a categoria `Ignorada` e os totais brutos não mudam.
 - Residência sem UF válida (após a regra da UF 20): usa a UF de ocorrência (`MUNIOCOR`/`CODMUNOCOR`). Se ela também for inválida, o óbito entra numa UF `Ignorada` visível. Cada imputação é contada no relatório de qualidade do run.
