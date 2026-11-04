@@ -3,31 +3,39 @@ using Mortalidade.Etl.Leitura;
 
 namespace Mortalidade.Etl.Tests.Leitura;
 
-/// <summary>Testes sobre data/ibge/populacao_fontes.csv e a série 1979–2023 estimada a partir dele.</summary>
+/// <summary>Testes sobre data/ibge/populacao_fontes.csv e a série estimada a partir dele (1979 ao último ano das fontes).</summary>
 public class PopulacaoRealTests
 {
     private static readonly IReadOnlyList<PontoPopulacao> Pontos =
         LeitorPopulacaoFontes.Ler(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "populacao_fontes.csv"))).Valor;
 
-    private static readonly IReadOnlyList<Populacao> Serie = EstimativaPopulacional.Estimar(Pontos, 2023).Valor.Populacao;
+    private static readonly IReadOnlyList<Populacao> Serie = EstimativaPopulacional.Estimar(Pontos, Pontos.Max(p => p.Ano)).Valor.Populacao;
 
     private static long Total(int ano) => Serie.Where(p => p.Ano.Valor == ano).Sum(p => p.Habitantes);
 
-    [Theory]
-    [InlineData(1980, 119_009_778)]
-    [InlineData(1991, 146_825_475)]
-    [InlineData(1996, 157_070_163)]
-    [InlineData(2000, 174_695_935)]
-    [InlineData(2022, 210_862_983)]
-    public void AnosAncora_PreservamOTotalDaFonte(int ano, long total)
+    private static readonly int UltimoAno = Pontos.Max(p => p.Ano);
+
+    [Fact]
+    public void AnosAncora_PreservamOTotalDaFonte()
     {
-        Assert.InRange(Total(ano), total - 30, total + 30);
+        // O total vem do próprio arquivo: o teste segue válido quando as fontes são atualizadas.
+        foreach (var ano in Pontos.Select(p => p.Ano).Distinct())
+        {
+            var fonte = Pontos.Where(p => p.Ano == ano).Sum(p => p.Habitantes);
+            Assert.InRange(Total(ano), fonte - 30, fonte + 30);
+        }
     }
 
     [Fact]
-    public void Serie_CobreTodosOsEstratosDe1979a2023()
+    public void Censo1980_TemOTotalDoSidra()
     {
-        foreach (var ano in Enumerable.Range(1979, 45))
+        Assert.Equal(119_009_778, Pontos.Where(p => p.Ano == 1980).Sum(p => p.Habitantes));
+    }
+
+    [Fact]
+    public void Serie_CobreTodosOsEstratosDe1979AoUltimoAno()
+    {
+        foreach (var ano in Enumerable.Range(1979, UltimoAno - 1978))
         {
             var ufs = ano < EstimativaPopulacional.AnoCriacaoTocantins ? 26 : 27;
             Assert.Equal(ufs * 2 * 17, Serie.Count(p => p.Ano.Valor == ano));
@@ -37,7 +45,7 @@ public class PopulacaoRealTests
     [Fact]
     public void Serie_CresceSemSaltosAnuaisNoTotalNacional()
     {
-        var variacoes = Enumerable.Range(1980, 44)
+        var variacoes = Enumerable.Range(1980, UltimoAno - 1979)
             .Select(ano => (ano, variacao: (double)Total(ano) / Total(ano - 1) - 1))
             .Where(v => v.variacao is < 0 or > 0.035)
             .Select(v => $"{v.ano}: {v.variacao:P2}")

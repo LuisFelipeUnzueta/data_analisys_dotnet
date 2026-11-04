@@ -1,7 +1,15 @@
 /** Formato de `dimensoes.json`, gerado pelo ETL (Cubo/GeradorDimensoes.cs). */
 export interface Dimensoes {
   gerado_em: string;
-  anos: { ano: number; revisao_cid: number; fonte_populacao: string; populacao_estimada: boolean }[];
+  anos: {
+    ano: number;
+    revisao_cid: number;
+    fonte_populacao: string;
+    populacao_estimada: boolean;
+    /** Taxas nacionais calculadas pelo ETL; o teste do front confere o próprio cálculo contra elas. */
+    taxa_bruta_brasil: number | null;
+    taxa_padronizada_brasil: number | null;
+  }[];
   regioes: { codigo: number; nome: string }[];
   ufs: { codigo: number; sigla: string; regiao: number }[];
   grupos: { indice: number; codigo: string; nome: string; capitulo: string; comparabilidade_reduzida: boolean }[];

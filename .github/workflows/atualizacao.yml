@@ -1,0 +1,100 @@
+name: Atualização dos dados
+
+# O OpenDATASUS republica anos sem calendário fixo, então a checagem é mensal. Só anos finais no Tabnet e que
+# conferem exatamente com ele são publicados; o commit e a publicação só acontecem quando os dados mudam.
+on:
+  schedule:
+    - cron: '0 9 5 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizacao
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    outputs:
+      mudou: ${{ steps.commit.outputs.mudou }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Gabarito do Tabnet (anos finais)
+        run: python scripts/gerar_gabarito.py data/tabnet/gabarito.csv
+
+      - name: População (censos e RIPSA)
+        run: |
+          ultimo=$(tail -n 1 data/tabnet/gabarito.csv | cut -d';' -f1)
+          echo "ULTIMO=$ultimo" >> "$GITHUB_ENV"
+          python scripts/baixar_populacao.py data/ibge/populacao_fontes.csv "$ultimo"
+
+      - name: Microdados do SIM (CSV do OpenDATASUS)
+        run: |
+          mkdir -p data/raw
+          seq 1979 "$ULTIMO" | xargs -P 6 -I{} sh -c '
+            curl -fsSL --retry 3 -o data/raw/{}.zip \
+              "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SIM/csv/Mortalidade_Geral_{}_csv.zip" &&
+            unzip -o -q data/raw/{}.zip -d data/raw && rm data/raw/{}.zip'
+
+      - name: ETL e conferência com o Tabnet
+        run: |
+          set +e
+          dotnet run -c Release --project src/Mortalidade.Etl -- data/raw out
+          codigo=$?
+          set -e
+          if [ "$codigo" = 1 ]; then exit 1; fi
+          if [ "$codigo" = 2 ]; then
+            echo "::warning::Algum ano não conferiu com o Tabnet e ficou fora da publicação (ver o log do ETL)."
+          fi
+          cp out/* web/public/dados/
+
+      - run: dotnet test -c Release
+
+      - run: npm ci --prefix web && npm --prefix web test
+
+      # A coluna "consulta" (data da consulta) e o gerado_em do JSON mudam a cada execução; só conta mudança real.
+      - id: commit
+        name: Commit dos dados, se mudaram
+        run: |
+          sem_data() { git show "HEAD:$1" | cut -d';' -f1-"$2" | cmp -s - <(cut -d';' -f1-"$2" "$1"); }
+          if git diff --quiet -- web/public/dados/obitos.parquet web/public/dados/populacao.parquet \
+             && sem_data data/tabnet/gabarito.csv 4 && sem_data data/ibge/populacao_fontes.csv 6; then
+            echo "Dados iguais aos publicados."
+            echo "mudou=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/dados data/tabnet/gabarito.csv data/ibge/populacao_fontes.csv
+          git commit -m "dados: atualização automática (anos finais até $ULTIMO)"
+          git push
+          echo "mudou=true" >> "$GITHUB_OUTPUT"
+
+  publicar:
+    needs: atualizar
+    if: needs.atualizar.outputs.mudou == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml
+    with:
+      ref: main

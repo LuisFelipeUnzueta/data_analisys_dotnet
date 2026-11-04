@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ComoLerMetricas from './componentes/ComoLerMetricas.svelte';
   import Filtros from './componentes/Filtros.svelte';
   import LinhaTempo from './componentes/LinhaTempo.svelte';
   import Mapa from './componentes/Mapa.svelte';
@@ -10,6 +11,7 @@
   import { formatarCompacto, formatarInteiro, formatarPercentual, formatarValor, rotuloFaixas, rotuloMetrica } from './lib/formato';
   import { pesosDoPadrao } from './lib/taxas';
   import type { Base, Filtro } from './lib/tipos';
+  import { DESCRICOES } from './lib/metricas';
   import { criarVistas } from './lib/vistas';
 
   let base = $state.raw<Base | null>(null);
@@ -85,7 +87,12 @@
     <section class="painel">
       <h2>{metrica} por ano</h2>
       <p class="contexto">{nomeCausa} · {nomeLocal} · {nomeIdade}</p>
+      <p class="descricao">{DESCRICOES[filtro.metrica].resumo} <a href="#como-ler">Como ler as métricas</a></p>
       <LinhaTempo pontos={vistas.serie} {formatar} {marcos} rotuloColuna={metrica} />
+    </section>
+
+    <section class="painel" id="como-ler">
+      <ComoLerMetricas dimensoes={base.dimensoes} selecionada={filtro.metrica} />
     </section>
 
     <div class="grade">
@@ -181,6 +188,14 @@
   .nota {
     font-size: 12px;
     margin: 8px 0 0;
+  }
+  .descricao {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 12px;
+  }
+  .descricao a {
+    color: var(--series-1);
   }
   .painel {
     background: var(--surface);

@@ -17,7 +17,7 @@ const pesosUniformes = () => {
 
 const dimensoes: Dimensoes = {
   gerado_em: '',
-  anos: [1995, 1996].map(ano => ({ ano, revisao_cid: ano < 1996 ? 9 : 10, fonte_populacao: 'interpolada', populacao_estimada: true })),
+  anos: [1995, 1996].map(ano => ({ ano, revisao_cid: ano < 1996 ? 9 : 10, fonte_populacao: 'interpolada', populacao_estimada: true, taxa_bruta_brasil: null, taxa_padronizada_brasil: null })),
   regioes: [{ codigo: 3, nome: 'Sudeste' }, { codigo: 1, nome: 'Norte' }],
   ufs: [{ codigo: 35, sigla: 'SP', regiao: 3 }, { codigo: 12, sigla: 'AC', regiao: 1 }],
   grupos: [
@@ -160,7 +160,7 @@ describe.skipIf(!existsSync(`${dados}/obitos.parquet`))('dados reais', () => {
     return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
   };
 
-  it('taxa padronizada nacional bate com o ETL em 1979 e 2023', async () => {
+  it('taxas nacionais de todos os anos batem com as calculadas pelo ETL', async () => {
     const real: Base = {
       dimensoes: JSON.parse(readFileSync(`${dados}/dimensoes.json`, 'utf8')) as Dimensoes,
       obitos: await lerParquet<TabelaObitos>(ler('obitos.parquet'), COLUNAS_OBITOS),
@@ -169,10 +169,14 @@ describe.skipIf(!existsSync(`${dados}/obitos.parquet`))('dados reais', () => {
     };
     const pesos = new Float64Array(FAIXAS);
     for (const { faixa, peso } of real.dimensoes.padrao.pesos) pesos[faixa] = peso;
-    const f = filtro({ anoInicio: 1979, anoFim: 2023, metrica: 'padronizada' });
-    const serie = criarVistas(agregar(real, f, -1), f, real.dimensoes, pesos).serie;
-
-    expect(serie[0]!.valor).toBeCloseTo(889.0, 1);
-    expect(serie.at(-1)!.valor).toBeCloseTo(560.9, 1);
+    const anos = real.dimensoes.anos;
+    for (const metrica of ['bruta', 'padronizada'] as const) {
+      const f = filtro({ anoInicio: anos[0]!.ano, anoFim: anos.at(-1)!.ano, metrica });
+      const serie = criarVistas(agregar(real, f, -1), f, real.dimensoes, pesos).serie;
+      serie.forEach((ponto, i) => {
+        const esperado = metrica === 'bruta' ? anos[i]!.taxa_bruta_brasil : anos[i]!.taxa_padronizada_brasil;
+        expect(ponto.valor, `${metrica} ${ponto.ano}`).toBeCloseTo(esperado!, 1);
+      });
+    }
   });
 });

@@ -93,13 +93,15 @@ public class SaidaTests
     {
         var fontes = new Dictionary<int, FontePopulacao> { [1979] = FontePopulacao.Extrapolada, [2000] = FontePopulacao.Ripsa2024 };
         using var json = JsonDocument.Parse(
-            GeradorDimensoes.Gerar(Mapa, Oms, [2000, 1979], fontes, new DateTimeOffset(2026, 11, 3, 0, 0, 0, TimeSpan.Zero)));
+            GeradorDimensoes.Gerar(Mapa, Oms, new Dictionary<int, (double?, double?)> { [2000] = (541.9, 666.9), [1979] = (608.7, null) }, fontes, new DateTimeOffset(2026, 11, 3, 0, 0, 0, TimeSpan.Zero)));
         var raiz = json.RootElement;
 
         var anos = raiz.GetProperty("anos").EnumerateArray().ToList();
         Assert.Equal(1979, anos[0].GetProperty("ano").GetInt32());
         Assert.True(anos[0].GetProperty("populacao_estimada").GetBoolean());
         Assert.Equal(10, anos[1].GetProperty("revisao_cid").GetInt32());
+        Assert.Equal(666.9, anos[1].GetProperty("taxa_padronizada_brasil").GetDouble());
+        Assert.Equal(JsonValueKind.Null, anos[0].GetProperty("taxa_padronizada_brasil").ValueKind);
 
         Assert.Equal(Mapa.Grupos.Count, raiz.GetProperty("grupos").GetArrayLength());
         Assert.Equal(18, raiz.GetProperty("faixas").GetArrayLength());

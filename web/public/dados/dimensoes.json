@@ -1,275 +1,365 @@
 {
-  "gerado_em": "2026-11-03T23:30:56.4136789+00:00",
+  "gerado_em": "2026-11-04T12:04:24.8782398+00:00",
   "anos": [
     {
       "ano": 1979,
       "revisao_cid": 9,
       "fonte_populacao": "extrapolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 608.738,
+      "taxa_padronizada_brasil": 889.008
     },
     {
       "ano": 1980,
       "revisao_cid": 9,
       "fonte_populacao": "censo",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 630.811,
+      "taxa_padronizada_brasil": 930.681
     },
     {
       "ano": 1981,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 619.227,
+      "taxa_padronizada_brasil": 916.29
     },
     {
       "ano": 1982,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 601.064,
+      "taxa_padronizada_brasil": 889.336
     },
     {
       "ano": 1983,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 613.657,
+      "taxa_padronizada_brasil": 912.653
     },
     {
       "ano": 1984,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 632.503,
+      "taxa_padronizada_brasil": 934.927
     },
     {
       "ano": 1985,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 604.141,
+      "taxa_padronizada_brasil": 901.482
     },
     {
       "ano": 1986,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 610.261,
+      "taxa_padronizada_brasil": 897.956
     },
     {
       "ano": 1987,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 589.781,
+      "taxa_padronizada_brasil": 865.719
     },
     {
       "ano": 1988,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 603.468,
+      "taxa_padronizada_brasil": 884.769
     },
     {
       "ano": 1989,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 578.474,
+      "taxa_padronizada_brasil": 839.251
     },
     {
       "ano": 1990,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 568.045,
+      "taxa_padronizada_brasil": 822.506
     },
     {
       "ano": 1991,
       "revisao_cid": 9,
       "fonte_populacao": "censo",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 547.477,
+      "taxa_padronizada_brasil": 784.996
     },
     {
       "ano": 1992,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 556.523,
+      "taxa_padronizada_brasil": 789.58
     },
     {
       "ano": 1993,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 582.735,
+      "taxa_padronizada_brasil": 816.587
     },
     {
       "ano": 1994,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 581.138,
+      "taxa_padronizada_brasil": 801.093
     },
     {
       "ano": 1995,
       "revisao_cid": 9,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 577.214,
+      "taxa_padronizada_brasil": 785.233
     },
     {
       "ano": 1996,
       "revisao_cid": 10,
       "fonte_populacao": "contagem",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 578.648,
+      "taxa_padronizada_brasil": 779.885
     },
     {
       "ano": 1997,
       "revisao_cid": 10,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 560.468,
+      "taxa_padronizada_brasil": 738.016
     },
     {
       "ano": 1998,
       "revisao_cid": 10,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 563.016,
+      "taxa_padronizada_brasil": 725.126
     },
     {
       "ano": 1999,
       "revisao_cid": 10,
       "fonte_populacao": "interpolada",
-      "populacao_estimada": true
+      "populacao_estimada": true,
+      "taxa_bruta_brasil": 552.114,
+      "taxa_padronizada_brasil": 695.379
     },
     {
       "ano": 2000,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 541.905,
+      "taxa_padronizada_brasil": 666.856
     },
     {
       "ano": 2001,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 543.204,
+      "taxa_padronizada_brasil": 661.829
     },
     {
       "ano": 2002,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 548.355,
+      "taxa_padronizada_brasil": 659.608
     },
     {
       "ano": 2003,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 552.626,
+      "taxa_padronizada_brasil": 656.295
     },
     {
       "ano": 2004,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 558.17,
+      "taxa_padronizada_brasil": 654.208
     },
     {
       "ano": 2005,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 542.71,
+      "taxa_padronizada_brasil": 625.989
     },
     {
       "ano": 2006,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 550.132,
+      "taxa_padronizada_brasil": 624.488
     },
     {
       "ano": 2007,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 553.062,
+      "taxa_padronizada_brasil": 616.967
     },
     {
       "ano": 2008,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 562.89,
+      "taxa_padronizada_brasil": 616.793
     },
     {
       "ano": 2009,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 571.033,
+      "taxa_padronizada_brasil": 614.259
     },
     {
       "ano": 2010,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 583.8,
+      "taxa_padronizada_brasil": 616.156
     },
     {
       "ano": 2011,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 596.71,
+      "taxa_padronizada_brasil": 617.292
     },
     {
       "ano": 2012,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 597.543,
+      "taxa_padronizada_brasil": 605.89
     },
     {
       "ano": 2013,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 607.586,
+      "taxa_padronizada_brasil": 603.948
     },
     {
       "ano": 2014,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 611.041,
+      "taxa_padronizada_brasil": 595.197
     },
     {
       "ano": 2015,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 624.581,
+      "taxa_padronizada_brasil": 595.67
     },
     {
       "ano": 2016,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 642.449,
+      "taxa_padronizada_brasil": 599.992
     },
     {
       "ano": 2017,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 639.663,
+      "taxa_padronizada_brasil": 584.633
     },
     {
       "ano": 2018,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 637.547,
+      "taxa_padronizada_brasil": 570.062
     },
     {
       "ano": 2019,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 649.255,
+      "taxa_padronizada_brasil": 567.153
     },
     {
       "ano": 2020,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 744.305,
+      "taxa_padronizada_brasil": 635.418
     },
     {
       "ano": 2021,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 872.26,
+      "taxa_padronizada_brasil": 732.778
     },
     {
       "ano": 2022,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 732.355,
+      "taxa_padronizada_brasil": 603.882
     },
     {
       "ano": 2023,
       "revisao_cid": 10,
       "fonte_populacao": "ripsa2024",
-      "populacao_estimada": false
+      "populacao_estimada": false,
+      "taxa_bruta_brasil": 692.321,
+      "taxa_padronizada_brasil": 560.877
     }
   ],
   "regioes": [
