@@ -1,0 +1,1252 @@
+{
+  "gerado_em": "2026-11-03T23:30:56.4136789+00:00",
+  "anos": [
+    {
+      "ano": 1979,
+      "revisao_cid": 9,
+      "fonte_populacao": "extrapolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1980,
+      "revisao_cid": 9,
+      "fonte_populacao": "censo",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 1981,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1982,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1983,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1984,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1985,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1986,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1987,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1988,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1989,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1990,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1991,
+      "revisao_cid": 9,
+      "fonte_populacao": "censo",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 1992,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1993,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1994,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1995,
+      "revisao_cid": 9,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1996,
+      "revisao_cid": 10,
+      "fonte_populacao": "contagem",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 1997,
+      "revisao_cid": 10,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1998,
+      "revisao_cid": 10,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 1999,
+      "revisao_cid": 10,
+      "fonte_populacao": "interpolada",
+      "populacao_estimada": true
+    },
+    {
+      "ano": 2000,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2001,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2002,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2003,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2004,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2005,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2006,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2007,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2008,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2009,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2010,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2011,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2012,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2013,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2014,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2015,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2016,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2017,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2018,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2019,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2020,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2021,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2022,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    },
+    {
+      "ano": 2023,
+      "revisao_cid": 10,
+      "fonte_populacao": "ripsa2024",
+      "populacao_estimada": false
+    }
+  ],
+  "regioes": [
+    {
+      "codigo": 1,
+      "nome": "Norte"
+    },
+    {
+      "codigo": 2,
+      "nome": "Nordeste"
+    },
+    {
+      "codigo": 3,
+      "nome": "Sudeste"
+    },
+    {
+      "codigo": 4,
+      "nome": "Sul"
+    },
+    {
+      "codigo": 5,
+      "nome": "Centro-Oeste"
+    }
+  ],
+  "ufs": [
+    {
+      "codigo": 11,
+      "sigla": "RO",
+      "regiao": 1
+    },
+    {
+      "codigo": 12,
+      "sigla": "AC",
+      "regiao": 1
+    },
+    {
+      "codigo": 13,
+      "sigla": "AM",
+      "regiao": 1
+    },
+    {
+      "codigo": 14,
+      "sigla": "RR",
+      "regiao": 1
+    },
+    {
+      "codigo": 15,
+      "sigla": "PA",
+      "regiao": 1
+    },
+    {
+      "codigo": 16,
+      "sigla": "AP",
+      "regiao": 1
+    },
+    {
+      "codigo": 17,
+      "sigla": "TO",
+      "regiao": 1
+    },
+    {
+      "codigo": 21,
+      "sigla": "MA",
+      "regiao": 2
+    },
+    {
+      "codigo": 22,
+      "sigla": "PI",
+      "regiao": 2
+    },
+    {
+      "codigo": 23,
+      "sigla": "CE",
+      "regiao": 2
+    },
+    {
+      "codigo": 24,
+      "sigla": "RN",
+      "regiao": 2
+    },
+    {
+      "codigo": 25,
+      "sigla": "PB",
+      "regiao": 2
+    },
+    {
+      "codigo": 26,
+      "sigla": "PE",
+      "regiao": 2
+    },
+    {
+      "codigo": 27,
+      "sigla": "AL",
+      "regiao": 2
+    },
+    {
+      "codigo": 28,
+      "sigla": "SE",
+      "regiao": 2
+    },
+    {
+      "codigo": 29,
+      "sigla": "BA",
+      "regiao": 2
+    },
+    {
+      "codigo": 31,
+      "sigla": "MG",
+      "regiao": 3
+    },
+    {
+      "codigo": 32,
+      "sigla": "ES",
+      "regiao": 3
+    },
+    {
+      "codigo": 33,
+      "sigla": "RJ",
+      "regiao": 3
+    },
+    {
+      "codigo": 35,
+      "sigla": "SP",
+      "regiao": 3
+    },
+    {
+      "codigo": 41,
+      "sigla": "PR",
+      "regiao": 4
+    },
+    {
+      "codigo": 42,
+      "sigla": "SC",
+      "regiao": 4
+    },
+    {
+      "codigo": 43,
+      "sigla": "RS",
+      "regiao": 4
+    },
+    {
+      "codigo": 50,
+      "sigla": "MS",
+      "regiao": 5
+    },
+    {
+      "codigo": 51,
+      "sigla": "MT",
+      "regiao": 5
+    },
+    {
+      "codigo": 52,
+      "sigla": "GO",
+      "regiao": 5
+    },
+    {
+      "codigo": 53,
+      "sigla": "DF",
+      "regiao": 5
+    }
+  ],
+  "grupos": [
+    {
+      "indice": 0,
+      "codigo": "inf_intestinais",
+      "nome": "Doenças infecciosas intestinais",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 1,
+      "codigo": "tuberculose",
+      "nome": "Tuberculose (inclui sequelas)",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 2,
+      "codigo": "septicemia",
+      "nome": "Septicemia",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 3,
+      "codigo": "meningococica",
+      "nome": "Infecção meningocócica",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 4,
+      "codigo": "tetano",
+      "nome": "Tétano (inclui neonatal)",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 5,
+      "codigo": "imunopreveniveis",
+      "nome": "Difteria, coqueluche, sarampo e poliomielite",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 6,
+      "codigo": "hiv_aids",
+      "nome": "HIV/aids",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 7,
+      "codigo": "hepatite_viral",
+      "nome": "Hepatites virais",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 8,
+      "codigo": "dengue",
+      "nome": "Dengue",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 9,
+      "codigo": "chagas",
+      "nome": "Doença de Chagas",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 10,
+      "codigo": "malaria",
+      "nome": "Malária",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 11,
+      "codigo": "leishmaniose",
+      "nome": "Leishmaniose",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 12,
+      "codigo": "esquistossomose",
+      "nome": "Esquistossomose",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 13,
+      "codigo": "leptospirose",
+      "nome": "Leptospirose",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 14,
+      "codigo": "sifilis",
+      "nome": "Sífilis",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 15,
+      "codigo": "infecciosas_resto",
+      "nome": "Restante das doenças infecciosas e parasitárias",
+      "capitulo": "infecciosas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 16,
+      "codigo": "covid19",
+      "nome": "COVID-19",
+      "capitulo": "covid19",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 17,
+      "codigo": "neo_boca_faringe",
+      "nome": "Neoplasia maligna do lábio, cavidade oral e faringe",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 18,
+      "codigo": "neo_esofago",
+      "nome": "Neoplasia maligna do esôfago",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 19,
+      "codigo": "neo_estomago",
+      "nome": "Neoplasia maligna do estômago",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 20,
+      "codigo": "neo_colon_reto",
+      "nome": "Neoplasia maligna do cólon, reto e ânus",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 21,
+      "codigo": "neo_figado",
+      "nome": "Neoplasia maligna do fígado e vias biliares intra-hepáticas",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 22,
+      "codigo": "neo_pancreas",
+      "nome": "Neoplasia maligna do pâncreas",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 23,
+      "codigo": "neo_laringe",
+      "nome": "Neoplasia maligna da laringe",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 24,
+      "codigo": "neo_pulmao",
+      "nome": "Neoplasia maligna da traqueia, brônquios e pulmões",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 25,
+      "codigo": "neo_melanoma",
+      "nome": "Melanoma maligno da pele",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 26,
+      "codigo": "neo_mama",
+      "nome": "Neoplasia maligna da mama",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 27,
+      "codigo": "neo_colo_utero",
+      "nome": "Neoplasia maligna do colo do útero",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 28,
+      "codigo": "neo_utero_outros",
+      "nome": "Neoplasia maligna do corpo e partes não especificadas do útero",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 29,
+      "codigo": "neo_ovario",
+      "nome": "Neoplasia maligna do ovário e anexos",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 30,
+      "codigo": "neo_prostata",
+      "nome": "Neoplasia maligna da próstata",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 31,
+      "codigo": "neo_bexiga",
+      "nome": "Neoplasia maligna da bexiga",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 32,
+      "codigo": "neo_snc",
+      "nome": "Neoplasias do encéfalo e sistema nervoso central (qualquer comportamento)",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 33,
+      "codigo": "neo_linfomas",
+      "nome": "Linfomas",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 34,
+      "codigo": "neo_mieloma",
+      "nome": "Mieloma múltiplo e doenças imunoproliferativas malignas",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 35,
+      "codigo": "neo_leucemia",
+      "nome": "Leucemias",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 36,
+      "codigo": "neo_benignas_insitu",
+      "nome": "Neoplasias in situ, benignas e de comportamento incerto (exceto SNC)",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 37,
+      "codigo": "neoplasias_resto",
+      "nome": "Restante das neoplasias malignas",
+      "capitulo": "neoplasias",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 38,
+      "codigo": "anemias",
+      "nome": "Anemias",
+      "capitulo": "sangue",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 39,
+      "codigo": "sangue_resto",
+      "nome": "Restante das doenças do sangue e transtornos imunitários",
+      "capitulo": "sangue",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 40,
+      "codigo": "diabetes",
+      "nome": "Diabetes mellitus",
+      "capitulo": "endocrinas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 41,
+      "codigo": "desnutricao",
+      "nome": "Desnutrição",
+      "capitulo": "endocrinas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 42,
+      "codigo": "endocrinas_resto",
+      "nome": "Restante das doenças endócrinas, nutricionais e metabólicas",
+      "capitulo": "endocrinas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 43,
+      "codigo": "demencias",
+      "nome": "Demências e doença de Alzheimer",
+      "capitulo": "mentais",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 44,
+      "codigo": "alcool",
+      "nome": "Transtornos mentais devidos ao uso de álcool",
+      "capitulo": "mentais",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 45,
+      "codigo": "mentais_resto",
+      "nome": "Restante dos transtornos mentais e comportamentais",
+      "capitulo": "mentais",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 46,
+      "codigo": "meningite",
+      "nome": "Meningites",
+      "capitulo": "nervoso",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 47,
+      "codigo": "epilepsia",
+      "nome": "Epilepsia",
+      "capitulo": "nervoso",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 48,
+      "codigo": "parkinson",
+      "nome": "Doença de Parkinson",
+      "capitulo": "nervoso",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 49,
+      "codigo": "nervoso_resto",
+      "nome": "Restante das doenças do sistema nervoso e órgãos dos sentidos",
+      "capitulo": "nervoso",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 50,
+      "codigo": "reumatica",
+      "nome": "Febre reumática e doença reumática crônica do coração",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 51,
+      "codigo": "hipertensivas",
+      "nome": "Doenças hipertensivas",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 52,
+      "codigo": "isquemicas",
+      "nome": "Doenças isquêmicas do coração",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 53,
+      "codigo": "outras_cardiacas",
+      "nome": "Outras doenças cardíacas (inclui insuficiência cardíaca)",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 54,
+      "codigo": "cerebrovasculares",
+      "nome": "Doenças cerebrovasculares",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 55,
+      "codigo": "aterosclerose",
+      "nome": "Aterosclerose",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 56,
+      "codigo": "circulatorio_resto",
+      "nome": "Restante das doenças do aparelho circulatório",
+      "capitulo": "circulatorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 57,
+      "codigo": "influenza",
+      "nome": "Influenza (gripe)",
+      "capitulo": "respiratorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 58,
+      "codigo": "pneumonia",
+      "nome": "Pneumonias",
+      "capitulo": "respiratorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 59,
+      "codigo": "resp_agudas_inferiores",
+      "nome": "Bronquite e bronquiolite agudas",
+      "capitulo": "respiratorio",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 60,
+      "codigo": "resp_cronicas",
+      "nome": "Doenças crônicas das vias aéreas inferiores (DPOC e asma)",
+      "capitulo": "respiratorio",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 61,
+      "codigo": "respiratorio_resto",
+      "nome": "Restante das doenças do aparelho respiratório",
+      "capitulo": "respiratorio",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 62,
+      "codigo": "ulcera",
+      "nome": "Úlcera gástrica, duodenal e péptica",
+      "capitulo": "digestivo",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 63,
+      "codigo": "figado",
+      "nome": "Doenças do fígado (inclui cirrose)",
+      "capitulo": "digestivo",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 64,
+      "codigo": "digestivo_resto",
+      "nome": "Restante das doenças do aparelho digestivo",
+      "capitulo": "digestivo",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 65,
+      "codigo": "renais",
+      "nome": "Doenças renais (nefrites e insuficiência renal)",
+      "capitulo": "geniturinario",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 66,
+      "codigo": "geniturinario_resto",
+      "nome": "Restante das doenças do aparelho geniturinário",
+      "capitulo": "geniturinario",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 67,
+      "codigo": "aborto",
+      "nome": "Gravidez que termina em aborto",
+      "capitulo": "maternas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 68,
+      "codigo": "maternas_resto",
+      "nome": "Outras causas maternas",
+      "capitulo": "maternas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 69,
+      "codigo": "pele",
+      "nome": "Doenças da pele e do tecido subcutâneo",
+      "capitulo": "pele",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 70,
+      "codigo": "osteomuscular",
+      "nome": "Doenças do sistema osteomuscular e do tecido conjuntivo",
+      "capitulo": "osteomuscular",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 71,
+      "codigo": "cong_nervoso",
+      "nome": "Malformações congênitas do sistema nervoso",
+      "capitulo": "congenitas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 72,
+      "codigo": "cong_circulatorio",
+      "nome": "Malformações congênitas do aparelho circulatório",
+      "capitulo": "congenitas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 73,
+      "codigo": "congenitas_resto",
+      "nome": "Restante das malformações congênitas e anomalias cromossômicas",
+      "capitulo": "congenitas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 74,
+      "codigo": "perinatal_respiratorio",
+      "nome": "Hipóxia, asfixia e transtornos respiratórios do período perinatal",
+      "capitulo": "perinatais",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 75,
+      "codigo": "perinatais_resto",
+      "nome": "Restante das afecções originadas no período perinatal",
+      "capitulo": "perinatais",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 76,
+      "codigo": "mal_definidas",
+      "nome": "Sintomas, sinais e causas mal definidas",
+      "capitulo": "mal_definidas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 77,
+      "codigo": "transporte",
+      "nome": "Acidentes de transporte",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 78,
+      "codigo": "quedas",
+      "nome": "Quedas",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 79,
+      "codigo": "afogamento",
+      "nome": "Afogamento e submersão acidentais",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 80,
+      "codigo": "fogo",
+      "nome": "Exposição à fumaça, ao fogo e às chamas",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 81,
+      "codigo": "envenenamento",
+      "nome": "Envenenamento acidental",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 82,
+      "codigo": "suicidio",
+      "nome": "Lesões autoprovocadas voluntariamente (suicídio)",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 83,
+      "codigo": "homicidio",
+      "nome": "Agressões (homicídio)",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 84,
+      "codigo": "intencao_indeterminada",
+      "nome": "Eventos cuja intenção é indeterminada",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    },
+    {
+      "indice": 85,
+      "codigo": "intervencao_legal",
+      "nome": "Intervenções legais e operações de guerra",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": true
+    },
+    {
+      "indice": 86,
+      "codigo": "externas_resto",
+      "nome": "Restante das causas externas",
+      "capitulo": "externas",
+      "comparabilidade_reduzida": false
+    }
+  ],
+  "faixas": [
+    {
+      "indice": 0,
+      "rotulo": "0-4",
+      "inicio": 0,
+      "fim": 4
+    },
+    {
+      "indice": 1,
+      "rotulo": "5-9",
+      "inicio": 5,
+      "fim": 9
+    },
+    {
+      "indice": 2,
+      "rotulo": "10-14",
+      "inicio": 10,
+      "fim": 14
+    },
+    {
+      "indice": 3,
+      "rotulo": "15-19",
+      "inicio": 15,
+      "fim": 19
+    },
+    {
+      "indice": 4,
+      "rotulo": "20-24",
+      "inicio": 20,
+      "fim": 24
+    },
+    {
+      "indice": 5,
+      "rotulo": "25-29",
+      "inicio": 25,
+      "fim": 29
+    },
+    {
+      "indice": 6,
+      "rotulo": "30-34",
+      "inicio": 30,
+      "fim": 34
+    },
+    {
+      "indice": 7,
+      "rotulo": "35-39",
+      "inicio": 35,
+      "fim": 39
+    },
+    {
+      "indice": 8,
+      "rotulo": "40-44",
+      "inicio": 40,
+      "fim": 44
+    },
+    {
+      "indice": 9,
+      "rotulo": "45-49",
+      "inicio": 45,
+      "fim": 49
+    },
+    {
+      "indice": 10,
+      "rotulo": "50-54",
+      "inicio": 50,
+      "fim": 54
+    },
+    {
+      "indice": 11,
+      "rotulo": "55-59",
+      "inicio": 55,
+      "fim": 59
+    },
+    {
+      "indice": 12,
+      "rotulo": "60-64",
+      "inicio": 60,
+      "fim": 64
+    },
+    {
+      "indice": 13,
+      "rotulo": "65-69",
+      "inicio": 65,
+      "fim": 69
+    },
+    {
+      "indice": 14,
+      "rotulo": "70-74",
+      "inicio": 70,
+      "fim": 74
+    },
+    {
+      "indice": 15,
+      "rotulo": "75-79",
+      "inicio": 75,
+      "fim": 79
+    },
+    {
+      "indice": 16,
+      "rotulo": "80+",
+      "inicio": 80,
+      "fim": null
+    },
+    {
+      "indice": 17,
+      "rotulo": "Ignorada",
+      "inicio": null,
+      "fim": null
+    }
+  ],
+  "sexos": [
+    {
+      "codigo": 0,
+      "nome": "ignorado"
+    },
+    {
+      "codigo": 1,
+      "nome": "masculino"
+    },
+    {
+      "codigo": 2,
+      "nome": "feminino"
+    }
+  ],
+  "padrao": {
+    "nome": "OMS 2000–2025 (SEER, por milhão)",
+    "pesos": [
+      {
+        "faixa": 0,
+        "peso": 88569
+      },
+      {
+        "faixa": 1,
+        "peso": 86870
+      },
+      {
+        "faixa": 2,
+        "peso": 85970
+      },
+      {
+        "faixa": 3,
+        "peso": 84670
+      },
+      {
+        "faixa": 4,
+        "peso": 82171
+      },
+      {
+        "faixa": 5,
+        "peso": 79272
+      },
+      {
+        "faixa": 6,
+        "peso": 76073
+      },
+      {
+        "faixa": 7,
+        "peso": 71475
+      },
+      {
+        "faixa": 8,
+        "peso": 65877
+      },
+      {
+        "faixa": 9,
+        "peso": 60379
+      },
+      {
+        "faixa": 10,
+        "peso": 53681
+      },
+      {
+        "faixa": 11,
+        "peso": 45484
+      },
+      {
+        "faixa": 12,
+        "peso": 37187
+      },
+      {
+        "faixa": 13,
+        "peso": 29590
+      },
+      {
+        "faixa": 14,
+        "peso": 22092
+      },
+      {
+        "faixa": 15,
+        "peso": 15195
+      },
+      {
+        "faixa": 16,
+        "peso": 15445
+      }
+    ]
+  },
+  "marcos": [
+    {
+      "ano": 1996,
+      "descricao": "Troca da CID-9 pela CID-10"
+    },
+    {
+      "ano": 1989,
+      "descricao": "Tocantins passa a ser contado separado de Goiás"
+    }
+  ]
+}

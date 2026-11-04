@@ -1,0 +1,68 @@
+/* Tokens da paleta de referência (dataviz). O tema escuro tem passos próprios, não é uma inversão. */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --border: rgba(11, 11, 11, 0.1);
+  --selecao: #cde2fb;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --seq-min: #cde2fb;
+  --seq-max: #0d366b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --border: rgba(255, 255, 255, 0.1);
+    --selecao: #104281;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --seq-min: #104281;
+    --seq-max: #cde2fb;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --border: rgba(255, 255, 255, 0.1);
+  --selecao: #104281;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --seq-min: #104281;
+  --seq-max: #cde2fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* O tooltip do Plot usa --plot-background como fundo; segue a superfície do tema. */
+figure,
+svg {
+  --plot-background: var(--surface) !important;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.45;
+}

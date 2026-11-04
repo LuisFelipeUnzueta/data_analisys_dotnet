@@ -39,6 +39,18 @@ O ETL lê os CSV anuais do SIM em `data/raw/` (`Mortalidade_Geral_{AAAA}.csv`, b
 | `populacao.parquet` | População por ano × UF × sexo × faixa etária |
 | `dimensoes.json` | Códigos das dimensões, pesos da OMS 2000–2025, proveniência de cada ano e marcos metodológicos |
 
+### Página (`web/`)
+
+Svelte 5 + Vite, gráficos com Observable Plot e leitura do Parquet no navegador com hyparquet. A página baixa os três arquivos uma vez (≈ 4,4 MB) e recalcula os gráficos a cada filtro com uma passada pelo cubo.
+
+```bash
+cp out/* web/public/dados/
+npm --prefix web install
+npm --prefix web run dev     # http://localhost:5173
+npm --prefix web test        # inclui conferência das taxas com o ETL quando há dados em web/public/dados
+npm --prefix web run build   # gera web/dist
+```
+
 ## Roadmap
 
 | Fase | Entrega | Critério de saída |

@@ -492,3 +492,7 @@ CLAUDE.md
 
 # Saída do ETL (Parquet e JSON gerados)
 out/
+
+# Front: dependências e build
+web/node_modules/
+web/dist/

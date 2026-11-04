@@ -1,0 +1,27 @@
+{
+  "name": "mortalidade-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "svelte-check && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@observablehq/plot": "0.6.17",
+    "hyparquet": "1.31.5",
+    "hyparquet-compressors": "1.1.2"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "@tsconfig/svelte": "5.0.8",
+    "@types/node": "24.19.2",
+    "svelte": "5.57.2",
+    "svelte-check": "4.7.7",
+    "typescript": "5.9.3",
+    "vite": "8.3.4",
+    "vitest": "4.1.12"
+  }
+}
