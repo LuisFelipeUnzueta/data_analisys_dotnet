@@ -1,3 +1,4 @@
+using Mortalidade.Etl.Leitura;
 using System.Text.Json;
 using Mortalidade.Etl.Cubo;
 using Mortalidade.Etl.Dominio;
@@ -9,10 +10,10 @@ namespace Mortalidade.Etl.Tests.Cubo;
 public class SaidaTests
 {
     private static readonly MapaCausas Mapa =
-        MapaCausas.Carregar(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "grupos.csv"))).Valor;
+        LeitorMapaCausas.Ler(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "grupos.csv"))).Valor;
 
     private static readonly PopulacaoPadrao Oms =
-        PopulacaoPadrao.Carregar(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "oms_2000_2025.csv"))).Valor;
+        LeitorPopulacaoPadrao.Ler(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "oms_2000_2025.csv"))).Valor;
 
     private static readonly Uf Sp = Uf.DeCodigoIbge(35).Valor;
     private static readonly Uf Ac = Uf.DeCodigoIbge(12).Valor;

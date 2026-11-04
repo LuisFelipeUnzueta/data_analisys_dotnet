@@ -1,24 +1,19 @@
 namespace Mortalidade.Etl.Dominio;
 
-/// <summary>Pesos da população-padrão por faixa quinquenal (até 80+), carregados de <c>data/padrao/*.csv</c>.</summary>
+/// <summary>Pesos da população-padrão por faixa quinquenal (até 80+); lidos de <c>data/padrao/*.csv</c> por <c>LeitorPopulacaoPadrao</c>.</summary>
 public sealed class PopulacaoPadrao
 {
     private PopulacaoPadrao(IReadOnlyDictionary<FaixaEtaria, double> pesos) => Pesos = pesos;
 
     public IReadOnlyDictionary<FaixaEtaria, double> Pesos { get; }
 
-    public static Result<PopulacaoPadrao> Carregar(IEnumerable<string> linhasCsv)
+    /// <summary>Exige um peso não negativo para cada faixa conhecida (sem a Ignorada).</summary>
+    public static Result<PopulacaoPadrao> Criar(IReadOnlyDictionary<FaixaEtaria, double> pesos)
     {
-        var pesos = new Dictionary<FaixaEtaria, double>();
-        foreach (var campos in linhasCsv.Skip(1).Where(l => !string.IsNullOrWhiteSpace(l)).Select(l => l.Split(';')))
-        {
-            if (campos.Length != 2 || FaixaEtaria.DeRotulo(campos[0]) is not { } faixa || faixa == FaixaEtaria.Ignorada
-                || !double.TryParse(campos[1], System.Globalization.CultureInfo.InvariantCulture, out var peso) || peso < 0)
-                return Result<PopulacaoPadrao>.Falha("padrao.linha_invalida", $"Linha inválida: {string.Join(';', campos)}.");
-            pesos[faixa] = peso;
-        }
-
         var faixasConhecidas = FaixaEtaria.Todas.Count - 1;
+        if (pesos.ContainsKey(FaixaEtaria.Ignorada) || pesos.Values.Any(p => p < 0))
+            return Result<PopulacaoPadrao>.Falha("padrao.peso_invalido", "Pesos devem ser não negativos e não incluir a faixa Ignorada.");
+
         return pesos.Count == faixasConhecidas
             ? Result<PopulacaoPadrao>.Sucesso(new PopulacaoPadrao(pesos))
             : Result<PopulacaoPadrao>.Falha("padrao.faixas_incompletas", $"Esperadas {faixasConhecidas} faixas, lidas {pesos.Count}.");

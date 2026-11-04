@@ -55,10 +55,10 @@ O ETL é um projeto único, [`src/Mortalidade.Etl`](src/Mortalidade.Etl), com o 
 ```
 src/Mortalidade.Etl/
   Dominio/     regras puras: dimensões, MapaCausas, EstimativaPopulacional, RedistribuicaoIdade, Taxas
-  Leitura/     LeitorSimCsv (pacote Sep) e LeitorPopulacaoFontes
+  Leitura/     todo arquivo de texto: SIM (pacote Sep), mapa de causas, gabarito, população e pesos da OMS
   Cubo/        AgregadorCubo, EscritorParquet (Parquet.Net), GeradorDimensoes
   Validacao/   ConferenciaTabnet e ContinuidadeCid
-  Pipeline/    ProcessadorAno: um ano do pipeline
+  Pipeline/    Entradas (carga encadeada com Result.Bind), ProcessadorAno, PublicacaoSaida e GeradorFixtures
   Program.cs   composição, anos em paralelo e relatório
 web/           página Svelte 5 + Vite + Observable Plot + hyparquet
 scripts/       consultas ao Tabnet e ao SIDRA (Python, só biblioteca padrão)
@@ -66,17 +66,18 @@ data/          tabela de causas, gabarito do Tabnet, população-fonte e pesos d
 ```
 
 - **Sem servidor e sem interfaces especulativas.** O ETL lê arquivos locais e grava num diretório; download e publicação ficam nos workflows. Kafka, filas, CQRS e microsserviços ficaram de fora de propósito: os dados mudam no máximo uma vez por mês e cabem em arquivos estáticos.
-- **Regra como dado.** A correspondência de causas, os pesos da OMS e o gabarito do Tabnet são CSV versionados, não código.
+- **Regra como dado.** A correspondência de causas, os pesos da OMS e o gabarito do Tabnet são CSV versionados, não código. O domínio recebe valores já tipados; interpretar arquivo é papel de `Leitura`.
+- **Uma regra, um lugar.** As regras territoriais (Fernando de Noronha como PE, Tocantins separado de Goiás em 1989) ficam em `Uf`, e os marcos metodológicos vão no `dimensoes.json`, de onde a página tira linhas e avisos.
 - **Desempenho.** O laço por óbito não aloca strings nem objetos novos (instâncias de UF, faixa e causa reaproveitadas, chave de agregação por inteiros). Os 45 anos são processados em cerca de 25 s. No navegador, o cubo é lido em cerca de 300 ms e cada mudança de filtro é uma única passada pelas 1,8 milhão de linhas.
 
 ## Qualidade
 
-- **111 testes no .NET**, entre eles:
+- **114 testes no .NET**, entre eles:
   - golden files da harmonização: cobertura dos 12.986 códigos, totais por grupo de 1992–1999 e coerência da marca de comparabilidade com o salto de 1996;
   - os 16 layouts do CSV, a decodificação da idade e as regras de UF;
   - interpolação populacional, padronização e redistribuição de idade;
   - regra de arquitetura (NetArchTest): `Dominio` não depende de leitura, cubo, validação nem Parquet.
-- **12 testes no front**, incluindo a conferência das taxas nacionais calculadas no navegador com as que o ETL grava no `dimensoes.json`, ano a ano, para as duas implementações não divergirem.
+- **13 testes no front**, incluindo a conferência das taxas nacionais calculadas no navegador com as que o ETL grava no `dimensoes.json`, ano a ano, para as duas implementações não divergirem.
 - **Conferência exata com o Tabnet** a cada execução do ETL.
 
 ## Executar localmente
@@ -101,6 +102,12 @@ O ETL processa os anos que estão no gabarito do Tabnet e sai com código 0 quan
 ```bash
 python scripts/gerar_gabarito.py data/tabnet/gabarito.csv
 python scripts/baixar_populacao.py data/ibge/populacao_fontes.csv 2024
+```
+
+Depois de mudar uma faixa do `grupos.csv`, regere as fixtures dos testes de harmonização e revise o diff do golden (anos que não conferem com o Tabnet ficam de fora):
+
+```bash
+dotnet run -c Release --project src/Mortalidade.Etl -- fixtures data/raw
 ```
 
 ## Atualização e publicação

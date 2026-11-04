@@ -1,34 +1,39 @@
+import { ufsDoLocal } from './agregacao';
 import type { Dimensoes, Filtro } from './tipos';
 
-const UF_TOCANTINS = 17;
-const UF_GOIAS = 52;
-const REGIOES_COM_TO_OU_GO = new Set([1, 5]);
+type Marco = Dimensoes['marcos'][number];
+
+/**
+ * Marcos de `dimensoes.json` que afetam o recorte: o período cruza o ano e, nos territoriais, o local contém só parte
+ * das UFs envolvidas (o Brasil inteiro, com GO e TO, não muda quando o Tocantins é separado de Goiás).
+ */
+export function marcosDoRecorte(filtro: Filtro, dimensoes: Dimensoes): Marco[] {
+  const ufs = ufsDoLocal(dimensoes, filtro.local);
+  return dimensoes.marcos.filter(m => {
+    const cruza = filtro.anoInicio < m.ano && filtro.anoFim >= m.ano;
+    const noLocal = m.ufs.filter(uf => ufs[uf] === 1).length;
+    return cruza && (m.ufs.length === 0 || (noLocal > 0 && noLocal < m.ufs.length));
+  });
+}
 
 /** Avisos metodológicos que valem para o recorte atual, na ordem em que aparecem na página. */
 export function avisosDoRecorte(filtro: Filtro, dimensoes: Dimensoes): string[] {
   const avisos: string[] = [];
-  const cruza = (ano: number) => filtro.anoInicio < ano && filtro.anoFim >= ano;
   const grupo = filtro.grupo === null ? null : dimensoes.grupos[filtro.grupo];
 
-  if (cruza(1996)) {
-    avisos.push(
-      grupo?.comparabilidade_reduzida
-        ? `Comparabilidade reduzida: "${grupo.nome}" muda mais de 10% além da tendência na troca da CID-9 pela CID-10, em 1996. Compare os dois lados de 1996 com cautela.`
-        : 'Em 1996 a causa básica passa a ser codificada pela CID-10. Os grupos de causa foram harmonizados entre as duas revisões.'
-    );
+  for (const marco of marcosDoRecorte(filtro, dimensoes)) {
+    if (marco.tipo === 'cid') {
+      avisos.push(grupo?.comparabilidade_reduzida
+        ? `Comparabilidade reduzida: "${grupo.nome}" muda mais de 10% além da tendência na troca da CID-9 pela CID-10, em ${marco.ano}. Compare os dois lados de ${marco.ano} com cautela.`
+        : `Em ${marco.ano} a causa básica passa a ser codificada pela CID-10. Os grupos de causa foram harmonizados entre as duas revisões.`);
+    } else {
+      avisos.push(`Até ${marco.ano - 1} o território do Tocantins era parte de Goiás; a partir de ${marco.ano} os dois são contados separadamente.`);
+    }
   }
 
-  const estimados = dimensoes.anos.filter(a => a.populacao_estimada && a.ano >= filtro.anoInicio && a.ano <= filtro.anoFim);
-  if (filtro.metrica !== 'obitos' && estimados.some(a => a.fonte_populacao === 'extrapolada')) {
-    avisos.push('A população de 1979 não tem fonte oficial: foi extrapolada do crescimento entre 1980 e 1981.');
-  }
-
-  const local = filtro.local;
-  const afetaTocantins = local.tipo === 'brasil' ? false
-    : local.tipo === 'uf' ? local.codigo === UF_TOCANTINS || local.codigo === UF_GOIAS
-    : REGIOES_COM_TO_OU_GO.has(local.codigo);
-  if (afetaTocantins && cruza(1989)) {
-    avisos.push('Até 1988 o território do Tocantins era parte de Goiás; a partir de 1989 os dois são contados separadamente.');
+  const extrapolados = dimensoes.anos.filter(a => a.fonte_populacao === 'extrapolada' && a.ano >= filtro.anoInicio && a.ano <= filtro.anoFim);
+  if (filtro.metrica !== 'obitos' && extrapolados.length > 0) {
+    avisos.push(`A população de ${extrapolados.map(a => a.ano).join(', ')} não tem fonte oficial: foi extrapolada do crescimento dos anos seguintes.`);
   }
 
   if (filtro.metrica === 'padronizada' && filtro.faixa !== null) {

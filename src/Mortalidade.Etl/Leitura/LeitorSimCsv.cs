@@ -9,9 +9,6 @@ namespace Mortalidade.Etl.Leitura;
 /// </summary>
 public static class LeitorSimCsv
 {
-    private const int UfFernandoDeNoronha = 20;
-    private const int UfPernambuco = 26;
-
     public static IEnumerable<Result<RegistroObito>> Ler(Stream csv, Ano ano)
     {
         using var leitor = Sep.New(';').Reader(o => o with { Unescape = true }).From(csv);
@@ -100,7 +97,7 @@ public static class LeitorSimCsv
         if (valor.Length < 2 || !int.TryParse(valor[..2], out var codigo))
             return null;
 
-        var uf = Uf.DeCodigoIbge(codigo == UfFernandoDeNoronha ? UfPernambuco : codigo);
+        var uf = Uf.DeCodigoHistorico(codigo);
         return uf.IsSuccess ? uf.Valor : null;
     }
 }

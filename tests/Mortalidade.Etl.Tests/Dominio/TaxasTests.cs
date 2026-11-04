@@ -1,3 +1,4 @@
+using Mortalidade.Etl.Leitura;
 using Mortalidade.Etl.Dominio;
 
 namespace Mortalidade.Etl.Tests.Dominio;
@@ -5,7 +6,7 @@ namespace Mortalidade.Etl.Tests.Dominio;
 public class TaxasTests
 {
     private static readonly PopulacaoPadrao Oms =
-        PopulacaoPadrao.Carregar(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "oms_2000_2025.csv"))).Valor;
+        LeitorPopulacaoPadrao.Ler(File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Dados", "oms_2000_2025.csv"))).Valor;
 
     private static IEnumerable<FaixaEtaria> FaixasConhecidas => FaixaEtaria.Todas.Where(f => f != FaixaEtaria.Ignorada);
 
@@ -56,6 +57,6 @@ public class TaxasTests
     [InlineData("faixa;peso\n0-4;1\n0-4;x")]
     public void Carregar_ArquivoInvalido_RetornaFalha(string conteudo)
     {
-        Assert.True(PopulacaoPadrao.Carregar(conteudo.Split('\n')).IsFailure);
+        Assert.True(LeitorPopulacaoPadrao.Ler(conteudo.Split('\n')).IsFailure);
     }
 }

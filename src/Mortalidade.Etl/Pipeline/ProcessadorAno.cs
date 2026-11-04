@@ -11,7 +11,7 @@ public sealed record ResultadoAno(int Ano, IReadOnlyList<CelulaCubo> Celulas, IR
 }
 
 /// <summary>Um ano do pipeline: ler o CSV → agregar → redistribuir idade ignorada → conferir com o Tabnet.</summary>
-public sealed class ProcessadorAno(MapaCausas mapa, IReadOnlyList<LinhaGabarito> gabarito)
+public sealed class ProcessadorAno(MapaCausas mapa, IReadOnlyDictionary<int, TotaisTabnet> gabarito)
 {
     public ResultadoAno Processar(Ano ano, Stream csv)
     {

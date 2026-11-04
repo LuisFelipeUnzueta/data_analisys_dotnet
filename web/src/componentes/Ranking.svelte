@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { base, Plot } from '../lib/plot';
+  import { aoClicar, base, Plot } from '../lib/plot';
   import { tema } from '../lib/tema.svelte';
   import Grafico from './Grafico.svelte';
   import Tabela from './Tabela.svelte';
@@ -38,10 +38,7 @@
         Plot.tip(itens, Plot.pointerY({ x: 'valor', y: 'nome', title: d => `${d.nome}\n${formatar(d.valor)}` }))
       ]
     });
-    figura.addEventListener('click', () => {
-      const apontado = (figura as unknown as { value?: (typeof itens)[number] }).value;
-      if (apontado) aoSelecionar(apontado.indice);
-    });
+    aoClicar<(typeof itens)[number]>(figura, item => aoSelecionar(item.indice));
     return figura;
   }
 </script>

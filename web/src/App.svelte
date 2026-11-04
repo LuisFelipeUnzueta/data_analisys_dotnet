@@ -6,7 +6,7 @@
   import Piramide from './componentes/Piramide.svelte';
   import Ranking from './componentes/Ranking.svelte';
   import { agregar } from './lib/agregacao';
-  import { avisosDoRecorte } from './lib/avisos';
+  import { avisosDoRecorte, marcosDoRecorte } from './lib/avisos';
   import { carregarBase } from './lib/dados';
   import { formatarCompacto, formatarInteiro, formatarPercentual, formatarValor, rotuloFaixas, rotuloMetrica } from './lib/formato';
   import { pesosDoPadrao } from './lib/taxas';
@@ -49,11 +49,7 @@
   });
   const nomeIdade = $derived(base ? rotuloFaixas(base.dimensoes.faixas, filtro.faixa) : '');
   const nomeCausa = $derived(filtro.grupo === null || !base ? 'todas as causas' : base.dimensoes.grupos[filtro.grupo]!.nome);
-  const marcos = $derived(
-    (base?.dimensoes.marcos ?? [])
-      .filter(m => m.ano > filtro.anoInicio && m.ano <= filtro.anoFim && (m.ano === 1996 || avisos.some(a => a.includes('Tocantins'))))
-      .map(m => ({ ano: m.ano, texto: m.ano === 1996 ? 'CID-9 → CID-10' : 'TO separado de GO' }))
-  );
+  const marcos = $derived(base ? marcosDoRecorte(filtro, base.dimensoes).map(m => ({ ano: m.ano, texto: m.rotulo })) : []);
 </script>
 
 <main>

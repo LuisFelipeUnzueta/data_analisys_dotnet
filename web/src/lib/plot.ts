@@ -17,4 +17,12 @@ export const linhaDeGrade = () => Plot.gridY({ stroke: tema.cores.grid, strokeOp
 
 export const eixoBase = () => Plot.ruleY([0], { stroke: tema.cores.muted });
 
+/** Clique no dado apontado: o Plot expõe em `figura.value` o dado sob o ponteiro de uma marca `pointer`. */
+export function aoClicar<T>(figura: Element, acao: (dado: T) => void): void {
+  figura.addEventListener('click', () => {
+    const apontado = (figura as Element & { value?: T }).value;
+    if (apontado !== undefined && apontado !== null) acao(apontado);
+  });
+}
+
 export { Plot };

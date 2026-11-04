@@ -8,3 +8,15 @@ public enum Regiao
     Sul = 4,
     CentroOeste = 5
 }
+
+public static class RegiaoNome
+{
+    public static string De(Regiao regiao) => regiao switch
+    {
+        Regiao.Norte => "Norte",
+        Regiao.Nordeste => "Nordeste",
+        Regiao.Sudeste => "Sudeste",
+        Regiao.Sul => "Sul",
+        _ => "Centro-Oeste"
+    };
+}

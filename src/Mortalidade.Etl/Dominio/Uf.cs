@@ -17,6 +17,18 @@ public sealed record Uf
     // Resultados pré-alocados: DeCodigoIbge roda uma vez por óbito.
     private static readonly Dictionary<int, Result<Uf>> PorCodigo = Todas.ToDictionary(u => u.CodigoIbge, Result<Uf>.Sucesso);
 
+    /// <summary>Tocantins foi criado em 1988 a partir do norte de Goiás; o projeto o conta separado a partir de 1989.</summary>
+    public const int AnoCriacaoTocantins = 1989;
+
+    // Antigo Território de Fernando de Noronha, incorporado a Pernambuco em 1988; o SIM ainda usa o código 20.
+    private const int CodigoFernandoDeNoronha = 20;
+
+    public static Uf Tocantins { get; } = PorCodigo[17].Valor;
+
+    public static Uf Goias { get; } = PorCodigo[52].Valor;
+
+    public static Uf Pernambuco { get; } = PorCodigo[26].Valor;
+
     private Uf(int codigoIbge, string sigla)
     {
         CodigoIbge = codigoIbge;
@@ -32,6 +44,10 @@ public sealed record Uf
     public static Result<Uf> DeCodigoIbge(int codigo) =>
         PorCodigo.GetValueOrDefault(codigo)
         ?? Result<Uf>.Falha("uf.codigo_invalido", $"Código IBGE de UF inválido: {codigo}.");
+
+    /// <summary>Como <see cref="DeCodigoIbge"/>, mas aceita o código histórico de Fernando de Noronha (20 → PE), como faz o Tabnet.</summary>
+    public static Result<Uf> DeCodigoHistorico(int codigo) =>
+        DeCodigoIbge(codigo == CodigoFernandoDeNoronha ? Pernambuco.CodigoIbge : codigo);
 
     public override string ToString() => Sigla;
 }

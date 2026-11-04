@@ -19,9 +19,6 @@ public sealed record PontoPopulacao(int Ano, FontePopulacao Fonte, Uf Uf, Sexo S
 /// </summary>
 public static class EstimativaPopulacional
 {
-    public const int AnoCriacaoTocantins = 1989;
-    private const int CodigoTocantins = 17;
-    private const int CodigoGoias = 52;
 
     public static Result<(IReadOnlyList<Populacao> Populacao, IReadOnlyDictionary<int, FontePopulacao> FontePorAno)> Estimar(
         IEnumerable<PontoPopulacao> pontos, int ultimoAno)
@@ -107,7 +104,7 @@ public static class EstimativaPopulacional
         });
 
     private static bool TemTocantins(Dictionary<Estrato, double> estratos) =>
-        estratos.Any(e => e.Key.Uf.CodigoIbge == CodigoTocantins && e.Value > 0);
+        estratos.Any(e => e.Key.Uf == Uf.Tocantins && e.Value > 0);
 
     /// <summary>
     /// Entre uma âncora sem Tocantins (Censo 1980, com o território dentro de Goiás) e uma com Tocantins,
@@ -117,23 +114,21 @@ public static class EstimativaPopulacional
     private static Dictionary<Estrato, double> InterpolarComGoiasHistorico(
         int ano, Dictionary<Estrato, double> inicio, Dictionary<Estrato, double> fim, double t)
     {
-        var goias = Uf.DeCodigoIbge(CodigoGoias).Valor;
         Dictionary<Estrato, double> Unir(Dictionary<Estrato, double> estratos) => estratos
-            .GroupBy(e => e.Key.Uf.CodigoIbge == CodigoTocantins ? e.Key with { Uf = goias } : e.Key)
+            .GroupBy(e => e.Key.Uf == Uf.Tocantins ? e.Key with { Uf = Uf.Goias } : e.Key)
             .ToDictionary(g => g.Key, g => g.Sum(e => e.Value));
 
         var interpolada = Interpolar(Unir(inicio), Unir(fim), t);
-        if (ano < AnoCriacaoTocantins)
+        if (ano < Uf.AnoCriacaoTocantins)
             return interpolada;
 
-        var tocantins = Uf.DeCodigoIbge(CodigoTocantins).Valor;
-        foreach (var (estrato, combinado) in interpolada.Where(e => e.Key.Uf == goias).ToList())
+        foreach (var (estrato, combinado) in interpolada.Where(e => e.Key.Uf == Uf.Goias).ToList())
         {
-            var noTocantins = fim.GetValueOrDefault(estrato with { Uf = tocantins });
+            var noTocantins = fim.GetValueOrDefault(estrato with { Uf = Uf.Tocantins });
             var total = noTocantins + fim.GetValueOrDefault(estrato);
             var proporcao = total > 0 ? noTocantins / total : 0;
             interpolada[estrato] = combinado * (1 - proporcao);
-            interpolada[estrato with { Uf = tocantins }] = combinado * proporcao;
+            interpolada[estrato with { Uf = Uf.Tocantins }] = combinado * proporcao;
         }
 
         return interpolada;
@@ -142,10 +137,9 @@ public static class EstimativaPopulacional
     private static IEnumerable<Populacao> AplicarTocantins(int anoNumero, Dictionary<Estrato, double> estratos)
     {
         var ano = Ano.Criar(anoNumero).Valor;
-        var goias = Uf.DeCodigoIbge(CodigoGoias).Valor;
         return estratos
-            .GroupBy(e => anoNumero < AnoCriacaoTocantins && e.Key.Uf.CodigoIbge == CodigoTocantins
-                ? e.Key with { Uf = goias }
+            .GroupBy(e => anoNumero < Uf.AnoCriacaoTocantins && e.Key.Uf == Uf.Tocantins
+                ? e.Key with { Uf = Uf.Goias }
                 : e.Key)
             .Select(g => new Populacao(ano, g.Key.Uf, g.Key.Sexo, g.Key.FaixaEtaria, (long)Math.Round(g.Sum(e => e.Value))));
     }

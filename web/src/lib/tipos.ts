@@ -16,7 +16,8 @@ export interface Dimensoes {
   faixas: { indice: number; rotulo: string; inicio: number | null; fim: number | null }[];
   sexos: { codigo: number; nome: string }[];
   padrao: { nome: string; pesos: { faixa: number; peso: number }[] };
-  marcos: { ano: number; descricao: string }[];
+  /** Marcos metodológicos; `ufs` vazio vale para todo o país. */
+  marcos: { ano: number; tipo: 'cid' | 'territorio'; rotulo: string; descricao: string; ufs: number[] }[];
 }
 
 /** Colunas de `obitos.parquet`, uma posição por célula do cubo. */

@@ -2,14 +2,17 @@ using System.Collections.Concurrent;
 
 namespace Mortalidade.Etl.Dominio;
 
+/// <param name="FaixasCid9">Faixas por prefixo ("410-414", "4275"); idem <paramref name="FaixasCid10"/>.</param>
+public sealed record DefinicaoGrupo(
+    string Codigo, string Nome, string Capitulo, bool Resto, bool ComparabilidadeReduzida,
+    IReadOnlyList<string> FaixasCid9, IReadOnlyList<string> FaixasCid10);
+
 /// <summary>
-/// Correspondência causa básica → grupo harmonizado, carregada de <c>data/cause_map/grupos.csv</c>.
+/// Correspondência causa básica → grupo harmonizado (definida em <c>data/cause_map/grupos.csv</c>, lida por <c>LeitorMapaCausas</c>).
 /// Faixas casam por prefixo; entre grupos específicos vence a faixa mais longa, e grupos "resto" são o fallback.
 /// </summary>
 public sealed class MapaCausas
 {
-    private static readonly string[] Colunas = ["codigo", "nome", "capitulo", "resto", "cid9", "cid10", "comparabilidade"];
-
     private readonly Dictionary<RevisaoCid, Faixa[]> _faixas;
     private readonly ConcurrentDictionary<CausaBasica, Result<GrupoCausa>> _resolvidas = new();
 
@@ -21,41 +24,28 @@ public sealed class MapaCausas
 
     public IReadOnlyList<GrupoCausa> Grupos { get; }
 
-    public static Result<MapaCausas> Carregar(IEnumerable<string> linhasCsv)
+    /// <summary>Monta o mapa a partir das definições já lidas; valida códigos únicos e faixas "A-B" do mesmo tamanho.</summary>
+    public static Result<MapaCausas> Criar(IReadOnlyList<DefinicaoGrupo> definicoes)
     {
-        using var linhas = linhasCsv.GetEnumerator();
-        if (!linhas.MoveNext() || !linhas.Current.Trim().Split(';').SequenceEqual(Colunas))
-            return Result<MapaCausas>.Falha("mapa.cabecalho_invalido", $"Cabeçalho esperado: {string.Join(';', Colunas)}.");
-
         var grupos = new List<GrupoCausa>();
         var codigos = new HashSet<string>();
         var faixas = new Dictionary<RevisaoCid, List<Faixa>> { [RevisaoCid.Cid9] = [], [RevisaoCid.Cid10] = [] };
-        var numero = 1;
-        while (linhas.MoveNext())
+        foreach (var definicao in definicoes)
         {
-            numero++;
-            if (string.IsNullOrWhiteSpace(linhas.Current))
-                continue;
+            if (!codigos.Add(definicao.Codigo))
+                return Result<MapaCausas>.Falha("mapa.codigo_duplicado", $"Grupo duplicado: {definicao.Codigo}.");
 
-            var campos = linhas.Current.Split(';');
-            if (campos.Length != Colunas.Length || campos[3] is not ("0" or "1") || campos[6] is not ("alta" or "reduzida"))
-                return Result<MapaCausas>.Falha("mapa.linha_invalida", $"Linha {numero} inválida: {linhas.Current}");
-
-            if (!codigos.Add(campos[0]))
-                return Result<MapaCausas>.Falha("mapa.codigo_duplicado", $"Grupo duplicado na linha {numero}: {campos[0]}.");
-
-            var grupo = new GrupoCausa(grupos.Count, campos[0], campos[1], campos[2], campos[6] == "reduzida");
-            var resto = campos[3] == "1";
-            foreach (var (revisao, spec) in new[] { (RevisaoCid.Cid9, campos[4]), (RevisaoCid.Cid10, campos[5]) })
+            var grupo = new GrupoCausa(grupos.Count, definicao.Codigo, definicao.Nome, definicao.Capitulo, definicao.ComparabilidadeReduzida);
+            foreach (var (revisao, partes) in new[] { (RevisaoCid.Cid9, definicao.FaixasCid9), (RevisaoCid.Cid10, definicao.FaixasCid10) })
             {
-                foreach (var parte in spec.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                foreach (var parte in partes)
                 {
                     var limites = parte.Split('-');
                     var (inicio, fim) = (limites[0], limites.Length > 1 ? limites[1] : limites[0]);
                     if (limites.Length > 2 || inicio.Length != fim.Length || string.CompareOrdinal(inicio, fim) > 0)
-                        return Result<MapaCausas>.Falha("mapa.faixa_invalida", $"Faixa inválida na linha {numero}: {parte}.");
+                        return Result<MapaCausas>.Falha("mapa.faixa_invalida", $"Faixa inválida no grupo {definicao.Codigo}: {parte}.");
 
-                    faixas[revisao].Add(new Faixa(grupo, inicio, fim, resto));
+                    faixas[revisao].Add(new Faixa(grupo, inicio, fim, definicao.Resto));
                 }
             }
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { formatarCompacto } from '../lib/formato';
-  import { base, Plot } from '../lib/plot';
+  import { aoClicar, base, Plot } from '../lib/plot';
   import { tema } from '../lib/tema.svelte';
   import type { GeoJSON } from '../lib/tipos';
   import Grafico from './Grafico.svelte';
@@ -52,11 +52,7 @@
         Plot.tip(geo.features, Plot.pointer(Plot.centroid({ title: rotulo })))
       ]
     });
-    const svg = figura.querySelector('svg:last-of-type') ?? figura;
-    svg.addEventListener('click', () => {
-      const apontada = (figura as unknown as { value?: GeoJSON['features'][number] }).value;
-      if (apontada) aoSelecionar(apontada.properties.uf);
-    });
+    aoClicar<GeoJSON['features'][number]>(figura, f => aoSelecionar(f.properties.uf));
     return figura;
   }
 </script>

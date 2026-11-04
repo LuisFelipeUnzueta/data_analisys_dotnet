@@ -37,7 +37,7 @@ public class PopulacaoRealTests
     {
         foreach (var ano in Enumerable.Range(1979, UltimoAno - 1978))
         {
-            var ufs = ano < EstimativaPopulacional.AnoCriacaoTocantins ? 26 : 27;
+            var ufs = ano < Uf.AnoCriacaoTocantins ? 26 : 27;
             Assert.Equal(ufs * 2 * 17, Serie.Count(p => p.Ano.Valor == ano));
         }
     }

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { agregar } from './agregacao';
-import { avisosDoRecorte } from './avisos';
+import { avisosDoRecorte, marcosDoRecorte } from './avisos';
 import { COLUNAS_OBITOS, COLUNAS_POPULACAO, lerParquet } from './dados';
 import { rotuloFaixas } from './formato';
 import { novoAcumulador, pesosDoIntervalo, taxaBruta, taxaPadronizada, valorMetrica } from './taxas';
@@ -27,7 +27,10 @@ const dimensoes: Dimensoes = {
   faixas: Array.from({ length: FAIXAS }, (_, i) => ({ indice: i, rotulo: String(i), inicio: i * 5, fim: i * 5 + 4 })),
   sexos: [],
   padrao: { nome: 'teste', pesos: Array.from({ length: 17 }, (_, faixa) => ({ faixa, peso: 1 })) },
-  marcos: []
+  marcos: [
+    { ano: 1996, tipo: 'cid', rotulo: 'CID-9 → CID-10', descricao: '', ufs: [] },
+    { ano: 1996, tipo: 'territorio', rotulo: 'teste', descricao: '', ufs: [35, 12] }
+  ]
 };
 
 /** Cubo mínimo: [ano, uf, grupo, sexo, faixa, óbitos] com ajustados = óbitos. */
@@ -149,6 +152,12 @@ describe('avisos', () => {
   it('marca comparabilidade reduzida quando o período cruza 1996', () => {
     expect(avisosDoRecorte(filtro({ grupo: 1 }), dimensoes)[0]).toContain('Comparabilidade reduzida');
     expect(avisosDoRecorte(filtro({ anoInicio: 1996, grupo: 1 }), dimensoes)).toEqual([]);
+  });
+
+  it('marco territorial só vale quando o local tem parte das UFs envolvidas', () => {
+    expect(marcosDoRecorte(filtro(), dimensoes).map(m => m.tipo)).toEqual(['cid']);
+    expect(marcosDoRecorte(filtro({ local: { tipo: 'uf', codigo: 35 } }), dimensoes).map(m => m.tipo)).toEqual(['cid', 'territorio']);
+    expect(marcosDoRecorte(filtro({ local: { tipo: 'regiao', codigo: 1 } }), dimensoes).map(m => m.tipo)).toEqual(['cid', 'territorio']);
   });
 });
 

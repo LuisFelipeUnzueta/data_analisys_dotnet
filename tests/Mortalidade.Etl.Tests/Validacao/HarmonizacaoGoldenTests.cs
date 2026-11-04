@@ -1,3 +1,4 @@
+using Mortalidade.Etl.Leitura;
 using Mortalidade.Etl.Dominio;
 using Mortalidade.Etl.Validacao;
 
@@ -10,7 +11,7 @@ namespace Mortalidade.Etl.Tests.Validacao;
 public class HarmonizacaoGoldenTests
 {
     private static readonly MapaCausas Mapa =
-        MapaCausas.Carregar(File.ReadLines(Caminho("Dados", "grupos.csv"))).Valor;
+        LeitorMapaCausas.Ler(File.ReadLines(Caminho("Dados", "grupos.csv"))).Valor;
 
     private static string Caminho(params string[] partes) =>
         Path.Combine([AppContext.BaseDirectory, .. partes]);
@@ -36,9 +37,9 @@ public class HarmonizacaoGoldenTests
     }
 
     [Fact]
-    public void TodoCodigoObservadoEm1979a2023_TemExatamenteUmGrupo()
+    public void TodoCodigoObservado_TemExatamenteUmGrupo()
     {
-        var falhas = Linhas("codigos_observados_1979_2023.csv")
+        var falhas = Linhas("codigos_observados.csv")
             .Select(c => Mapa.Resolver(new CausaBasica((RevisaoCid)int.Parse(c[0]), c[1])))
             .Where(r => r.IsFailure)
             .Select(r => r.Erro!.Mensagem)

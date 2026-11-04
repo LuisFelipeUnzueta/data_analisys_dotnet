@@ -1,3 +1,4 @@
+using Mortalidade.Etl.Leitura;
 using Mortalidade.Etl.Dominio;
 
 namespace Mortalidade.Etl.Tests.Dominio;
@@ -7,7 +8,7 @@ public class MapaCausasTests
     private const string Cabecalho = "codigo;nome;capitulo;resto;cid9;cid10;comparabilidade";
 
     private static MapaCausas Mapa(params string[] linhas) =>
-        MapaCausas.Carregar([Cabecalho, .. linhas]).Valor;
+        LeitorMapaCausas.Ler([Cabecalho, .. linhas]).Valor;
 
     private static string Resolver(MapaCausas mapa, RevisaoCid revisao, string codigo)
     {
@@ -84,7 +85,7 @@ public class MapaCausasTests
     [InlineData(Cabecalho + "\nx;X;c;0;001;A00;alta\nx;Y;c;0;002;A01;alta", "mapa.codigo_duplicado")]
     public void Carregar_ConteudoInvalido_RetornaFalha(string conteudo, string erro)
     {
-        var resultado = MapaCausas.Carregar(conteudo.Split('\n'));
+        var resultado = LeitorMapaCausas.Ler(conteudo.Split('\n'));
 
         Assert.True(resultado.IsFailure);
         Assert.Equal(erro, resultado.Erro!.Codigo);
