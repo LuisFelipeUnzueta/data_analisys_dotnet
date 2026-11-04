@@ -32,7 +32,9 @@ export function avisosDoRecorte(filtro: Filtro, dimensoes: Dimensoes): string[] 
   }
 
   if (filtro.metrica === 'padronizada' && filtro.faixa !== null) {
-    avisos.push('Com uma faixa etária selecionada, a taxa padronizada equivale à taxa específica da faixa.');
+    avisos.push(filtro.faixa.inicio === filtro.faixa.fim
+      ? 'Com uma só faixa etária, a taxa padronizada equivale à taxa específica da faixa.'
+      : 'A taxa padronizada usa os pesos da OMS só das faixas selecionadas; óbitos com idade ignorada ficam de fora do recorte etário.');
   }
 
   return avisos;

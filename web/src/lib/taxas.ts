@@ -1,4 +1,4 @@
-import { FAIXA_IGNORADA, NUM_FAIXAS, type Dimensoes, type Metrica } from './tipos';
+import { FAIXA_IGNORADA, NUM_FAIXAS, type Dimensoes, type Filtro, type Metrica } from './tipos';
 
 export const BASE_TAXA = 100_000;
 
@@ -45,11 +45,15 @@ export function taxaPadronizada(acc: Acumulador, pesos: Float64Array): number | 
 }
 
 /**
- * Valor da métrica para um recorte. Com uma faixa etária filtrada, a padronização não se aplica:
- * a "taxa padronizada" vira a taxa específica da faixa (igual à bruta do recorte).
+ * Pesos só das faixas do intervalo: a taxa padronizada de um recorte etário (por exemplo 20 a 59 anos) usa o padrão
+ * restrito a essas faixas. Com uma só faixa, ela é igual à taxa específica.
  */
-export function valorMetrica(acc: Acumulador, metrica: Metrica, pesos: Float64Array, faixaFiltrada: boolean): number | null {
+export function pesosDoIntervalo(pesos: Float64Array, faixa: Filtro['faixa']): Float64Array {
+  if (faixa === null) return pesos;
+  return pesos.map((peso, f) => (f >= faixa.inicio && f <= faixa.fim ? peso : 0));
+}
+
+export function valorMetrica(acc: Acumulador, metrica: Metrica, pesos: Float64Array): number | null {
   if (metrica === 'obitos') return acc.obitos;
-  if (metrica === 'bruta' || faixaFiltrada) return taxaBruta(acc);
-  return taxaPadronizada(acc, pesos);
+  return metrica === 'bruta' ? taxaBruta(acc) : taxaPadronizada(acc, pesos);
 }

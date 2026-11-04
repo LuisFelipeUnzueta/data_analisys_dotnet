@@ -7,7 +7,7 @@
   import { agregar } from './lib/agregacao';
   import { avisosDoRecorte } from './lib/avisos';
   import { carregarBase } from './lib/dados';
-  import { formatarCompacto, formatarInteiro, formatarPercentual, formatarValor, rotuloMetrica } from './lib/formato';
+  import { formatarCompacto, formatarInteiro, formatarPercentual, formatarValor, rotuloFaixas, rotuloMetrica } from './lib/formato';
   import { pesosDoPadrao } from './lib/taxas';
   import type { Base, Filtro } from './lib/tipos';
   import { criarVistas } from './lib/vistas';
@@ -45,6 +45,7 @@
     if (!base || local.tipo === 'brasil') return 'Brasil';
     return local.tipo === 'uf' ? siglas.get(local.codigo)! : base.dimensoes.regioes.find(r => r.codigo === local.codigo)!.nome;
   });
+  const nomeIdade = $derived(base ? rotuloFaixas(base.dimensoes.faixas, filtro.faixa) : '');
   const nomeCausa = $derived(filtro.grupo === null || !base ? 'todas as causas' : base.dimensoes.grupos[filtro.grupo]!.nome);
   const marcos = $derived(
     (base?.dimensoes.marcos ?? [])
@@ -71,7 +72,7 @@
     </section>
 
     <p class="resumo">
-      <strong>{formatarCompacto(vistas.totalObitos)}</strong> óbitos por {nomeCausa} em {nomeLocal},
+      <strong>{formatarCompacto(vistas.totalObitos)}</strong> óbitos por {nomeCausa} em {nomeLocal}, {nomeIdade},
       {filtro.anoInicio}–{filtro.anoFim}.
     </p>
 
@@ -83,14 +84,14 @@
 
     <section class="painel">
       <h2>{metrica} por ano</h2>
-      <p class="contexto">{nomeCausa} · {nomeLocal}</p>
+      <p class="contexto">{nomeCausa} · {nomeLocal} · {nomeIdade}</p>
       <LinhaTempo pontos={vistas.serie} {formatar} {marcos} rotuloColuna={metrica} />
     </section>
 
     <div class="grade">
       <section class="painel">
         <h2>{metrica} por UF</h2>
-        <p class="contexto">{filtro.anoInicio}–{filtro.anoFim} · clique numa UF para selecioná-la</p>
+        <p class="contexto">{nomeIdade} · {filtro.anoInicio}–{filtro.anoFim} · clique numa UF para selecioná-la</p>
         <Mapa
           geo={base.geo}
           valores={vistas.porUf}
@@ -121,7 +122,7 @@
     <div class="grade">
       <section class="painel">
         <h2>Principais causas</h2>
-        <p class="contexto">{metrica} · {nomeLocal} · {filtro.anoInicio}–{filtro.anoFim} · clique para selecionar</p>
+        <p class="contexto">{metrica} · {nomeLocal} · {nomeIdade} · {filtro.anoInicio}–{filtro.anoFim} · clique para selecionar</p>
         <Ranking
           itens={vistas.ranking}
           selecionado={filtro.grupo}

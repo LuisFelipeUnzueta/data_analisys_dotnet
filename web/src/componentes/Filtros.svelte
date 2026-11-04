@@ -24,6 +24,14 @@
     return tipo === 'regiao' || tipo === 'uf' ? { tipo, codigo: Number(codigo) } : { tipo: 'brasil' };
   }
   const opcional = (valor: string) => (valor === '' ? null : Number(valor));
+
+  // Intervalo de faixas; o intervalo completo vira null, que também inclui os óbitos de idade ignorada.
+  const ultimaFaixa = $derived(faixas.at(-1)!.indice);
+  const faixaInicio = $derived(filtro.faixa?.inicio ?? 0);
+  const faixaFim = $derived(filtro.faixa?.fim ?? ultimaFaixa);
+  function definirFaixa(inicio: number, fim: number) {
+    filtro.faixa = inicio === 0 && fim === ultimaFaixa ? null : { inicio, fim };
+  }
 </script>
 
 <form class="filtros" onsubmit={e => e.preventDefault()}>
@@ -70,10 +78,15 @@
   </label>
 
   <label>
-    Faixa etária
-    <select value={filtro.faixa ?? ''} onchange={e => (filtro.faixa = opcional(e.currentTarget.value))}>
-      <option value="">Todas</option>
-      {#each faixas as faixa (faixa.indice)}<option value={faixa.indice}>{faixa.rotulo}</option>{/each}
+    Idade de
+    <select value={faixaInicio} onchange={e => definirFaixa(Number(e.currentTarget.value), faixaFim)}>
+      {#each faixas.filter(f => f.indice <= faixaFim) as faixa (faixa.indice)}<option value={faixa.indice}>{faixa.rotulo}</option>{/each}
+    </select>
+  </label>
+  <label>
+    Até
+    <select value={faixaFim} onchange={e => definirFaixa(faixaInicio, Number(e.currentTarget.value))}>
+      {#each faixas.filter(f => f.indice >= faixaInicio) as faixa (faixa.indice)}<option value={faixa.indice}>{faixa.rotulo}</option>{/each}
     </select>
   </label>
 

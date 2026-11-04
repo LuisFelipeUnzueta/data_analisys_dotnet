@@ -1,11 +1,11 @@
 import type { Agregado } from './agregacao';
-import { taxaBruta, valorMetrica } from './taxas';
+import { pesosDoIntervalo, taxaBruta, valorMetrica } from './taxas';
 import { FAIXA_IGNORADA, SEXO_FEMININO, SEXO_MASCULINO, type Dimensoes, type Filtro } from './tipos';
 
 /** Transforma o agregado nos dados de cada visualização, já com a métrica do filtro aplicada. */
 export function criarVistas(agregado: Agregado, filtro: Filtro, dimensoes: Dimensoes, pesos: Float64Array) {
-  const faixaFiltrada = filtro.faixa !== null;
-  const valor = (acc: Parameters<typeof valorMetrica>[0]) => valorMetrica(acc, filtro.metrica, pesos, faixaFiltrada);
+  const pesosRecorte = pesosDoIntervalo(pesos, filtro.faixa);
+  const valor = (acc: Parameters<typeof valorMetrica>[0]) => valorMetrica(acc, filtro.metrica, pesosRecorte);
   // Na pirâmide cada barra é uma faixa: taxas viram a taxa específica da faixa.
   const valorFaixa = (acc: Parameters<typeof valorMetrica>[0]) => (filtro.metrica === 'obitos' ? acc.obitos : taxaBruta(acc));
   const anosDoPeriodo = dimensoes.anos.filter(a => a.ano >= filtro.anoInicio && a.ano <= filtro.anoFim);

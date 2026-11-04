@@ -56,7 +56,8 @@ export interface Filtro {
   grupo: number | null;
   /** 1 masculino, 2 feminino; null = ambos (inclui sexo ignorado). */
   sexo: 1 | 2 | null;
-  faixa: number | null;
+  /** Intervalo de faixas (índices, inclusivo); null = todas, inclusive idade ignorada. */
+  faixa: { inicio: number; fim: number } | null;
   metrica: Metrica;
 }
 

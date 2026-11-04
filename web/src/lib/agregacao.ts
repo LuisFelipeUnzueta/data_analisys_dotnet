@@ -60,7 +60,7 @@ export function agregar(base: Base, filtro: Filtro, indiceMalDefinidas: number):
 
     const okUf = ufs[uf] === 1;
     const okSexo = sexo === null || s === sexo;
-    const okFaixa = faixa === null || f === faixa;
+    const okFaixa = faixa === null || (f >= faixa.inicio && f <= faixa.fim);
     const okGrupo = grupo === null || g === grupo;
     const noPeriodo = ano >= anoInicio && ano <= anoFim;
 
@@ -84,7 +84,7 @@ export function agregar(base: Base, filtro: Filtro, indiceMalDefinidas: number):
     const f = p.faixa[i]!;
     const habitantes = p.populacao[i]!;
     const okSexo = sexo === null || s === sexo;
-    const okFaixa = faixa === null || f === faixa;
+    const okFaixa = faixa === null || (f >= faixa.inicio && f <= faixa.fim);
     const noPeriodo = ano >= anoInicio && ano <= anoFim;
 
     if (ufs[uf] === 1 && okSexo && okFaixa) {

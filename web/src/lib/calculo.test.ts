@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { agregar } from './agregacao';
 import { avisosDoRecorte } from './avisos';
 import { COLUNAS_OBITOS, COLUNAS_POPULACAO, lerParquet } from './dados';
-import { novoAcumulador, taxaBruta, taxaPadronizada, valorMetrica } from './taxas';
+import { rotuloFaixas } from './formato';
+import { novoAcumulador, pesosDoIntervalo, taxaBruta, taxaPadronizada, valorMetrica } from './taxas';
 import type { Base, Dimensoes, Filtro, TabelaObitos, TabelaPopulacao } from './tipos';
 import { criarVistas } from './vistas';
 
@@ -66,11 +67,33 @@ describe('taxas', () => {
     expect(taxaPadronizada(acc, pesosUniformes())).toBeNull();
   });
 
-  it('com faixa filtrada a padronizada vira a taxa específica', () => {
+  it('com uma só faixa a padronizada é a taxa específica', () => {
     const acc = novoAcumulador();
     acc.obitos = 3;
+    acc.ajustados[4] = 3;
     acc.populacao[4] = 1000;
-    expect(valorMetrica(acc, 'padronizada', pesosUniformes(), true)).toBeCloseTo(300, 6);
+    const pesos = pesosDoIntervalo(pesosUniformes(), { inicio: 4, fim: 4 });
+    expect(valorMetrica(acc, 'padronizada', pesos)).toBeCloseTo(300, 6);
+  });
+
+  it('com um intervalo a padronizada usa só os pesos das faixas do intervalo', () => {
+    const acc = novoAcumulador();
+    acc.ajustados[4] = 1;
+    acc.populacao[4] = 1000;
+    acc.ajustados[5] = 4;
+    acc.populacao[5] = 1000;
+    // Pesos iguais: média de 100 e 400 por 100 mil.
+    const pesos = pesosDoIntervalo(pesosUniformes(), { inicio: 4, fim: 5 });
+    expect(valorMetrica(acc, 'padronizada', pesos)).toBeCloseTo(250, 6);
+    expect(taxaPadronizada(acc, pesosUniformes())).toBeNull();
+  });
+
+  it('rótulo do intervalo de faixas', () => {
+    const faixas = [...Array.from({ length: 16 }, (_, i) => ({ indice: i, rotulo: '', inicio: i * 5, fim: i * 5 + 4 })),
+      { indice: 16, rotulo: '80+', inicio: 80, fim: null }];
+    expect(rotuloFaixas(faixas, null)).toBe('todas as idades');
+    expect(rotuloFaixas(faixas, { inicio: 4, fim: 11 })).toBe('20 a 59 anos');
+    expect(rotuloFaixas(faixas, { inicio: 12, fim: 16 })).toBe('60 anos ou mais');
   });
 });
 
@@ -107,6 +130,11 @@ describe('agregação', () => {
     const a = agregar(cubo, filtro(), 1);
     expect(a.piramide[2]![17]!.obitos).toBe(2);
     expect(a.piramide[1]![10]!.obitos).toBe(6);
+  });
+
+  it('intervalo de faixas soma só as faixas do intervalo e exclui idade ignorada', () => {
+    const a = agregar(cubo, filtro({ faixa: { inicio: 0, fim: 16 } }), 1);
+    expect(a.serie[1]!.obitos).toBe(6);
   });
 
   it('filtro de sexo exclui óbitos de outro sexo e de sexo ignorado', () => {
