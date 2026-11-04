@@ -70,8 +70,8 @@
     const c = tema.cores;
     const dados = vistas.excesso!;
     const esperado = [...dados.ajusteBase, ...dados.porAno].map(a => ({ ano: a.ano, esperado: a.esperado }));
-    const ultimoBase = dados.ajusteBase.at(-1)?.ano ?? 2019;
-    const primeiroBase = dados.ajusteBase[0]?.ano ?? 2015;
+    const primeiroBase = dados.anosBase[0]!;
+    const ultimoBase = dados.anosBase.at(-1)!;
     return Plot.plot({
       ...base(largura, altura),
       x: { label: null, tickFormat: (a: number) => String(a), ticks: Math.min(esperado.length, Math.floor(largura / 60)) },
@@ -169,9 +169,10 @@
   <details open>
     <summary>Excesso de óbitos</summary>
     <p>
-      O excesso compara as mortes que aconteceram com as que seriam esperadas se a tendência de 2015 a 2019 tivesse
-      continuado. O esperado é calculado por faixa etária, com a população de cada ano, então já desconta o
-      crescimento e o envelhecimento da população. A diferença é o excesso.
+      O excesso compara as mortes que aconteceram depois do período escolhido com as que seriam esperadas se a
+      tendência desse período tivesse continuado. O esperado é calculado por faixa etária, com a população de cada
+      ano, então já desconta o crescimento e o envelhecimento da população. A diferença é o excesso. Para medir o
+      efeito da covid, escolha como período os anos anteriores a 2020 (por exemplo, 2015 até 2019).
     </p>
     {#if vistas.excesso && maiorExcesso}
       <Grafico desenhar={desenharExcesso} altura={200} />
@@ -183,7 +184,10 @@
         ({formatarPercentual((100 * (maiorExcesso.observado - maiorExcesso.esperado)) / maiorExcesso.esperado)}).
       </p>
     {:else}
-      <p class="nota">O recorte não tem óbitos suficientes nos anos-base para estimar o esperado.</p>
+      <p class="nota">
+        Sem cálculo para este filtro: o período escolhido precisa ter pelo menos 3 anos, terminar antes do último ano
+        disponível e ter óbitos no recorte.
+      </p>
     {/if}
     <p class="nota">
       O intervalo do excesso inclui a incerteza da projeção e a variação natural entre anos (modelo quasi-Poisson).

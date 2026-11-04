@@ -6,8 +6,8 @@ import { FAIXA_IGNORADA, SEXO_FEMININO, SEXO_MASCULINO, type Dimensoes, type Fil
 /** Ponto de uma série anual; `inferior`/`superior` formam o IC95% (iguais ao valor para contagens). */
 export type PontoAnual = { ano: number; valor: number | null } & Partial<Omit<Estimativa, 'valor'>>;
 
-/** Anos-base da linha de referência do excesso de mortalidade (antes da covid). */
-export const ANOS_BASE_EXCESSO = [2015, 2016, 2017, 2018, 2019];
+/** Mínimo de anos-base para ajustar a tendência do esperado (inclinação e dispersão). */
+export const MINIMO_ANOS_BASE = 3;
 
 /** Transforma o agregado nos dados de cada visualização, já com a métrica do filtro aplicada. */
 export function criarVistas(agregado: Agregado, filtro: Filtro, dimensoes: Dimensoes, pesos: Float64Array) {
@@ -52,20 +52,24 @@ export function criarVistas(agregado: Agregado, filtro: Filtro, dimensoes: Dimen
     .sort((a, b) => b.valor - a.valor)
     .slice(0, 10);
 
-  // O excesso ignora o filtro de período: compara 2020 em diante com a tendência de 2015–2019 do mesmo recorte.
-  const anosAlvo = dimensoes.anos.map(a => a.ano).filter(ano => ano > ANOS_BASE_EXCESSO.at(-1)!);
-  const porAnoExcesso = anosAlvo.length > 0 ? excesso(doAno, ANOS_BASE_EXCESSO, anosAlvo) : null;
-  const excessoPandemia = porAnoExcesso && {
-    porAno: porAnoExcesso,
-    observados: [...ANOS_BASE_EXCESSO, ...anosAlvo].map(ano => ({ ano, obitos: doAno(ano)!.obitos })),
-    // Ajuste do próprio modelo nos anos-base, para a explicação mostrar a reta que é projetada para frente.
-    ajusteBase: excesso(doAno, ANOS_BASE_EXCESSO, ANOS_BASE_EXCESSO) ?? [],
-    total: somarExcessos(porAnoExcesso)
-  };
+  // O período escolhido é a base do esperado; o excesso é medido nos anos posteriores ao fim do período.
+  const anosBase = anosDoPeriodo.map(a => a.ano);
+  const anosAlvo = dimensoes.anos.map(a => a.ano).filter(ano => ano > filtro.anoFim);
+  const porAnoExcesso = anosBase.length >= MINIMO_ANOS_BASE && anosAlvo.length > 0 ? excesso(doAno, anosBase, anosAlvo) : null;
+  const excessoDoPeriodo = porAnoExcesso && porAnoExcesso.some(a => a.esperado > 0)
+    ? {
+        anosBase,
+        porAno: porAnoExcesso,
+        observados: [...anosBase, ...anosAlvo].map(ano => ({ ano, obitos: doAno(ano)!.obitos })),
+        // Ajuste do próprio modelo nos anos-base, para mostrar a reta que é projetada para frente.
+        ajusteBase: excesso(doAno, anosBase, anosBase) ?? [],
+        total: somarExcessos(porAnoExcesso)
+      }
+    : null;
 
   const totalObitos = anosDoPeriodo.reduce((soma, { ano }) => soma + doAno(ano)!.obitos, 0);
 
-  return { serie, tendencia: tendenciaDoPeriodo, qualidade, porUf, piramide, idadeIgnoradaNaPiramide, ranking, excesso: excessoPandemia, totalObitos };
+  return { serie, tendencia: tendenciaDoPeriodo, qualidade, porUf, piramide, idadeIgnoradaNaPiramide, ranking, excesso: excessoDoPeriodo, totalObitos };
 }
 
 export type Vistas = ReturnType<typeof criarVistas>;

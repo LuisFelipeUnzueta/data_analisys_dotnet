@@ -14,7 +14,7 @@
   import { pesosDoPadrao } from './lib/taxas';
   import type { Base, Filtro } from './lib/tipos';
   import { DESCRICOES } from './lib/metricas';
-  import { criarVistas } from './lib/vistas';
+  import { criarVistas, MINIMO_ANOS_BASE } from './lib/vistas';
 
   let base = $state.raw<Base | null>(null);
   let erro = $state<string | null>(null);
@@ -104,17 +104,23 @@
       <ComoLerMetricas dimensoes={base.dimensoes} selecionada={filtro.metrica} />
     </section>
 
-    {#if vistas.excesso}
-      <section class="painel">
-        <h2>Excesso de óbitos desde {vistas.excesso.porAno[0]!.ano}</h2>
+    <section class="painel">
+      <h2>Excesso de óbitos{vistas.excesso ? ` após ${filtro.anoFim}` : ""}</h2>
+      {#if vistas.excesso}
         <p class="contexto">
-          {nomeCausa} · {nomeLocal} · {nomeIdade} · esperado pela tendência de 2015–2019 de cada faixa etária,
-          com a população de cada ano (regressão de Poisson com sobredispersão) ·
+          {nomeCausa} · {nomeLocal} · {nomeIdade} · esperado pela tendência de {filtro.anoInicio}–{filtro.anoFim} (o período
+          escolhido) em cada faixa etária, com a população de cada ano (regressão de Poisson com sobredispersão) ·
           <a href="#como-ler-estatisticas">como ler</a>
         </p>
         <Excesso dados={vistas.excesso} />
-      </section>
-    {/if}
+      {:else}
+        <p class="contexto">
+          O período escolhido é a base do esperado, e o excesso é medido nos anos seguintes. Para calculá-lo, escolha um
+          período com pelo menos {MINIMO_ANOS_BASE} anos que termine antes de {base.dimensoes.anos.at(-1)!.ano}
+          (por exemplo, 2015 até 2019 para medir o excesso da covid).
+        </p>
+      {/if}
+    </section>
 
     <section class="painel" id="como-ler-estatisticas">
       <ComoLerEstatisticas {vistas} metrica={filtro.metrica} recorte="{nomeCausa} · {nomeLocal} · {nomeIdade}" />

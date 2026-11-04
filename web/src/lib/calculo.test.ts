@@ -148,6 +148,15 @@ describe('agregação', () => {
   });
 });
 
+describe('excesso pelo período escolhido', () => {
+  it('não calcula sem anos depois do período nem com menos de 3 anos-base', () => {
+    const cubo = base([[1995, 35, 0, 1, 10, 10], [1996, 35, 0, 1, 10, 12]], [[1995, 35, 1, 10, 1000], [1996, 35, 1, 10, 1000]]);
+    const vistas = (f: Partial<Filtro>) => criarVistas(agregar(cubo, filtro(f), 1), filtro(f), dimensoes, pesosUniformes());
+    expect(vistas({ anoInicio: 1995, anoFim: 1996 }).excesso).toBeNull();
+    expect(vistas({ anoInicio: 1995, anoFim: 1995 }).excesso).toBeNull();
+  });
+});
+
 describe('avisos', () => {
   it('marca comparabilidade reduzida quando o período cruza 1996', () => {
     expect(avisosDoRecorte(filtro({ grupo: 1 }), dimensoes)[0]).toContain('Comparabilidade reduzida');

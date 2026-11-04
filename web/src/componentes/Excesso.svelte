@@ -6,10 +6,10 @@
   import Grafico from './Grafico.svelte';
   import Tabela from './Tabela.svelte';
 
-  // Óbitos observados x esperados pela tendência pré-pandemia, com o IC 95% do esperado, e o excesso por ano.
+  // Óbitos observados x esperados pela tendência do período escolhido, com o IC 95% do esperado, e o excesso por ano.
   let { dados }: { dados: NonNullable<Vistas['excesso']> } = $props();
 
-  const SERIES = ['Observados', 'Esperados (tendência 2015–2019)'];
+  const SERIES = $derived(['Observados', `Esperados (tendência ${dados.anosBase[0]}–${dados.anosBase.at(-1)})`]);
   const sinal = (v: number) => `${v > 0 ? '+' : ''}${formatarInteiro(Math.round(v))}`;
   const margem = (a: (typeof dados.porAno)[number]) => a.superior - (a.observado - a.esperado);
 
