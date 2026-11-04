@@ -73,7 +73,88 @@ data/          tabela de causas, gabarito do Tabnet, população-fonte e pesos d
 - **Sem servidor e sem interfaces especulativas.** O ETL lê arquivos locais e grava num diretório; download e publicação ficam nos workflows. Kafka, filas, CQRS e microsserviços ficaram de fora de propósito: os dados mudam no máximo uma vez por mês e cabem em arquivos estáticos.
 - **Regra como dado.** A correspondência de causas, os pesos da OMS e o gabarito do Tabnet são CSV versionados, não código. O domínio recebe valores já tipados; interpretar arquivo é papel de `Leitura`.
 - **Uma regra, um lugar.** As regras territoriais (Fernando de Noronha como PE, Tocantins separado de Goiás em 1989) ficam em `Uf`, e os marcos metodológicos vão no `dimensoes.json`, de onde a página tira linhas e avisos.
-- **Desempenho.** O laço por óbito não aloca strings nem objetos novos (instâncias de UF, faixa e causa reaproveitadas, chave de agregação por inteiros). Os 45 anos são processados em cerca de 25 s. No navegador, o cubo é lido em cerca de 300 ms e cada mudança de filtro é uma única passada pelas 1,8 milhão de linhas.
+- **Desempenho.** Ver a seção abaixo, com as medições de cada etapa.
+
+## Desempenho
+
+Medido em um notebook Intel Core 7 150U (2 núcleos de desempenho + 8 de eficiência, 12 threads), 32 GB de RAM e SSD NVMe, com .NET 10 e Node 24, sobre os 46 CSV de 1979 a 2024. Os números saem de dois comandos reproduzíveis (ver [Medir](#medir)).
+
+### Do CSV ao navegador
+
+```mermaid
+flowchart LR
+  A["46 CSV do SIM<br/><b>11,2 GB</b>"] -->|"leitura + agregação<br/>13,4 s em paralelo"| B["<b>48,0 milhões</b><br/>de registros"]
+  B -->|"chave de inteiros<br/>por célula"| C["<b>1,86 milhão</b><br/>de células"]
+  C -->|"Parquet + Zstd"| D["<b>4,6 MB</b><br/>cubo + população"]
+  D -->|"leitura no navegador<br/>225 ms"| E["página<br/><b>21 ms</b> por filtro"]
+```
+
+Cada etapa reduz o volume em ordens de grandeza: 11,2 GB de texto viram 4,6 MB, cerca de 2.400 vezes menos, e é isso que permite uma página sem servidor.
+
+### ETL: onde o tempo vai
+
+Tempo de cada etapa em um só núcleo, nos 46 anos:
+
+```mermaid
+xychart-beta
+  title "ETL em um núcleo: segundos por etapa (46 anos)"
+  x-axis ["Leitura do CSV", "Agregação", "Redistribuição da idade", "Conferência com o Tabnet"]
+  y-axis "segundos" 0 --> 30
+  bar [26.7, 3.3, 1.0, 0.02]
+```
+
+- **A leitura domina (86%).** São 11,2 GB de texto. O pacote Sep lê os campos como spans, sem criar uma string por campo; o código de causa vira uma `CausaBasica` reaproveitada por um dicionário consultado pelo próprio span.
+- **A agregação custa só 3,3 s para 48 milhões de registros (cerca de 70 ns por óbito).** A chave é uma tupla de inteiros (UF, índice do grupo, sexo, faixa), incrementada com uma única busca no dicionário, e o grupo de cada código fica em cache.
+- **Redistribuição e conferência são desprezíveis**, porque trabalham sobre as 1,86 milhão de células e não sobre os registros.
+
+```mermaid
+xychart-beta
+  title "Vazão do ETL (milhões de registros por segundo)"
+  x-axis ["1 núcleo", "12 threads (anos em paralelo)"]
+  y-axis "milhões/s" 0 --> 4
+  bar [1.6, 3.6]
+```
+
+Processar os anos em paralelo dá 2,3 vezes mais vazão: de 31,0 s para 13,4 s. O ganho não é de 12 vezes porque o processador de notebook tem só 2 núcleos de desempenho e a leitura de texto fica limitada pela memória. O pico de memória do processo foi de 326 MB, porque cada ano é lido em fluxo e só as células ficam na memória.
+
+### Uma troca medida: tamanho do cubo × tempo de gravação
+
+O perfil mostrou que gravar os Parquet levava mais tempo do que processar os 48 milhões de registros. A causa é o nível de compressão do Zstd:
+
+| Nível do Zstd | Gravação | `obitos.parquet` | ETL completo |
+|---|---|---|---|
+| **Máximo (escolhido)** | 22,0 s | **4,28 MB** | 40 s |
+| Optimal | 1,1 s | 5,57 MB (+30%) | 19 s |
+| Fastest | 1,3 s | 5,73 MB (+34%) | 18 s |
+
+O ETL roda uma vez por mês no GitHub Actions, e o cubo é baixado por cada visitante. Por isso o projeto mantém o nível máximo: 20 s a mais por mês economizam 1,3 MB em cada visita.
+
+### Página: tempo de resposta
+
+```mermaid
+xychart-beta
+  title "Página: milissegundos por operação"
+  x-axis ["Ler o cubo (1 vez)", "Filtro: mediana", "Filtro: pior caso", "Estatísticas do recorte"]
+  y-axis "ms" 0 --> 250
+  bar [225, 21, 38, 0.2]
+```
+
+| Item | Valor |
+|---|---|
+| Download (cubo + população + dimensões) | 4,6 MB, uma vez |
+| JavaScript da página | 509 KB (209 KB comprimido) |
+| Leitura do cubo para arrays tipados | 225 ms |
+| Agregação de um filtro (uma passada pelas 1,8 milhão de linhas) | 21 ms na mediana, 38 ms no pior caso, cerca de 180 milhões de linhas por segundo |
+| Taxas, intervalos de confiança, tendência e excesso do recorte | 0,2 ms |
+
+A página não guarda nenhum resultado pré-calculado por filtro: cada mudança refaz a agregação inteira em menos de 40 ms. O cubo fica em colunas tipadas (`Int16Array`, `Uint8Array`, `Float32Array`), sem um objeto por linha, e uma única passada alimenta as quatro visualizações.
+
+### Medir
+
+```bash
+dotnet run -c Release --project src/Mortalidade.Etl -- perfil data/raw out/perfil.json   # ETL por etapa
+MEDIR=1 npm --prefix web test -- desempenho                                               # página (grava out/perfil-web.json)
+```
 
 ## Qualidade
 

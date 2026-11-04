@@ -10,7 +10,13 @@ namespace Mortalidade.Etl.Cubo;
 /// </summary>
 public static class EscritorParquet
 {
-    private static readonly ParquetOptions Opcoes = new() { CompressionMethod = CompressionMethod.Zstd };
+    // Zstd no nível máximo: grava em ~22 s contra ~1 s no "Optimal", mas o cubo fica 23% menor (4,3 × 5,6 MB).
+    // O ETL roda uma vez por mês; o arquivo é baixado por cada visitante da página. Medido em `dotnet run -- perfil`.
+    private static readonly ParquetOptions Opcoes = new()
+    {
+        CompressionMethod = CompressionMethod.Zstd,
+        CompressionLevel = System.IO.Compression.CompressionLevel.SmallestSize
+    };
 
     private static readonly DataField<short> Ano = new("ano");
     private static readonly DataField<byte> Uf = new("uf");
