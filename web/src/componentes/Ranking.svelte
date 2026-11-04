@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { Estimativa } from '../lib/estatistica';
+  import { formatarIntervalo } from '../lib/formato';
   import { aoClicar, base, Plot } from '../lib/plot';
   import { tema } from '../lib/tema.svelte';
   import Grafico from './Grafico.svelte';
@@ -12,7 +14,7 @@
     rotuloMetrica,
     aoSelecionar
   }: {
-    itens: { indice: number; nome: string; valor: number }[];
+    itens: (Estimativa & { indice: number; nome: string })[];
     selecionado: number | null;
     formatar: (valor: number) => string;
     rotuloMetrica: string;
@@ -35,7 +37,8 @@
         Plot.barX(itens, { x: 'valor', y: 'nome', fill: cor, insetTop: 4, insetBottom: 4 }),
         Plot.text(itens, { x: 'valor', y: 'nome', text: d => formatar(d.valor), dx: 6, textAnchor: 'start', fill: c['text-primary'] }),
         Plot.ruleX([0], { stroke: c.muted }),
-        Plot.tip(itens, Plot.pointerY({ x: 'valor', y: 'nome', title: d => `${d.nome}\n${formatar(d.valor)}` }))
+        Plot.tip(itens, Plot.pointerY({ x: 'valor', y: 'nome', title: d =>
+          [d.nome, formatar(d.valor), formatarIntervalo(d, formatar), d.instavel ? 'estimativa instável' : ''].filter(Boolean).join('\n') }))
       ]
     });
     aoClicar<(typeof itens)[number]>(figura, item => aoSelecionar(item.indice));
@@ -44,4 +47,7 @@
 </script>
 
 <Grafico {desenhar} altura={Math.max(160, itens.length * 38 + 24)} />
-<Tabela colunas={['Causa', rotuloMetrica]} linhas={itens.map(i => [i.nome, formatar(i.valor)])} />
+<Tabela
+  colunas={['Causa', rotuloMetrica, 'IC 95%', 'Instável']}
+  linhas={itens.map(i => [i.nome, formatar(i.valor), formatarIntervalo(i, formatar).replace('IC 95%: ', ''), i.instavel ? 'sim' : ''])}
+/>

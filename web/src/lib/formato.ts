@@ -21,6 +21,18 @@ export function rotuloMetrica(filtro: Pick<Filtro, 'metrica' | 'faixa'>): string
   return umaFaixa ? 'Taxa específica da faixa por 100 mil hab.' : 'Taxa padronizada por idade por 100 mil hab.';
 }
 
+/** "IC 95%: 81,4 a 121,6" para taxas; vazio para contagens (inferior = superior). */
+export function formatarIntervalo(e: { inferior?: number; superior?: number } | null | undefined, formatar: (v: number) => string): string {
+  if (!e || e.inferior === undefined || e.superior === undefined || e.inferior === e.superior) return '';
+  return `IC 95%: ${formatar(e.inferior)} a ${formatar(e.superior)}`;
+}
+
+/** "−1,2% ao ano (IC 95%: −1,4 a −1,0)". */
+export function formatarTendencia(t: { apc: number; inferior: number; superior: number }): string {
+  const sinal = (v: number) => `${v > 0 ? '+' : ''}${decimal.format(v)}`;
+  return `${sinal(t.apc)}% ao ano (IC 95%: ${sinal(t.inferior)} a ${sinal(t.superior)})`;
+}
+
 /** "todas as idades", "20 a 59 anos", "60 anos ou mais". */
 export function rotuloFaixas(faixas: Dimensoes['faixas'], faixa: Filtro['faixa']): string {
   if (faixa === null) return 'todas as idades';

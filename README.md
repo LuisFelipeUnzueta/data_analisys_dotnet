@@ -10,7 +10,9 @@ Página interativa com a mortalidade no Brasil desde 1979, por região e UF de r
 ## O que a página mostra
 
 - **Filtros** de período, local (Brasil, região ou UF), causa, intervalo de idade, sexo e métrica, que valem para todas as visualizações.
-- **Série temporal** de 1979 ao último ano, com a marca da troca da CID-9 pela CID-10 em 1996.
+- **Série temporal** de 1979 ao último ano, com a marca da troca da CID-9 pela CID-10 em 1996, **intervalo de confiança de 95%** e a **tendência** do período (variação percentual anual).
+- **Excesso de óbitos desde 2020**, comparado com o esperado pela tendência de 2015–2019 do mesmo recorte.
+- **Como ler as métricas e as estatísticas:** explicações com exemplos do recorte filtrado, incluindo um simulador de como o intervalo de confiança estreita com mais óbitos, a reta de tendência em escala normal ou logarítmica e os anos-base do excesso.
 - **Mapa por UF** (malha do IBGE); clicar numa UF filtra a página.
 - **Pirâmide etária** do ano final, por sexo.
 - **Ranking das principais causas** no recorte; clicar numa causa filtra a página.
@@ -45,6 +47,9 @@ flowchart LR
 | População | Censo 1980 (SIDRA), Censo 1991 e Contagem 1996 (Tabnet) e estimativas RIPSA 2024 a partir de 2000. 1981–1999 interpolados geometricamente; 1979 extrapolado de 1980–1981. |
 | Taxas | Por 100 mil habitantes. A padronizada usa o método direto com a população-padrão da OMS 2000–2025; num intervalo de idade, só os pesos das faixas do intervalo. |
 | Idade ignorada | Fica visível no cubo e é redistribuída na proporção das faixas conhecidas só para a taxa padronizada. |
+| Intervalos de confiança | Taxa bruta: IC exato de Poisson. Taxa padronizada: método gama de Fay e Feuer (o do SEER). Quantis do qui-quadrado pela aproximação de Wilson–Hilferty. Estimativas com menos de 20 óbitos ou erro relativo acima de 30% são marcadas como instáveis. |
+| Tendência | Variação percentual anual (APC) por regressão log-linear ponderada (pesos 1/Var(ln taxa)), com IC pela variância residual e quantil t. Não é calculada quando a maioria dos anos do recorte é instável. |
+| Excesso de mortalidade | Em cada faixa etária, regressão quasi-Poisson com tendência linear sobre 2015–2019 e a população como offset; esperado projetado para 2020 em diante. O IC soma a variância do esperado (com a dispersão φ) e a da projeção (método delta). |
 
 O levantamento das fontes, do layout dos arquivos e das opções de população-padrão está em [`reports/Fontes e padrões da fase 0.md`](reports/Fontes%20e%20padrões%20da%20fase%200.md).
 
@@ -77,7 +82,7 @@ data/          tabela de causas, gabarito do Tabnet, população-fonte e pesos d
   - os 16 layouts do CSV, a decodificação da idade e as regras de UF;
   - interpolação populacional, padronização e redistribuição de idade;
   - regra de arquitetura (NetArchTest): `Dominio` não depende de leitura, cubo, validação nem Parquet.
-- **13 testes no front**, incluindo a conferência das taxas nacionais calculadas no navegador com as que o ETL grava no `dimensoes.json`, ano a ano, para as duas implementações não divergirem.
+- **23 testes no front**, incluindo a conferência das taxas nacionais calculadas no navegador com as que o ETL grava no `dimensoes.json`, ano a ano, e as funções estatísticas: o IC de Fay e Feuer coincide com o de Poisson numa só faixa, a regressão recupera uma tendência exata e o modelo de excesso recupera um choque conhecido.
 - **Conferência exata com o Tabnet** a cada execução do ETL.
 
 ## Executar localmente

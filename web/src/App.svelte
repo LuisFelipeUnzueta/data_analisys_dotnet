@@ -1,5 +1,7 @@
 <script lang="ts">
+  import ComoLerEstatisticas from './componentes/ComoLerEstatisticas.svelte';
   import ComoLerMetricas from './componentes/ComoLerMetricas.svelte';
+  import Excesso from './componentes/Excesso.svelte';
   import Filtros from './componentes/Filtros.svelte';
   import LinhaTempo from './componentes/LinhaTempo.svelte';
   import Mapa from './componentes/Mapa.svelte';
@@ -8,7 +10,7 @@
   import { agregar } from './lib/agregacao';
   import { avisosDoRecorte, marcosDoRecorte } from './lib/avisos';
   import { carregarBase } from './lib/dados';
-  import { formatarCompacto, formatarInteiro, formatarPercentual, formatarValor, rotuloFaixas, rotuloMetrica } from './lib/formato';
+  import { formatarCompacto, formatarInteiro, formatarPercentual, formatarTendencia, formatarValor, rotuloFaixas, rotuloMetrica } from './lib/formato';
   import { pesosDoPadrao } from './lib/taxas';
   import type { Base, Filtro } from './lib/tipos';
   import { DESCRICOES } from './lib/metricas';
@@ -84,11 +86,38 @@
       <h2>{metrica} por ano</h2>
       <p class="contexto">{nomeCausa} · {nomeLocal} · {nomeIdade}</p>
       <p class="descricao">{DESCRICOES[filtro.metrica].resumo} <a href="#como-ler">Como ler as métricas</a></p>
+      {#if vistas.tendencia}
+        <p class="tendencia">
+          <strong>Tendência {filtro.anoInicio}–{filtro.anoFim}:</strong> {formatarTendencia(vistas.tendencia)}
+          <span class="nota-tendencia">
+            regressão log-linear ponderada; varia conforme o período escolhido ·
+            <a href="#como-ler-estatisticas">o que é a faixa, a tendência e o excesso</a>
+          </span>
+        </p>
+      {:else}
+        <p class="nota-tendencia">Tendência não calculada: a maioria dos anos do recorte tem poucos óbitos para uma estimativa estável.</p>
+      {/if}
       <LinhaTempo pontos={vistas.serie} {formatar} {marcos} rotuloColuna={metrica} />
     </section>
 
     <section class="painel" id="como-ler">
       <ComoLerMetricas dimensoes={base.dimensoes} selecionada={filtro.metrica} />
+    </section>
+
+    {#if vistas.excesso}
+      <section class="painel">
+        <h2>Excesso de óbitos desde {vistas.excesso.porAno[0]!.ano}</h2>
+        <p class="contexto">
+          {nomeCausa} · {nomeLocal} · {nomeIdade} · esperado pela tendência de 2015–2019 de cada faixa etária,
+          com a população de cada ano (regressão de Poisson com sobredispersão) ·
+          <a href="#como-ler-estatisticas">como ler</a>
+        </p>
+        <Excesso dados={vistas.excesso} />
+      </section>
+    {/if}
+
+    <section class="painel" id="como-ler-estatisticas">
+      <ComoLerEstatisticas {vistas} metrica={filtro.metrica} recorte="{nomeCausa} · {nomeLocal} · {nomeIdade}" />
     </section>
 
     <div class="grade">
@@ -190,7 +219,19 @@
     color: var(--text-secondary);
     margin: 0 0 12px;
   }
-  .descricao a {
+  .tendencia {
+    font-size: 14px;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+  }
+  .nota-tendencia {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .descricao a,
+  .nota-tendencia a,
+  .contexto a {
     color: var(--series-1);
   }
   .painel {

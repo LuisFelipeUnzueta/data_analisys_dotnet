@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { formatarCompacto } from '../lib/formato';
+  import type { Estimativa } from '../lib/estatistica';
+  import { formatarCompacto, formatarIntervalo } from '../lib/formato';
   import { aoClicar, base, Plot } from '../lib/plot';
   import { tema } from '../lib/tema.svelte';
   import type { GeoJSON } from '../lib/tipos';
@@ -17,7 +18,7 @@
     aoSelecionar
   }: {
     geo: GeoJSON;
-    valores: Map<number, number | null>;
+    valores: Map<number, Estimativa | null>;
     siglas: Map<number, string>;
     selecionada: number | null;
     formatar: (valor: number) => string;
@@ -25,10 +26,12 @@
     aoSelecionar: (uf: number) => void;
   } = $props();
 
-  const valor = (f: GeoJSON['features'][number]) => valores.get(f.properties.uf) ?? null;
+  const estimativa = (f: GeoJSON['features'][number]) => valores.get(f.properties.uf) ?? null;
+  const valor = (f: GeoJSON['features'][number]) => estimativa(f)?.valor ?? null;
   const rotulo = (f: GeoJSON['features'][number]) => {
-    const v = valor(f);
-    return `${siglas.get(f.properties.uf)}\n${v === null ? 'sem dado' : formatar(v)}`;
+    const e = estimativa(f);
+    const linhas = e ? [formatar(e.valor), formatarIntervalo(e, formatar), e.instavel ? 'estimativa instável' : ''] : ['sem dado'];
+    return [siglas.get(f.properties.uf), ...linhas].filter(Boolean).join('\n');
   };
 
   function desenhar(largura: number, altura: number) {
@@ -59,9 +62,9 @@
 
 <Grafico {desenhar} altura={380} />
 <Tabela
-  colunas={['UF', rotuloMetrica]}
+  colunas={['UF', rotuloMetrica, 'IC 95%', 'Instável']}
   linhas={[...siglas].sort((a, b) => a[1].localeCompare(b[1])).map(([uf, sigla]) => {
-    const v = valores.get(uf) ?? null;
-    return [sigla, v === null ? '—' : formatar(v)];
+    const e = valores.get(uf) ?? null;
+    return e === null ? [sigla, '—', '', ''] : [sigla, formatar(e.valor), formatarIntervalo(e, formatar).replace('IC 95%: ', ''), e.instavel ? 'sim' : ''];
   })}
 />
