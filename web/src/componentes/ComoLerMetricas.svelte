@@ -12,42 +12,31 @@
   const metricas = Object.keys(DESCRICOES) as Metrica[];
 </script>
 
-<details open>
-  <summary><h2>Como ler as métricas</h2></summary>
-  <dl>
-    {#each metricas as metrica (metrica)}
-      <div class:ativa={metrica === selecionada}>
-        <dt>{DESCRICOES[metrica].titulo}</dt>
-        <dd>
-          <strong>{DESCRICOES[metrica].resumo}</strong>
-          {DESCRICOES[metrica].detalhe}
-        </dd>
-      </div>
-    {/each}
-  </dl>
-  <p class="exemplo">
-    <strong>Por que as duas taxas contam histórias diferentes:</strong> no Brasil, a taxa bruta foi de
-    {taxa(primeiro.taxa_bruta_brasil)} em {primeiro.ano} e de {taxa(ultimo.taxa_bruta_brasil)} em {ultimo.ano} por 100 mil
-    habitantes, enquanto a padronizada caiu de {taxa(primeiro.taxa_padronizada_brasil)} para
-    {taxa(ultimo.taxa_padronizada_brasil)}. O risco de morrer em cada idade diminuiu bastante, mas a população envelheceu,
-    e mais pessoas em idades de maior risco seguram a taxa bruta em alta.
-  </p>
-</details>
+<dl>
+  {#each metricas as metrica (metrica)}
+    <div class:ativa={metrica === selecionada}>
+      <dt>{DESCRICOES[metrica].titulo}</dt>
+      <dd>
+        <strong>{DESCRICOES[metrica].resumo}</strong>
+        {DESCRICOES[metrica].detalhe}
+      </dd>
+    </div>
+  {/each}
+</dl>
+<p class="exemplo">
+  <strong>Por que as duas taxas contam histórias diferentes:</strong> no Brasil, a taxa bruta foi de
+  {taxa(primeiro.taxa_bruta_brasil)} em {primeiro.ano} e de {taxa(ultimo.taxa_bruta_brasil)} em {ultimo.ano} por 100 mil
+  habitantes, enquanto a padronizada caiu de {taxa(primeiro.taxa_padronizada_brasil)} para
+  {taxa(ultimo.taxa_padronizada_brasil)}. O risco de morrer em cada idade diminuiu bastante, mas a população envelheceu,
+  e mais pessoas em idades de maior risco seguram a taxa bruta em alta.
+</p>
 
 <style>
-  summary {
-    cursor: pointer;
-  }
-  summary h2 {
-    display: inline;
-    font-size: 16px;
-    color: var(--text-primary);
-  }
   dl {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 12px;
-    margin: 12px 0 0;
+    margin: 0;
   }
   dl > div {
     padding: 12px;
@@ -55,7 +44,7 @@
     border-radius: 6px;
   }
   dl > div.ativa {
-    border-color: var(--series-1);
+    border-color: var(--acento);
     background: var(--selecao);
   }
   dt {

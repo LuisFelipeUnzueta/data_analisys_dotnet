@@ -1,57 +1,65 @@
 <script lang="ts">
+  import BarraRecorte from './componentes/BarraRecorte.svelte';
   import ComoLerEstatisticas from './componentes/ComoLerEstatisticas.svelte';
   import ComoLerMetricas from './componentes/ComoLerMetricas.svelte';
+  import Destaque from './componentes/Destaque.svelte';
   import Excesso from './componentes/Excesso.svelte';
   import Filtros from './componentes/Filtros.svelte';
   import LinhaTempo from './componentes/LinhaTempo.svelte';
   import Mapa from './componentes/Mapa.svelte';
+  import Painel from './componentes/Painel.svelte';
   import Piramide from './componentes/Piramide.svelte';
   import Ranking from './componentes/Ranking.svelte';
+  import Recolhivel from './componentes/Recolhivel.svelte';
   import { agregar } from './lib/agregacao';
   import { avisosDoRecorte, marcosDoRecorte } from './lib/avisos';
   import { carregarBase } from './lib/dados';
-  import { formatarCompacto, formatarInteiro, formatarPercentual, formatarTendencia, formatarValor, rotuloFaixas, rotuloMetrica } from './lib/formato';
+  import { formatarInteiro, formatarPercentual, formatarTendencia, formatarValor, nomeMetrica, rotuloMetrica, rotulosDoRecorte } from './lib/formato';
   import { pesosDoPadrao } from './lib/taxas';
-  import type { Base, Filtro } from './lib/tipos';
+  import type { Base, Filtro, Local } from './lib/tipos';
   import { DESCRICOES } from './lib/metricas';
+  import { filtroDaUrl, filtroParaUrl } from './lib/url';
   import { criarVistas, MINIMO_ANOS_BASE } from './lib/vistas';
+
+  const BASE_COVID = { inicio: 2015, fim: 2019 };
+  const BRASIL: Local = { tipo: 'brasil' };
 
   let base = $state.raw<Base | null>(null);
   let erro = $state<string | null>(null);
-  let filtro = $state<Filtro>({
-    anoInicio: 1979,
-    anoFim: 1979,
-    local: { tipo: 'brasil' },
-    grupo: null,
-    sexo: null,
-    faixa: null,
-    metrica: 'padronizada'
-  });
+  let filtro = $state<Filtro>({ anoInicio: 0, anoFim: 0, local: BRASIL, grupo: null, sexo: null, faixa: null, metrica: 'padronizada' });
 
   carregarBase()
     .then(b => {
-      filtro.anoInicio = b.dimensoes.anos[0]!.ano;
-      filtro.anoFim = b.dimensoes.anos.at(-1)!.ano;
+      filtro = filtroDaUrl(location.search, b.dimensoes);
       base = b;
     })
     .catch(e => (erro = `Não foi possível carregar os dados: ${e}`));
+
+  // A URL acompanha o recorte, para o link da página reabrir a mesma visão.
+  $effect(() => {
+    if (base) history.replaceState(null, '', `${location.pathname}${filtroParaUrl(filtro, base.dimensoes)}${location.hash}`);
+  });
 
   const pesos = $derived(base ? pesosDoPadrao(base.dimensoes) : null);
   const indiceMalDefinidas = $derived(base?.dimensoes.grupos.find(g => g.codigo === 'mal_definidas')?.indice ?? -1);
   const vistas = $derived(base && pesos ? criarVistas(agregar(base, filtro, indiceMalDefinidas), filtro, base.dimensoes, pesos) : null);
   const avisos = $derived(base ? avisosDoRecorte(filtro, base.dimensoes) : []);
   const metrica = $derived(rotuloMetrica(filtro));
+  const nome = $derived(nomeMetrica(filtro));
+  const unidade = $derived(filtro.metrica === 'obitos' ? '' : 'por 100 mil hab. · ');
   const formatar = (v: number) => formatarValor(v, filtro.metrica);
   const siglas = $derived(new Map(base?.dimensoes.ufs.map(u => [u.codigo, u.sigla]) ?? []));
-
-  const nomeLocal = $derived.by(() => {
-    const local = filtro.local;
-    if (!base || local.tipo === 'brasil') return 'Brasil';
-    return local.tipo === 'uf' ? siglas.get(local.codigo)! : base.dimensoes.regioes.find(r => r.codigo === local.codigo)!.nome;
-  });
-  const nomeIdade = $derived(base ? rotuloFaixas(base.dimensoes.faixas, filtro.faixa) : '');
-  const nomeCausa = $derived(filtro.grupo === null || !base ? 'todas as causas' : base.dimensoes.grupos[filtro.grupo]!.nome);
+  const rotulos = $derived(base ? rotulosDoRecorte(filtro, base.dimensoes) : null);
   const marcos = $derived(base ? marcosDoRecorte(filtro, base.dimensoes).map(m => ({ ano: m.ano, texto: m.rotulo })) : []);
+  const periodo = $derived(`${filtro.anoInicio}–${filtro.anoFim}`);
+
+  const alternarUf = (uf: number) => {
+    filtro.local = filtro.local.tipo === 'uf' && filtro.local.codigo === uf ? BRASIL : { tipo: 'uf', codigo: uf };
+  };
+  const usarBaseCovid = () => {
+    filtro.anoInicio = BASE_COVID.inicio;
+    filtro.anoFim = BASE_COVID.fim;
+  };
 </script>
 
 <main>
@@ -64,17 +72,20 @@
 
   {#if erro}
     <p class="erro">{erro}</p>
-  {:else if !base || !vistas}
-    <p class="carregando">Carregando dados…</p>
+  {:else if !base || !vistas || !rotulos}
+    <div class="esqueleto" role="status" aria-label="Carregando dados">
+      <div></div>
+      <div class="alto"></div>
+      <div class="alto"></div>
+    </div>
   {:else}
-    <section class="painel filtros">
-      <Filtros dimensoes={base.dimensoes} bind:filtro />
-    </section>
+    {#if vistas.destaque}<Destaque destaque={vistas.destaque} {metrica} {formatar} />{/if}
 
-    <p class="resumo">
-      <strong>{formatarCompacto(vistas.totalObitos)}</strong> óbitos por {nomeCausa} em {nomeLocal}, {nomeIdade},
-      {filtro.anoInicio}–{filtro.anoFim}.
-    </p>
+    <Painel>
+      <Filtros dimensoes={base.dimensoes} bind:filtro />
+    </Painel>
+
+    <BarraRecorte dimensoes={base.dimensoes} bind:filtro totalObitos={vistas.totalObitos} />
 
     {#if avisos.length > 0}
       <ul class="avisos" aria-label="Avisos metodológicos">
@@ -82,13 +93,11 @@
       </ul>
     {/if}
 
-    <section class="painel">
-      <h2>{metrica} por ano</h2>
-      <p class="contexto">{nomeCausa} · {nomeLocal} · {nomeIdade}</p>
+    <Painel titulo="{nome} por ano" contexto="{unidade}{rotulos.contexto}">
       <p class="descricao">{DESCRICOES[filtro.metrica].resumo} <a href="#como-ler">Como ler as métricas</a></p>
       {#if vistas.tendencia}
         <p class="tendencia">
-          <strong>Tendência {filtro.anoInicio}–{filtro.anoFim}:</strong> {formatarTendencia(vistas.tendencia)}
+          <strong>Tendência {periodo}:</strong> {formatarTendencia(vistas.tendencia)}
           <span class="nota-tendencia">
             regressão log-linear ponderada; varia conforme o período escolhido ·
             <a href="#como-ler-estatisticas">o que é a faixa, a tendência e o excesso</a>
@@ -98,38 +107,27 @@
         <p class="nota-tendencia">Tendência não calculada: a maioria dos anos do recorte tem poucos óbitos para uma estimativa estável.</p>
       {/if}
       <LinhaTempo pontos={vistas.serie} {formatar} {marcos} rotuloColuna={metrica} />
-    </section>
+    </Painel>
 
-    <section class="painel" id="como-ler">
-      <ComoLerMetricas dimensoes={base.dimensoes} selecionada={filtro.metrica} />
-    </section>
-
-    <section class="painel">
-      <h2>Excesso de óbitos{vistas.excesso ? ` após ${filtro.anoFim}` : ""}</h2>
-      {#if vistas.excesso}
-        <p class="contexto">
-          {nomeCausa} · {nomeLocal} · {nomeIdade} · esperado pela tendência de {filtro.anoInicio}–{filtro.anoFim} (o período
-          escolhido) em cada faixa etária, com a população de cada ano (regressão de Poisson com sobredispersão) ·
-          <a href="#como-ler-estatisticas">como ler</a>
-        </p>
+    {#if vistas.excesso}
+      <Painel
+        titulo="Excesso de óbitos após {filtro.anoFim}"
+        contexto="{rotulos.contexto} · esperado pela tendência de {periodo} (o período escolhido) em cada faixa etária, com a população de cada ano (regressão de Poisson com sobredispersão)"
+      >
+        <p class="nota-tendencia"><a href="#como-ler-estatisticas">Como ler o excesso</a></p>
         <Excesso dados={vistas.excesso} />
-      {:else}
-        <p class="contexto">
-          O período escolhido é a base do esperado, e o excesso é medido nos anos seguintes. Para calculá-lo, escolha um
-          período com pelo menos {MINIMO_ANOS_BASE} anos que termine antes de {base.dimensoes.anos.at(-1)!.ano}
-          (por exemplo, 2015 até 2019 para medir o excesso da covid).
-        </p>
-      {/if}
-    </section>
-
-    <section class="painel" id="como-ler-estatisticas">
-      <ComoLerEstatisticas {vistas} metrica={filtro.metrica} recorte="{nomeCausa} · {nomeLocal} · {nomeIdade}" />
-    </section>
+      </Painel>
+    {:else}
+      <Painel
+        titulo="Excesso de óbitos"
+        contexto="O período escolhido é a base do esperado, e o excesso é medido nos anos seguintes. Para calculá-lo, escolha um período com pelo menos {MINIMO_ANOS_BASE} anos que termine antes de {base.dimensoes.anos.at(-1)!.ano}."
+      >
+        <button class="acao" onclick={usarBaseCovid}>Ver o excesso da covid (base {BASE_COVID.inicio}–{BASE_COVID.fim})</button>
+      </Painel>
+    {/if}
 
     <div class="grade">
-      <section class="painel">
-        <h2>{metrica} por UF</h2>
-        <p class="contexto">{nomeIdade} · {filtro.anoInicio}–{filtro.anoFim} · clique numa UF para selecioná-la</p>
+      <Painel titulo="{nome} por UF" contexto="{unidade}{rotulos.idade} · {periodo} · clique numa UF para selecioná-la">
         <Mapa
           geo={base.geo}
           valores={vistas.porUf}
@@ -137,15 +135,14 @@
           selecionada={filtro.local.tipo === 'uf' ? filtro.local.codigo : null}
           {formatar}
           rotuloMetrica={metrica}
-          aoSelecionar={uf => (filtro.local = { tipo: 'uf', codigo: uf })}
+          aoSelecionar={alternarUf}
         />
-      </section>
+      </Painel>
 
-      <section class="painel">
-        <h2>Pirâmide etária em {filtro.anoFim}</h2>
-        <p class="contexto">
-          {filtro.metrica === 'obitos' ? 'Óbitos' : 'Taxa específica por 100 mil hab.'} por sexo e faixa · {nomeCausa} · {nomeLocal}
-        </p>
+      <Painel
+        titulo="Pirâmide etária em {filtro.anoFim}"
+        contexto="{filtro.metrica === 'obitos' ? 'Óbitos' : 'Taxa específica por 100 mil hab.'} por sexo e faixa · {rotulos.causa} · {rotulos.local}"
+      >
         <Piramide
           linhas={vistas.piramide}
           formatar={v => formatarValor(v, filtro.metrica === 'obitos' ? 'obitos' : 'bruta')}
@@ -154,13 +151,11 @@
         {#if vistas.idadeIgnoradaNaPiramide > 0}
           <p class="nota">{formatarInteiro(vistas.idadeIgnoradaNaPiramide)} óbitos com idade ignorada não aparecem na pirâmide.</p>
         {/if}
-      </section>
+      </Painel>
     </div>
 
     <div class="grade">
-      <section class="painel">
-        <h2>Principais causas</h2>
-        <p class="contexto">{metrica} · {nomeLocal} · {nomeIdade} · {filtro.anoInicio}–{filtro.anoFim} · clique para selecionar</p>
+      <Painel titulo="Principais causas" contexto="{metrica} · {rotulos.local} · {rotulos.idade} · {periodo} · clique para selecionar">
         <Ranking
           itens={vistas.ranking}
           selecionado={filtro.grupo}
@@ -168,14 +163,20 @@
           rotuloMetrica={metrica}
           aoSelecionar={g => (filtro.grupo = filtro.grupo === g ? null : g)}
         />
-      </section>
+      </Painel>
 
-      <section class="painel">
-        <h2>Causas mal definidas</h2>
-        <p class="contexto">% dos óbitos de {nomeLocal} com causa mal definida · indicador de qualidade do registro</p>
+      <Painel titulo="Causas mal definidas" contexto="% dos óbitos com causa mal definida · {rotulos.local} · indicador de qualidade do registro">
         <LinhaTempo pontos={vistas.qualidade} formatar={formatarPercentual} formatarEixo={v => `${v}%`} altura={220} rotuloColuna="% mal definidas" />
-      </section>
+      </Painel>
     </div>
+
+    <Recolhivel id="como-ler" titulo="Como ler as métricas">
+      <ComoLerMetricas dimensoes={base.dimensoes} selecionada={filtro.metrica} />
+    </Recolhivel>
+
+    <Recolhivel id="como-ler-estatisticas" titulo="Como ler as estatísticas">
+      <ComoLerEstatisticas {vistas} metrica={filtro.metrica} recorte={rotulos.contexto} />
+    </Recolhivel>
 
     <footer>
       <p>
@@ -198,23 +199,13 @@
     margin: 0 0 4px;
     color: var(--text-primary);
   }
-  h2 {
-    font-size: 16px;
-    margin: 0;
-    color: var(--text-primary);
-  }
   .sub,
-  .contexto,
   .nota,
   footer {
     color: var(--text-secondary);
   }
   .sub {
     margin: 0 0 16px;
-  }
-  .contexto {
-    font-size: 13px;
-    margin: 2px 0 12px;
   }
   .nota {
     font-size: 12px;
@@ -235,46 +226,62 @@
     font-size: 12px;
     color: var(--text-secondary);
   }
-  .descricao a,
-  .nota-tendencia a,
-  .contexto a {
-    color: var(--series-1);
+  .acao {
+    font: inherit;
+    font-size: 14px;
+    padding: 6px 12px;
+    color: var(--text-primary);
+    background: var(--selecao);
+    border: 1px solid var(--acento);
+    border-radius: 6px;
+    cursor: pointer;
   }
-  .painel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
+  .acao:focus-visible {
+    outline: 2px solid var(--acento);
+    outline-offset: 2px;
   }
   .grade {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
     gap: 0 16px;
   }
-  .resumo {
-    margin: 0 0 12px;
-    color: var(--text-secondary);
-  }
-  .resumo strong {
-    color: var(--text-primary);
-    font-size: 20px;
-  }
   .avisos {
     list-style: none;
     padding: 12px 16px;
     margin: 0 0 16px;
-    border-left: 3px solid var(--muted);
+    border-left: 3px solid var(--aviso);
     background: var(--surface);
     color: var(--text-primary);
     font-size: 14px;
   }
+  .avisos span {
+    color: var(--aviso);
+  }
   .avisos li + li {
     margin-top: 6px;
   }
-  .erro,
-  .carregando {
+  .erro {
     color: var(--text-secondary);
+  }
+  .esqueleto div {
+    height: 72px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .esqueleto .alto {
+    height: 320px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .esqueleto div {
+      animation: pulsar 1.4s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes pulsar {
+    to {
+      opacity: 0.5;
+    }
   }
   footer {
     font-size: 12px;

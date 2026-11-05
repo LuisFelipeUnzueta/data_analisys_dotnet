@@ -7,7 +7,7 @@
   import Grafico from './Grafico.svelte';
   import Tabela from './Tabela.svelte';
 
-  // Coroplético sequencial (um só tom, claro → escuro). Clicar numa UF a seleciona no filtro.
+  // Coroplético sequencial (um só tom, em classes). Clicar numa UF a seleciona no filtro.
   let {
     geo,
     valores,
@@ -34,23 +34,28 @@
     return [siglas.get(f.properties.uf), ...linhas].filter(Boolean).join('\n');
   };
 
+  // Cinco classes de quantil: uma UF extrema não apaga as diferenças entre as demais; o valor exato está no tooltip.
+  const CLASSES = 5;
+
   function desenhar(largura: number, altura: number) {
     const c = tema.cores;
+    const cores = Array.from({ length: CLASSES }, (_, i) =>
+      `color-mix(in lab, ${c['seq-max']} ${(100 * i) / (CLASSES - 1)}%, ${c['seq-min']})`);
     const selecionadas = geo.features.filter(f => f.properties.uf === selecionada);
     const figura = Plot.plot({
       ...base(largura, altura),
       marginLeft: 0,
       projection: { type: 'mercator', domain: geo },
       color: {
-        type: 'linear',
-        range: [c['seq-min'], c['seq-max']],
-        interpolate: 'lab',
+        type: 'quantile',
+        n: CLASSES,
+        range: cores,
         legend: true,
         label: rotuloMetrica,
         tickFormat: formatarCompacto
       },
       marks: [
-        Plot.geo(geo, { fill: valor, stroke: c.surface, strokeWidth: 1 }),
+        Plot.geo(geo, { fill: valor, stroke: c.muted, strokeWidth: 0.5 }),
         Plot.geo(selecionadas, { stroke: c['text-primary'], strokeWidth: 2 }),
         Plot.tip(geo.features, Plot.pointer(Plot.centroid({ title: rotulo })))
       ]

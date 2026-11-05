@@ -1,4 +1,7 @@
-/* Tokens da paleta de referência (dataviz). O tema escuro tem passos próprios, não é uma inversão. */
+/*
+ * Tokens da paleta de referência (dataviz). O tema escuro tem passos próprios, não é uma inversão.
+ * `--series-*` e `--seq-*` são cores de dado; `--acento` é da interface (links, seleção e foco).
+ */
 :root {
   color-scheme: light;
   --page: #f9f9f7;
@@ -9,14 +12,16 @@
   --grid: #e1e0d9;
   --border: rgba(11, 11, 11, 0.1);
   --selecao: #cde2fb;
+  --acento: #1f66bd;
+  --aviso: #a8700c;
   --series-1: #2a78d6;
   --series-2: #eb6834;
-  --seq-min: #cde2fb;
+  --seq-min: #a9cbf5;
   --seq-max: #0d366b;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:where(:not([data-theme='light'])) {
+  :root {
     color-scheme: dark;
     --page: #0d0d0d;
     --surface: #1a1a19;
@@ -26,27 +31,13 @@
     --grid: #2c2c2a;
     --border: rgba(255, 255, 255, 0.1);
     --selecao: #104281;
+    --acento: #6aa8f0;
+    --aviso: #e0a93b;
     --series-1: #3987e5;
     --series-2: #d95926;
     --seq-min: #104281;
     --seq-max: #cde2fb;
   }
-}
-
-:root[data-theme='dark'] {
-  color-scheme: dark;
-  --page: #0d0d0d;
-  --surface: #1a1a19;
-  --text-primary: #f0efec;
-  --text-secondary: #c3c2b7;
-  --muted: #898781;
-  --grid: #2c2c2a;
-  --border: rgba(255, 255, 255, 0.1);
-  --selecao: #104281;
-  --series-1: #3987e5;
-  --series-2: #d95926;
-  --seq-min: #104281;
-  --seq-max: #cde2fb;
 }
 
 * {
@@ -65,4 +56,15 @@ body {
   color: var(--text-primary);
   font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--acento);
 }

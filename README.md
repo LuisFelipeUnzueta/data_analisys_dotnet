@@ -9,7 +9,7 @@ Página interativa com a mortalidade no Brasil desde 1979, por região e UF de r
 
 ## O que a página mostra
 
-- **Filtros** de período, local (Brasil, região ou UF), causa, intervalo de idade, sexo e métrica, que valem para todas as visualizações.
+- **Filtros** de período, local (Brasil, região ou UF), causa, intervalo de idade, sexo e métrica, que valem para todas as visualizações e ficam na URL, então cada recorte vira um link compartilhável.
 - **Série temporal** de 1979 ao último ano, com a marca da troca da CID-9 pela CID-10 em 1996, **intervalo de confiança de 95%** e a **tendência** do período (variação percentual anual).
 - **Excesso de óbitos** nos anos depois do período escolhido, comparado com o esperado pela tendência desse período (por exemplo, base 2015–2019 para medir a covid).
 - **Como ler as métricas e as estatísticas:** explicações com exemplos do recorte filtrado, incluindo um simulador de como o intervalo de confiança estreita com mais óbitos, a reta de tendência em escala normal ou logarítmica e os anos-base do excesso.
@@ -142,7 +142,7 @@ xychart-beta
 | Item | Valor |
 |---|---|
 | Download (cubo + população + dimensões) | 4,6 MB, uma vez |
-| JavaScript da página | 509 KB (209 KB comprimido) |
+| JavaScript da página | 528 KB (216 KB comprimido) |
 | Leitura do cubo para arrays tipados | 225 ms |
 | Agregação de um filtro (uma passada pelas 1,8 milhão de linhas) | 21 ms na mediana, 38 ms no pior caso, cerca de 180 milhões de linhas por segundo |
 | Taxas, intervalos de confiança, tendência e excesso do recorte | 0,2 ms |

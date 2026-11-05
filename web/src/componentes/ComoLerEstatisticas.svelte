@@ -89,7 +89,6 @@
   }
 </script>
 
-<h2>Como ler as estatísticas</h2>
 <p class="intro">As explicações usam o recorte filtrado acima ({recorte}).</p>
 
 <div class="secoes">
@@ -197,11 +196,6 @@
 </div>
 
 <style>
-  h2 {
-    font-size: 16px;
-    margin: 0;
-    color: var(--text-primary);
-  }
   .intro,
   .nota,
   .legenda-mini {
@@ -209,7 +203,7 @@
     color: var(--text-secondary);
   }
   .intro {
-    margin: 2px 0 12px;
+    margin: 0 0 12px;
   }
   .secoes {
     display: grid;
@@ -244,7 +238,7 @@
   }
   input[type='range'] {
     width: 100%;
-    accent-color: var(--series-1);
+    accent-color: var(--acento);
   }
   .regua {
     position: relative;
@@ -285,7 +279,7 @@
     cursor: pointer;
   }
   .alternar button[aria-pressed='true'] {
-    border-color: var(--series-1);
+    border-color: var(--acento);
     background: var(--selecao);
   }
   .legenda-mini {

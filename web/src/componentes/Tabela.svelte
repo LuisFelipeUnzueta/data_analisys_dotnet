@@ -36,7 +36,6 @@
   table {
     border-collapse: collapse;
     width: 100%;
-    font-variant-numeric: tabular-nums;
   }
   th,
   td {

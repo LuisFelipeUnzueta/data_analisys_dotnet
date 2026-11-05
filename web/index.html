@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Mortalidade no Brasil desde 1979 por UF, causa harmonizada, sexo e faixa etária, com taxas brutas e padronizadas." />
     <title>Mortalidade no Brasil</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mortalidade no Brasil" />
+    <meta property="og:description" content="46 milhões de óbitos desde 1979, por UF, causa, sexo e idade, em uma página interativa." />
+    <meta property="og:url" content="https://luisfelipeunzueta.github.io/data_analisys_dotnet/" />
+    <meta property="og:image" content="https://luisfelipeunzueta.github.io/data_analisys_dotnet/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- O cubo não espera o JavaScript para começar a baixar. -->
+    <link rel="preload" href="./dados/obitos.parquet" as="fetch" crossorigin="anonymous" />
   </head>
   <body>
     <div id="app"></div>

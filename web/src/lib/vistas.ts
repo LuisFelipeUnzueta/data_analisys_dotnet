@@ -69,10 +69,22 @@ export function criarVistas(agregado: Agregado, filtro: Filtro, dimensoes: Dimen
 
   const totalObitos = anosDoPeriodo.reduce((soma, { ano }) => soma + doAno(ano)!.obitos, 0);
 
-  return { serie, tendencia: tendenciaDoPeriodo, qualidade, porUf, piramide, idadeIgnoradaNaPiramide, ranking, excesso: excessoDoPeriodo, totalObitos };
+  return { serie, destaque: destaqueDoPeriodo(serie), tendencia: tendenciaDoPeriodo, qualidade, porUf, piramide, idadeIgnoradaNaPiramide, ranking, excesso: excessoDoPeriodo, totalObitos };
 }
 
 export type Vistas = ReturnType<typeof criarVistas>;
+
+/** Primeiro e último ano com valor e a variação entre eles; pontas instáveis ou zeradas dariam um número enganoso. */
+export function destaqueDoPeriodo(serie: PontoAnual[]) {
+  const validos = serie.filter((p): p is PontoAnual & { valor: number } => p.valor !== null);
+  const [inicio, fim] = [validos[0], validos.at(-1)];
+  if (!inicio || !fim || inicio === fim || inicio.valor === 0 || inicio.instavel || fim.instavel) return null;
+  return {
+    inicio: { ano: inicio.ano, valor: inicio.valor },
+    fim: { ano: fim.ano, valor: fim.valor },
+    variacao: (100 * (fim.valor - inicio.valor)) / inicio.valor
+  };
+}
 
 /** Excesso acumulado; as margens dos anos se combinam em quadratura (anos tratados como independentes). */
 function somarExcessos(anos: ExcessoAno[]) {
